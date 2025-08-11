@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --color-purple-default: oklch(30.775% 0.14149 328.352);
+  --color-button-default: oklch(37.569% 0.17187 328.341);
+  --color-orange-default: oklch(74.419% 0.18112 56.449);
+}
+
+@layer utilities {
+  .background-default {
+    background-color: var(--color-purple-default);
+  }
+
+  .text-default {
+    color: var(--color-orange-default);
+  }
+
+  .purple-white {
+    background-color: var(--color-button-default);
+  }
+  
+  .background-orange {
+    background-color: var(--color-orange-default);
+  }
+
+  .text-purple {
+    color: var(--color-purple-default);
+  }
+}
+
+@layer components {
+  /* Animação do sublinhado */
+  .sidebar-button {
+    &::after {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    &.active::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+:root {
+  --sidebar-width: 14rem; /* 224px - ajuste conforme sua Sidebar */
+}
