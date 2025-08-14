@@ -26,11 +26,7 @@ export default function JsonFormatter() {
         <button
           onClick={formatarJSON}
           disabled={isButtonDisabled}
-          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-            isButtonDisabled
-              ? "purple-white text-white cursor-not-allowed"
-              : "purple-white hover:bg-purple-900 text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
-          }`}
+          className={`px-6 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled ? "botao-padrao-desativado" : "botao-padrao-ativo"}`}
         >
           Formatar
         </button>
@@ -42,11 +38,10 @@ export default function JsonFormatter() {
             setError(false);
           }}
           placeholder={"{}"}
-          className={`w-full p-4 border-2 purple-white rounded-lg font-mono text-sm focus:outline-none focus:ring-2 ${
-            error
-              ? "border-red-500 focus:ring-red-200"
-              : "text-default focus:text-default focus:text-default"
-          }`}
+          className={`w-full p-4 border-2 purple-white rounded-lg font-mono text-sm focus:outline-none focus:ring-2 ${error
+            ? "border-red-500 focus:ring-red-200"
+            : "text-default focus:text-default focus:text-default"
+            }`}
           rows={8}
         ></textarea>
 

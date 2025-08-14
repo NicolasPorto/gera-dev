@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import CpfGenerator from "./tools/CpfGenerator";
+import DocumentosGenerator from "./tools/DocumentosGenerator";
 import JsonFormatter from "./tools/JsonFormatter";
 import './index.css'
 
@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "documentos",
-        element: <CpfGenerator />,
+        element: <DocumentosGenerator />,
       },
       {
         path: "json",

@@ -7,7 +7,7 @@ export function Sidebar() {
   
   const activeStyle = "relative";
   
-  const underlineStyle = "after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-orange-500 after:rounded-full";
+  const underlineStyle = "underline-style";
 
   return (
     <nav className="w-56 p-4 flex flex-col">      

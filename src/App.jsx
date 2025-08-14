@@ -17,7 +17,7 @@ function App() {
         {/* Área de conteúdo - ESSA PARTE FOI AJUSTADA */}
         <main className="flex-1 flex">
           <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
-            <div className="w-full max-w-lg mx-auto pointer-events-auto">
+            <div className="max-w-lg mx-auto pointer-events-auto">
               <Outlet />
             </div>
           </div>
