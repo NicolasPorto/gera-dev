@@ -10,7 +10,7 @@ export function Sidebar() {
   const underlineStyle = "underline-style";
 
   return (
-    <nav className="w-56 p-4 flex flex-col">      
+    <nav className="w-40 p-4 flex flex-col">      
       <Link
         to="/documentos"
         className={`${baseStyle} ${
