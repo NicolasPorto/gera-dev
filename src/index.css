@@ -3,6 +3,15 @@
 :root {
   --color-background-default: #1E003E;
   --color-button-default: #6A0DAD;
+  --color-text-default: #FFFFFF;
+  --color-orange-default: #FF6B35;
+}
+
+:root[data-theme="white"] {
+  --color-background-default: #FFFFFF;
+  --color-button-default: #6A0DAD;
+  --color-text-default: #1E003E;
+  --color-orange-default: #6A0DAD;
 }
 
 @layer utilities {
@@ -11,7 +20,7 @@
   }
 
   .text-default {
-    color: var(--color-orange-default);
+    color: var(--color-text-default);
   }
 
   .purple-white {
@@ -24,7 +33,6 @@
 }
 
 @layer components {
-  /* Animação do sublinhado */
   .sidebar-button {
     &::after {
       transform: scaleX(0);
@@ -39,7 +47,7 @@
 }
 
 :root {
-  --sidebar-width: 14rem; /* 224px - Sidebar */
+  --sidebar-width: 14rem;
 }
 
 .botao-padrao {
@@ -77,7 +85,7 @@
   font-size: 3rem;
   font-weight: bold;
   font-family: monospace;
-  color: white;
+  color: var(--color-text-default);
   border-radius: 0.5rem;
   text-align: center;
   display: inline-block;
@@ -97,4 +105,73 @@
   height: 0.25rem;
   background-color: #D63384;
   border-radius: 9999px;
+}
+
+[data-theme="white"] .underline-style::after {
+  background-color: #6A0DAD; 
+}
+
+.icon-dark {
+  color: white;
+}
+
+.icon-light {
+  color: #1E003E;
+}
+
+[data-theme="white"] .icon-dark {
+  color: #1E003E;
+}
+
+[data-theme="white"] .icon-light {
+  color: white;
+}
+
+.botao-padrao-claro {
+  cursor: pointer;
+  background-color: #7e3aaf;
+  transition: all 0.2s ease;
+  color: black;
+}
+
+.botao-padrao-claro-clicked {
+  cursor: pointer;
+  background-color: #9166af;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  color: black;
+}
+
+.botao-padrao-claro:hover {
+  background-color: #9166af;
+  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.botao-padrao-claro svg,
+.botao-padrao-claro-clicked svg,
+.botao-padrao-claro:hover svg {
+  color: white;
+}
+
+[data-theme="white"] .botao-padrao {
+  background-color: #7e3aaf;
+  color: rgb(255, 255, 255);
+}
+
+[data-theme="white"] .botao-padrao-clicked {
+  background-color: #9166af;
+  color: rgb(255, 255, 255);
+}
+
+[data-theme="white"] .botao-padrao:hover {
+  background-color: #9166af;
+  color: rgb(255, 255, 255);
+}
+
+[data-theme="white"] .botao-padrao svg,
+[data-theme="white"] .botao-padrao-clicked svg,
+[data-theme="white"] .botao-padrao:hover svg {
+  color: white;
 }

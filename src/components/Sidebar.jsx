@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 export function Sidebar() {
   const location = useLocation();
 
-  const baseStyle = "p-2 text-left transition-all duration-200 text-white";
+  const baseStyle = "p-2 text-left transition-all duration-200 text-default";
   
   const activeStyle = "relative";
   
