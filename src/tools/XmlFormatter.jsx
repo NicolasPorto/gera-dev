@@ -110,28 +110,28 @@ export default function XmlFormatter() {
         )}
 
         {outputOn && (
-          <>
-            <div className="w-full border-2 rounded-lg border-gray-300/20 bg-purple-200/10 font-mono text-sm overflow-y-auto resize-none whitespace-pre-wrap break-all custom-scrollbar textarea-white-theme h-100">
-              <SyntaxHighlighter
-                language="xml"
-                style={getSyntaxStyle()}
-                customStyle={{
-                  background: 'transparent',
-                  padding: '0.6rem',
-                  margin: 0,
-                  fontSize: '0.775rem'
-                }}
-                codeTagProps={{
-                  style: {
-                    fontFamily: 'monospace'
-                  }
-                }}
-                className='w-full p-4 resize-none transition-all duration-300 ease-in-out h-100'
-              >
-                {output}
-              </SyntaxHighlighter>
-            </div>
-          </>
+          <div className={`w-full h-100 textarea-text-color ${
+              error ? "border-red-500 bg-purple-200/10 focus:border-red-600" : "border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
+            }`}>
+            <SyntaxHighlighter
+              language="xml"
+              style={getSyntaxStyle()}
+              customStyle={{
+                background: 'transparent',
+                padding: '0.6rem',
+                margin: 0,
+                fontSize: '0.775rem'
+              }}
+              codeTagProps={{
+                style: {
+                  fontFamily: 'monospace'
+                }
+              }}
+              className="border-2 rounded-lg border-gray-300/20 bg-purple-200/10 font-mono text-sm overflow-y-auto resize-none whitespace-pre-wrap break-all custom-scrollbar textarea-white-theme h-100"
+            >
+              {output}
+            </SyntaxHighlighter>
+          </div>
         )}
 
         <div className="p-4 flex flex-col items-center gap-6">
