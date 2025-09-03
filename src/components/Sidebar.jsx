@@ -3,17 +3,19 @@ import { Link, useLocation } from "react-router-dom";
 export function Sidebar() {
   const location = useLocation();
 
-  const baseStyle = "p-2 text-left transition-all duration-200 text-default";
+  const baseStyle = "px-4 py-3 rounded-lg font-medium text-left transition-all duration-200 botao-padrao";
   
-  const activeStyle = "relative";
+  const activeStyle = "botao-padrao-ativo relative";
   
   const underlineStyle = "underline-style";
+  
+  const hoverStyle = "hover:scale-105 transition-transform";
 
   return (
-    <nav className="w-40 p-4 flex flex-col">      
+    <nav className="w-48 p-4 flex flex-col gap-2">      
       <Link
         to="/documentos"
-        className={`${baseStyle} ${
+        className={`${baseStyle} ${hoverStyle} ${
           location.pathname.includes("documentos") 
             ? `${activeStyle} ${underlineStyle}`
             : ""
@@ -24,7 +26,7 @@ export function Sidebar() {
       
       <Link
         to="/json"
-        className={`${baseStyle} ${
+        className={`${baseStyle} ${hoverStyle} ${
           location.pathname.includes("json") 
             ? `${activeStyle} ${underlineStyle}`
             : ""

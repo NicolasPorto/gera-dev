@@ -1,14 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
 import { ThemeToggle } from "./components/ThemeToggle";
+import InfoIcon from "./components/InfoIcon";
 
 function App() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
     <div className="min-h-screen background-default flex flex-col">
       <header className="py-4 px-6 flex items-center relative">
-        <h1 className="text-5xl font-bold text-center text-default absolute left-1/2 transform -translate-x-1/2">
-          Geradev
-        </h1>
+        <div className="text-5xl font-bold text-center text-default absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+          <Link to="/" className="hover:opacity-80 transition-opacity">
+            Geradev
+          </Link>
+          {!isHome && <InfoIcon />}
+        </div>
 
         <div className="ml-auto">
           <ThemeToggle />
