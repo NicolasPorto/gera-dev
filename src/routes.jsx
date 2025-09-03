@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       {
         path: "gerar-qrcode",
         element: <QRCodeGenerator />,
-      }
+      },
       {
         path: "/xml",
         element: <XmlFormatter />,
