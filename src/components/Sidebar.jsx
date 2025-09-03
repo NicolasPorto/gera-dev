@@ -35,7 +35,7 @@ export function Sidebar() {
         Formatar JSON
       </Link>
 
-            <Link
+      <Link
         to="/xml"
         className={`${baseStyle} ${hoverStyle} ${
           location.pathname.includes("xml") 
