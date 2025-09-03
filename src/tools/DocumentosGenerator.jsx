@@ -74,21 +74,21 @@ export default function DocumentosGenerator() {
       <div className="flex gap-4">
         <button
           onClick={() => handleClick("cpf")}
-          className={`botao-padrao px-4 py-2 rounded ${ativo === "cpf" ? "botao-padrao-clicked" : ""
+          className={`botao-padrao px-4 py-2 rounded font-medium ${ativo === "cpf" ? "botao-padrao-clicked" : ""
             }`}
         >
           CPF
         </button>
         <button
           onClick={() => handleClick("cnpj")}
-          className={`botao-padrao px-4 py-2 rounded ${ativo === "cnpj" ? "botao-padrao-clicked" : ""
+          className={`botao-padrao px-4 py-2 rounded font-medium ${ativo === "cnpj" ? "botao-padrao-clicked" : ""
             }`}
         >
           CNPJ
         </button>
         <button
           onClick={() => handleClick("rg")}
-          className={`botao-padrao px-4 py-2 rounded ${ativo === "rg" ? "botao-padrao-clicked" : ""
+          className={`botao-padrao px-4 py-2 rounded font-medium ${ativo === "rg" ? "botao-padrao-clicked" : ""
             }`}
         >
           RG

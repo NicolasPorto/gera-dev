@@ -5,6 +5,9 @@
   --color-button-default: #6A0DAD;
   --color-text-default: #FFFFFF;
   --color-orange-default: #FF6B35;
+  --color-textarea-border: #9333ea;
+  --color-textarea-bg: #9333ea;
+  --color-textarea-text: #FFFFFF; 
 }
 
 :root[data-theme="white"] {
@@ -12,7 +15,35 @@
   --color-button-default: #6A0DAD;
   --color-text-default: #1E003E;
   --color-orange-default: #6A0DAD;
+  --color-textarea-border: rgba(106, 13, 173, 0.3);
+  --color-textarea-bg: rgba(106, 13, 173, 0.08);
+  --color-textarea-text: #000000;
 }
+
+.textarea-text-color {
+  color: var(--color-textarea-text);
+}
+
+[data-theme="white"] .textarea-white-theme {
+  border-color: var(--color-textarea-border) !important;
+  background-color: var(--color-textarea-bg) !important;
+}
+
+[data-theme="white"] .textarea-white-theme:focus {
+  border-color: #6A0DAD !important;
+  background-color: rgba(106, 13, 173, 0.12) !important;
+}
+
+[data-theme="white"] .textarea-white-theme.error {
+  border-color: #dc2626 !important;
+  background-color: rgba(220, 38, 38, 0.1) !important;
+}
+
+.bg-purple-50 { background-color: #faf5ff; }
+.bg-purple-600 { background-color: #9333ea; }
+.bg-purple-700 { background-color: #7c3aed; }
+.hover\:bg-purple-700:hover { background-color: #7c3aed; }
+.bg-red-50 { background-color: #fef2f2; }
 
 @layer utilities {
   .background-default {
@@ -175,3 +206,40 @@
 [data-theme="white"] .botao-padrao:hover svg {
   color: white;
 }
+
+/* SCROLL */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #9333ea transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #9333ea;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
+}
+
+[data-theme="white"] .custom-scrollbar {
+  scrollbar-color: #7e3aaf transparent;
+}
+
+[data-theme="white"] .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #7e3aaf;
+}
+
+[data-theme="white"] .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9166af;
+}
+/* SCROLL */

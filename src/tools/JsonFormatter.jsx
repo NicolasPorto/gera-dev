@@ -1,6 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import * as prismStyles from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+function useTheme() {
+  const [theme, setTheme] = useState(() => {
+    return document.documentElement.getAttribute('data-theme') || 'dark';
+  });
+
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          const newTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+          setTheme(newTheme);
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+}
 
 export default function JsonFormatter() {
   const [input, setInput] = useState("");
@@ -41,6 +67,12 @@ export default function JsonFormatter() {
 
   const isButtonDisabled = input.trim() === "";
 
+  const theme = useTheme();
+
+  const getSyntaxStyle = () => {
+    return theme === 'white' ? prismStyles.coldarkLight : prismStyles.coldarkDark;
+  };
+
   return (
     <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
       <div className="w-full flex flex-col items-center gap-6">
@@ -53,25 +85,25 @@ export default function JsonFormatter() {
               setError(false);
             }}
             placeholder={"{}"}
-            className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none focus:ring-2 resize-none ${error
-              ? "border-red-500 focus:ring-red-200"
-              : "border-gray-300 focus:ring-purple-300"
-              } background-default text-default`}
+            className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-100  textarea-text-color ${error
+              ? "border-red-500 bg-purple-200/10 focus:border-red-600"
+              : "border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
+              }`}
             rows={12}
           ></textarea>
         )}
 
         {outputOn && (
           <>
-            <div className="w-full p-4 border-2 border-gray-300 rounded-lg font-mono text-sm background-default text-default h-120 overflow-y-auto resize-none whitespace-pre-wrap break-all">
+            <div className="w-full border-2 rounded-lg border-gray-300/20 bg-purple-200/10 font-mono text-sm overflow-y-auto resize-none whitespace-pre-wrap break-all custom-scrollbar textarea-white-theme h-100">
               <SyntaxHighlighter
                 language="json"
-                style={coldarkDark}
+                style={getSyntaxStyle()}
                 customStyle={{
                   background: 'transparent',
-                  padding: '1rem',
+                  padding: '0.6rem',
                   margin: 0,
-                  fontSize: '0.875rem'
+                  fontSize: '0.775rem'
                 }}
                 codeTagProps={{
                   style: {
@@ -91,12 +123,15 @@ export default function JsonFormatter() {
               <button
                 onClick={formatarJSON}
                 disabled={isButtonDisabled}
-                className={`px-8 py-3 rounded-lg font-medium text-lg botao-padrao ${isButtonDisabled
+                className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
                   ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
                   : "botao-padrao-ativo hover:scale-105 transition-transform"
                   }`}
               >
-                Formatar
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M17.44 3a1 1 0 0 1 .707.293l2.56 2.56a1 1 0 0 1 0 1.414L18.194 9.78 14.22 5.806l2.513-2.513A1 1 0 0 1 17.44 3Zm-4.634 4.22-9.513 9.513a1 1 0 0 0 0 1.414l2.56 2.56a1 1 0 0 0 1.414 0l9.513-9.513-3.974-3.974ZM6 6a1 1 0 0 1 1 1v1h1a1 1 0 0 1 0 2H7v1a1 1 0 1 1-2 0v-1H4a1 1 0 0 1 0-2h1V7a1 1 0 0 1 1-1Zm9 9a1 1 0 0 1 1 1v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 1 1 0-2h1v-1a1 1 0 0 1 1-1Z" clip-rule="evenodd" />
+                  <path d="M19 13h-2v2h2v-2ZM13 3h-2v2h2V3Zm-2 2H9v2h2V5ZM9 3H7v2h2V3Zm12 8h-2v2h2v-2Zm0 4h-2v2h2v-2Z" />
+                </svg>
               </button>
             )}
 
@@ -107,7 +142,7 @@ export default function JsonFormatter() {
                     handleCopiar();
                   }}
                   disabled={isButtonDisabled}
-                  className={`px-8 py-3 rounded-lg font-medium text-lg botao-padrao ${isButtonDisabled
+                  className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
                     ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
                     : "botao-padrao-ativo hover:scale-105 transition-transform"
                     }`}
@@ -128,24 +163,30 @@ export default function JsonFormatter() {
                     setOutputOn(false);
                   }}
                   disabled={isButtonDisabled}
-                  className={`px-8 py-3 rounded-lg font-medium text-lg botao-padrao ${isButtonDisabled
+                  className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
                     ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
                     : "botao-padrao-ativo hover:scale-105 transition-transform"
                     }`}
                 >
-                  Editar
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z" clip-rule="evenodd" />
+                  </svg>
                 </button>
                 <button
                   onClick={() => {
                     handleNovo()
                   }}
                   disabled={isButtonDisabled}
-                  className={`px-8 py-3 rounded-lg font-medium text-lg botao-padrao ${isButtonDisabled
+                  className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
                     ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
                     : "botao-padrao-ativo hover:scale-105 transition-transform"
                     }`}
                 >
-                  Novo
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M17.44 3a1 1 0 0 1 .707.293l2.56 2.56a1 1 0 0 1 0 1.414L18.194 9.78 14.22 5.806l2.513-2.513A1 1 0 0 1 17.44 3Zm-4.634 4.22-9.513 9.513a1 1 0 0 0 0 1.414l2.56 2.56a1 1 0 0 0 1.414 0l9.513-9.513-3.974-3.974ZM6 6a1 1 0 0 1 1 1v1h1a1 1 0 0 1 0 2H7v1a1 1 0 1 1-2 0v-1H4a1 1 0 0 1 0-2h1V7a1 1 0 0 1 1-1Zm9 9a1 1 0 0 1 1 1v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 1 1 0-2h1v-1a1 1 0 0 1 1-1Z" clip-rule="evenodd" />
+                    <path d="M19 13h-2v2h2v-2ZM13 3h-2v2h2V3Zm-2 2H9v2h2V5ZM9 3H7v2h2V3Zm12 8h-2v2h2v-2Zm0 4h-2v2h2v-2Z" />
+                  </svg>
                 </button>
               </>
             )}
