@@ -36,6 +36,17 @@ export function Sidebar() {
       </Link>
       
       <Link
+        to="/xml"
+        className={`${baseStyle} ${hoverStyle} ${
+          location.pathname.includes("xml") 
+            ? `${activeStyle} ${underlineStyle}`
+            : ""
+        }`}
+      >
+        Formatar XML
+      </Link>
+      
+      <Link
         to="/gerar-qrcode"
         className={`${baseStyle} ${hoverStyle} ${
           location.pathname.includes("gerar-qrcode") 

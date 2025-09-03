@@ -3,6 +3,7 @@ import App from "./App";
 import DocumentosGenerator from "./tools/DocumentosGenerator";
 import JsonFormatter from "./tools/JsonFormatter";
 import QRCodeGenerator from "./tools/QRCodeGenerator";
+import XmlFormatter from "./tools/XmlFormatter";
 import Home from "./pages/Home";
 import './index.css'
 
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
         path: "gerar-qrcode",
         element: <QRCodeGenerator />,
       }
+      {
+        path: "/xml",
+        element: <XmlFormatter />,
+      },
     ],
   },
 ], {

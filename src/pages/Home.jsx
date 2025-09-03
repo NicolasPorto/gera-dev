@@ -19,7 +19,7 @@ function Home() {
 
             <div className="max-w-md mx-auto">
                 <h1 className="text-2xl font-bold text-default mb-6">
-                    Geradev Tools
+                    GeraDev Tools
                 </h1>
                 
                 <p className="text-default mb-4 leading-relaxed">
