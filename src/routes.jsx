@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import DocumentosGenerator from "./tools/DocumentosGenerator";
 import JsonFormatter from "./tools/JsonFormatter";
+import QRCodeGenerator from "./tools/QRCodeGenerator";
 import Home from "./pages/Home";
 import './index.css'
 
@@ -15,13 +16,19 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "documentos",
+        path: "gerar-documentos",
         element: <DocumentosGenerator />,
       },
       {
-        path: "json",
+        path: "formatar-json",
         element: <JsonFormatter />,
       },
+      {
+        path: "gerar-qrcode",
+        element: <QRCodeGenerator />,
+      }
     ],
   },
-]);
+], {
+  basename: import.meta.env.BASE_URL
+});
