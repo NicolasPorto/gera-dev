@@ -12,29 +12,29 @@ export function Sidebar() {
   const hoverStyle = "hover:scale-105 transition-transform";
 
   return (
-    <nav className="w-48 p-4 flex flex-col gap-2">      
+    <nav className="w-55 p-4 flex flex-col gap-2  z-50">      
       <Link
-        to="/documentos"
+        to="/gerar-documentos"
         className={`${baseStyle} ${hoverStyle} ${
-          location.pathname.includes("documentos") 
+          location.pathname.includes("gerar-documentos") 
             ? `${activeStyle} ${underlineStyle}`
             : ""
         }`}
       >
-        Documentos
+        Gerar Documentos
       </Link>
       
       <Link
-        to="/json"
+        to="/formatar-json"
         className={`${baseStyle} ${hoverStyle} ${
-          location.pathname.includes("json") 
+          location.pathname.includes("formatar-json") 
             ? `${activeStyle} ${underlineStyle}`
             : ""
         }`}
       >
         Formatar JSON
       </Link>
-
+      
       <Link
         to="/xml"
         className={`${baseStyle} ${hoverStyle} ${
@@ -44,6 +44,17 @@ export function Sidebar() {
         }`}
       >
         Formatar XML
+      </Link>
+      
+      <Link
+        to="/gerar-qrcode"
+        className={`${baseStyle} ${hoverStyle} ${
+          location.pathname.includes("gerar-qrcode") 
+            ? `${activeStyle} ${underlineStyle}`
+            : ""
+        }`}
+      >
+        Gerar QR Code
       </Link>
     </nav>
   );
