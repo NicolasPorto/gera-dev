@@ -25,6 +25,17 @@ export function Sidebar() {
       </Link>
       
       <Link
+        to="/gerar-qrcode"
+        className={`${baseStyle} ${hoverStyle} ${
+          location.pathname.includes("gerar-qrcode") 
+            ? `${activeStyle} ${underlineStyle}`
+            : ""
+        }`}
+      >
+        Gerar QR Code
+      </Link>
+
+      <Link
         to="/formatar-json"
         className={`${baseStyle} ${hoverStyle} ${
           location.pathname.includes("formatar-json") 
@@ -36,7 +47,7 @@ export function Sidebar() {
       </Link>
       
       <Link
-        to="/xml"
+        to="/formatar-xml"
         className={`${baseStyle} ${hoverStyle} ${
           location.pathname.includes("xml") 
             ? `${activeStyle} ${underlineStyle}`
@@ -47,14 +58,14 @@ export function Sidebar() {
       </Link>
       
       <Link
-        to="/gerar-qrcode"
+        to="/visualizar-html"
         className={`${baseStyle} ${hoverStyle} ${
-          location.pathname.includes("gerar-qrcode") 
+          location.pathname.includes("visualizar-html") 
             ? `${activeStyle} ${underlineStyle}`
             : ""
         }`}
       >
-        Gerar QR Code
+        Visualizar HTML
       </Link>
     </nav>
   );

@@ -4,6 +4,7 @@ import DocumentosGenerator from "./tools/DocumentosGenerator";
 import JsonFormatter from "./tools/JsonFormatter";
 import QRCodeGenerator from "./tools/QRCodeGenerator";
 import XmlFormatter from "./tools/XmlFormatter";
+import VisualizarHTML from "./tools/VisualizarHTML";
 import Home from "./pages/Home";
 import './index.css'
 
@@ -25,12 +26,16 @@ export const router = createBrowserRouter([
         element: <JsonFormatter />,
       },
       {
+        path: "formatar-xml",
+        element: <XmlFormatter />,
+      },
+      {
         path: "gerar-qrcode",
         element: <QRCodeGenerator />,
       },
       {
-        path: "/xml",
-        element: <XmlFormatter />,
+        path: "visualizar-html",
+        element: <VisualizarHTML />,
       },
     ],
   },
