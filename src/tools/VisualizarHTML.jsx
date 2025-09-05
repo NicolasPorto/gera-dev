@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function HtmlViewer() {
+export default function VisualizarHTML() {
     const [htmlCode, setHtmlCode] = useState("");
     const [isPreview, setIsPreview] = useState(false);
 
@@ -26,7 +26,7 @@ export default function HtmlViewer() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center p-6 w-full max-w-6xl mx-auto">
+        <div className="flex flex-col items-center justify-center p-6 w-full max-w-5xl mx-auto">
             <div className="w-full flex flex-col items-center gap-6">
 
                 <div className="w-full p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20">
@@ -40,7 +40,7 @@ export default function HtmlViewer() {
                     <textarea
                         value={htmlCode}
                         onChange={(e) => setHtmlCode(e.target.value)}
-                        placeholder="<html><body><h1>Seu HTML aqui</h1></body></html>"
+                        placeholder="<html><body><h1>Olá!</h1></body></html>"
                         className="w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-96 textarea-text-color border-gray-300/20 bg-purple-200/10 focus:border-purple-400 custom-scrollbar"
                         onKeyDown={(e) => {
                             if (e.ctrlKey && e.key === 'Enter') {

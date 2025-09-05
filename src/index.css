@@ -123,6 +123,10 @@
   margin-top: 1rem;
 }
 
+.numero-gerado { font-size: 3rem; }             
+@media (max-width: 768px) { .numero-gerado { font-size: 2rem; } }
+@media (max-width: 640px) { .numero-gerado { font-size: 2rem; } }
+
 .underline-style {
   position: relative;
 }
@@ -275,4 +279,10 @@
 
 [data-theme="white"] .dark\:bg-gray-800 {
   background-color: #7e3aaf !important;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-background-default);
 }
