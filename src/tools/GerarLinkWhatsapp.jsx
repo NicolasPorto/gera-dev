@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import InputMask from 'react-input-mask';
 
 export default function GerarLinkWhatsapp() {
@@ -37,7 +37,7 @@ export default function GerarLinkWhatsapp() {
 
     const isButtonDisabled = phonenumber.replace(/\D/g, '').length < 11;
     return (
-        <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
+        <div className="flex flex-col items-centermax-w-3xl">
             <div className="w-full flex flex-col items-center gap-6">
                 {!linkAlreadyGenerated ? 
                 (

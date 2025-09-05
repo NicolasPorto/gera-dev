@@ -40,7 +40,7 @@ export default function VisualizarHTML() {
                     <textarea
                         value={htmlCode}
                         onChange={(e) => setHtmlCode(e.target.value)}
-                        placeholder="<html><body><h1>Olá!</h1></body></html>"
+                        placeholder="<html/>"
                         className="w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-96 textarea-text-color border-gray-300/20 bg-purple-200/10 focus:border-purple-400 custom-scrollbar"
                         onKeyDown={(e) => {
                             if (e.ctrlKey && e.key === 'Enter') {

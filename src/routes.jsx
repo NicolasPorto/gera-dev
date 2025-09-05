@@ -6,6 +6,7 @@ import QRCodeGenerator from "./tools/QRCodeGenerator";
 import XmlFormatter from "./tools/XmlFormatter";
 import VisualizarHTML from "./tools/VisualizarHTML";
 import GeradorSenha from "./tools/GeradorSenha";
+import LinkWhatsApp from "./tools/GerarLinkWhatsapp";
 import Home from "./pages/Home";
 import './index.css'
 
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
         path: "visualizar-html",
         element: <VisualizarHTML />,
       },
+      {
+        path: "link-whatsapp",
+        element: <LinkWhatsApp />,
+      }
     ],
   },
 ]);
