@@ -34,3 +34,16 @@ export function gerarCNPJ() {
 export function gerarRG() {
   return Array.from({ length: 9 }, () => Math.floor(Math.random() * 10)).join("");
 }
+
+
+export function formatarCPF(cpf) {
+  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+}
+
+export function formatarCNPJ(cnpj) {
+  return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+}
+
+export function formatarRG(rg) {
+  return rg.replace(/(\d{2})(\d{3})(\d{3})(\d{1})/, "$1.$2.$3-$4");
+}

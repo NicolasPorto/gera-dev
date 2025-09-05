@@ -1,17 +1,5 @@
 import { useState, useEffect } from "react";
-import { gerarCPF, gerarCNPJ, gerarRG } from "../utils/documentos";
-
-function formatarCPF(cpf) {
-  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-}
-
-function formatarCNPJ(cnpj) {
-  return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
-}
-
-function formatarRG(rg) {
-  return rg.replace(/(\d{2})(\d{3})(\d{3})(\d{1})/, "$1.$2.$3-$4");
-}
+import { gerarCPF, gerarCNPJ, gerarRG, formatarCPF, formatarRG, formatarCNPJ } from "../utils/documentos";
 
 export default function DocumentosGenerator() {
   const [numero, setNumero] = useState("");

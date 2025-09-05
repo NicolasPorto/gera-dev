@@ -88,6 +88,17 @@
   color: white;
 }
 
+.botao-padrao-transparente {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+[data-theme="white"] .botao-padrao-transparente {
+  color: #7e3aaf;
+}
+
+
 .botao-padrao-desativado {
   cursor: not-allowed;
 }

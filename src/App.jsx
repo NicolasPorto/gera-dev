@@ -29,10 +29,11 @@ function App() {
       "/gerar-documentos": "GeraDev | Gerar Documentos",
       "/gerar-qrcode": "GeraDev | Gerar QR Code",
       "/gerar-senha": "GeraDev | Gerar Senha",
+      "/link-whatsapp": "GeraDev | Link WhatsApp",
+      "/gerar-pessoa": "GeraDev | Gerar Pessoa",
       "/formatar-json": "GeraDev | Formatar JSON",
       "/formatar-xml": "GeraDev | Formatar XML",
-      "/visualizar-html": "GeraDev | Visualizar HTML",
-      "/link-whatsapp": "GeraDev | Link WhatsApp"
+      "/visualizar-html": "GeraDev | Visualizar HTML"
     };
 
     document.title = pathTitles[location.pathname] || "GeraDev";
@@ -82,25 +83,29 @@ function App() {
               <Outlet />
             </div>
           </div>
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 dark:text-purple-300 opacity-70 hover:opacity-100 transition-opacity duration-300 flex items-center">
-            <span className="font-light mr-1">Desenvolvido por </span>
-            <a
-              href="https://github.com/NicolasPorto"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium hover:underline mx-1 transition-all"
-            >
-              Nicolas Porto
-            </a>
-            <span className="font-light mx-1">e</span>
-            <a
-              href="https://github.com/LuisQuintino"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium hover:underline mx-1 transition-all"
-            >
-              Luis Venturini
-            </a>
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-gray-400 dark:text-purple-300 opacity-70 hover:opacity-100 transition-opacity duration-300">
+            <div className="flex flex-col items-center sm:flex-row">
+              <span className="text-[10px] sm:text-xs font-light mb-1 sm:mb-0 sm:mr-1">Desenvolvido por </span>
+              <div className="flex">
+                <a
+                  href="https://github.com/NicolasPorto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
+                >
+                  Nicolas Porto
+                </a>
+                <span className="text-[10px] sm:text-xs font-light mx-1">e</span>
+                <a
+                  href="https://github.com/LuisQuintino"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
+                >
+                  Luis Venturini
+                </a>
+              </div>
+            </div>
           </div>
         </main>
       </div>

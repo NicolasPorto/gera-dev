@@ -8,6 +8,7 @@ export function Sidebar({ open, setOpen, isMobile }) {
     { to: "/gerar-qrcode", label: "Gerar QR Code" },
     { to: "/gerar-senha", label: "Gerar Senha" },
     { to: "/link-whatsapp", label: "Gerar Link WhatsApp" },
+    { to: "/gerar-pessoa", label: "Gerar Pessoa" },
     { to: "/formatar-json", label: "Formatar JSON" },
     { to: "/formatar-xml", label: "Formatar XML" },
     { to: "/visualizar-html", label: "Visualizar HTML" },
