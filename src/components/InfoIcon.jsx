@@ -2,7 +2,7 @@ function InfoIcon() {
     return (
         <div className="relative group inline-flex items-center">
             <svg 
-                className="w-5 h-5 text-default ml-2 cursor-help opacity-70 hover:opacity-100 transition-opacity" 
+                className="w-5 h-5 text-default ml-2 cursor-pointer opacity-70 hover:opacity-100 transition-opacity" 
                 aria-hidden="true" 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="24" 
