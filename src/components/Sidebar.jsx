@@ -7,10 +7,10 @@ export function Sidebar({ open, setOpen, isMobile }) {
     { to: "/gerar-documentos", label: "Gerar Documentos" },
     { to: "/gerar-qrcode", label: "Gerar QR Code" },
     { to: "/gerar-senha", label: "Gerar Senha" },
+    { to: "/link-whatsapp", label: "Gerar Link WhatsApp" },
     { to: "/formatar-json", label: "Formatar JSON" },
     { to: "/formatar-xml", label: "Formatar XML" },
     { to: "/visualizar-html", label: "Visualizar HTML" },
-    { to: "/link-whatsapp", label: "Gerar Link WhatsApp" },
   ];
 
   if (isMobile) {

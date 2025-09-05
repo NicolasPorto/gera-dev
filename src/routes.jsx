@@ -32,6 +32,10 @@ export const router = createBrowserRouter([
         element: <GeradorSenha />,
       },
       {
+        path: "link-whatsapp",
+        element: <LinkWhatsApp />,
+      },
+      {
         path: "formatar-json",
         element: <JsonFormatter />,
       },
@@ -42,10 +46,6 @@ export const router = createBrowserRouter([
       {
         path: "visualizar-html",
         element: <VisualizarHTML />,
-      },
-      {
-        path: "link-whatsapp",
-        element: <LinkWhatsApp />,
       }
     ],
   },
