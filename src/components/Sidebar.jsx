@@ -48,7 +48,7 @@ export function Sidebar({ open, setOpen, isMobile }) {
       className={`
         fixed left-0 top-0 h-full z-40
         w-[var(--sidebar-width)] bg-transparent
-        pt-20 px-4 flex flex-col gap-2
+        pt-20 px-4 flex flex-col gap-2 justify-center
       `}
     >
       {links.map(({ to, label }) => (
