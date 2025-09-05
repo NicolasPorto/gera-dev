@@ -46,13 +46,13 @@ export default function PessoaGenerator() {
         if (!pessoa) return;
 
         const texto = `
-Nome: ${pessoa.nome}
-Idade: ${pessoa.idade} anos
-Email: ${pessoa.email}
-Telefone: ${pessoa.telefone}
-Endereço: ${pessoa.endereco}
-CPF: ${pessoa.cpf}
-RG: ${pessoa.rg}
+            Nome: ${pessoa.nome}
+            Idade: ${pessoa.idade} anos
+            Email: ${pessoa.email}
+            Telefone: ${pessoa.telefone}
+            Endereço: ${pessoa.endereco}
+            CPF: ${pessoa.cpf}
+            RG: ${pessoa.rg}
         `.trim();
 
         navigator.clipboard.writeText(texto);
@@ -72,18 +72,35 @@ RG: ${pessoa.rg}
     return (
         <div className="p-4 flex flex-col items-center gap-6 w-full max-w-3xl mx-auto">
             <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                <div className="relative group">
+                <div class="relative group">
                     <div className="flex items-center gap-2">
-                        <span className="text-default">Sexo:</span>
-                        <select
-                            value={sexo}
-                            onChange={(e) => setSexo(e.target.value)}
-                            className="botao-padrao px-3 py-2 rounded font-medium cursor-pointer"
-                        >
-                            <option value="aleatorio">Aleatório</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Feminino</option>
-                        </select>
+                        <span class="text-default text-sm font-medium mr-2">Sexo:</span>
+                        <div class="relative group">
+                            <select
+                                value={sexo}
+                                onChange={(e) => setSexo(e.target.value)}
+                                class="
+                                botao-padrao 
+                                px-4 
+                                pr-10 
+                                py-2 
+                                rounded font-medium 
+                                cursor-pointer 
+                                transition-all 
+                                appearance-none 
+                                focus:ring-2 focus:ring-purple-400 
+                                focus:outline-none"
+                            >
+                                <option value="aleatorio">Aleatório</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                                <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="relative group">
