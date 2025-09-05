@@ -6,6 +6,7 @@ export function Sidebar({ open, setOpen, isMobile }) {
   const links = [
     { to: "/gerar-documentos", label: "Gerar Documentos" },
     { to: "/gerar-qrcode", label: "Gerar QR Code" },
+    { to: "/gerar-senha", label: "Gerar Senha" },
     { to: "/formatar-json", label: "Formatar JSON" },
     { to: "/formatar-xml", label: "Formatar XML" },
     { to: "/visualizar-html", label: "Visualizar HTML" },

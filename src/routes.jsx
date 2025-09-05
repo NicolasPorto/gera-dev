@@ -5,6 +5,7 @@ import JsonFormatter from "./tools/JsonFormatter";
 import QRCodeGenerator from "./tools/QRCodeGenerator";
 import XmlFormatter from "./tools/XmlFormatter";
 import VisualizarHTML from "./tools/VisualizarHTML";
+import GeradorSenha from "./tools/GeradorSenha";
 import Home from "./pages/Home";
 import './index.css'
 
@@ -22,16 +23,20 @@ export const router = createBrowserRouter([
         element: <DocumentosGenerator />,
       },
       {
+        path: "gerar-qrcode",
+        element: <QRCodeGenerator />,
+      },
+      {
+        path: "gerar-senha",
+        element: <GeradorSenha />,
+      },
+      {
         path: "formatar-json",
         element: <JsonFormatter />,
       },
       {
         path: "formatar-xml",
         element: <XmlFormatter />,
-      },
-      {
-        path: "gerar-qrcode",
-        element: <QRCodeGenerator />,
       },
       {
         path: "visualizar-html",

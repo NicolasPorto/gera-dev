@@ -28,6 +28,7 @@ function App() {
       "/": "Geradev",
       "/gerar-documentos": "Geradev | Gerar Documentos",
       "/gerar-qrcode": "Geradev | Gerar QR Code",
+      "/gerar-senha": "Geradev | Gerar Senha",
       "/formatar-json": "Geradev | Formatar JSON",
       "/formatar-xml": "Geradev | Formatar XML",
       "/visualizar-html": "Geradev | Visualizar HTML",
