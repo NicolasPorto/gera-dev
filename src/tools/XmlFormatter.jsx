@@ -100,7 +100,7 @@ export default function XmlFormatter() {
               setInput(e.target.value);
               setError(false);
             }}
-            placeholder={"<xml>"}
+            placeholder={"<xml/>"}
             className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-100  textarea-text-color ${error
               ? "border-red-500 bg-purple-200/10 focus:border-red-600"
               : "border-gray-300/20 bg-purple-200/10 focus:border-purple-400"

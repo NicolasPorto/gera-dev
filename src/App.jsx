@@ -25,16 +25,17 @@ function App() {
 
   useEffect(() => {
     const pathTitles = {
-      "/": "Geradev",
-      "/gerar-documentos": "Geradev | Gerar Documentos",
-      "/gerar-qrcode": "Geradev | Gerar QR Code",
-      "/gerar-senha": "Geradev | Gerar Senha",
-      "/formatar-json": "Geradev | Formatar JSON",
-      "/formatar-xml": "Geradev | Formatar XML",
-      "/visualizar-html": "Geradev | Visualizar HTML",
+      "/": "GeraDev",
+      "/gerar-documentos": "GeraDev | Gerar Documentos",
+      "/gerar-qrcode": "GeraDev | Gerar QR Code",
+      "/gerar-senha": "GeraDev | Gerar Senha",
+      "/formatar-json": "GeraDev | Formatar JSON",
+      "/formatar-xml": "GeraDev | Formatar XML",
+      "/visualizar-html": "GeraDev | Visualizar HTML",
+      "/link-whatsapp": "GeraDev | Link WhatsApp"
     };
 
-    document.title = pathTitles[location.pathname] || "Geradev";
+    document.title = pathTitles[location.pathname] || "GeraDev";
   }, [location]);
 
   return (
@@ -53,7 +54,7 @@ function App() {
 
         <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-default absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
           <Link to="/" className="hover:opacity-80 transition-opacity">
-            Geradev
+            GeraDev
           </Link>
           {!isHome && <InfoIcon />}
         </div>
