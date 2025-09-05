@@ -123,9 +123,24 @@
   margin-top: 1rem;
 }
 
+.numero-gerado-erro {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: monospace;
+  color: rgba(185, 21, 21, 0.705);
+  border-radius: 0.5rem;
+  text-align: center;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
 .numero-gerado { font-size: 3rem; }             
 @media (max-width: 768px) { .numero-gerado { font-size: 2rem; } }
 @media (max-width: 640px) { .numero-gerado { font-size: 2rem; } }
+
+.numero-gerado-erro { font-size: 2rem; }             
+@media (max-width: 768px) { .numero-gerado-erro { font-size: 2rem; } }
+@media (max-width: 640px) { .numero-gerado-erro { font-size: 1.4rem; } }
 
 .underline-style {
   position: relative;

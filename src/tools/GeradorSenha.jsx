@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function GeradorSenha() {
     const [password, setPassword] = useState("");
     const [length, setLength] = useState(12);
+    const [erro, setErro] = useState(false);
     const [copiado, setCopiado] = useState(false);
     const [hoverRefresh, setHoverRefresh] = useState(false);
     const [options, setOptions] = useState({
@@ -13,6 +14,7 @@ export default function GeradorSenha() {
     });
 
     const generatePassword = () => {
+        setErro(false);
         const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
         const numberChars = "0123456789";
@@ -26,6 +28,7 @@ export default function GeradorSenha() {
 
         if (allowedChars.length === 0) {
             setPassword("Selecione pelo menos uma opção");
+            setErro(true);
             return;
         }
 
@@ -102,17 +105,17 @@ export default function GeradorSenha() {
                         </svg>
                     </button>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                        Gerar Nova
+                        Refresh
                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                     </div>
                 </div>
             </div>
             {password && (
-                <p className="
-            numero-gerado text-center
-            text-2xl sm:text-3xl md:text-4xl lg:text-5xl
-          "
-                >
+                <p
+                    className={` text-center ${erro
+                        ? "numero-gerado-erro text-1xl sm:text-1xl md:text-2xl lg:text-2xl"
+                        : "numero-gerado text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+                    }`}>
                     {password}
                 </p>
             )}
@@ -123,9 +126,10 @@ export default function GeradorSenha() {
                     type="range"
                     min="6"
                     max="30"
+                    id="large-range"
                     value={length}
                     onChange={(e) => setLength(parseInt(e.target.value))}
-                    className="w-full h-2 bg-purple-600 rounded-lg appearance-none cursor-pointer"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-600"
                 />
                 <div className="flex justify-between text-default text-sm mt-1">
                     <span>6</span>
