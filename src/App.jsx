@@ -82,6 +82,26 @@ function App() {
               <Outlet />
             </div>
           </div>
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 dark:text-purple-300 opacity-70 hover:opacity-100 transition-opacity duration-300 flex items-center">
+            <span className="font-light mr-1">Desenvolvido por </span>
+            <a
+              href="https://github.com/NicolasPorto"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium hover:underline mx-1 transition-all"
+            >
+              Nicolas Porto
+            </a>
+            <span className="font-light mx-1">e</span>
+            <a
+              href="https://github.com/LuisQuintino"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium hover:underline mx-1 transition-all"
+            >
+              Luis Venturini
+            </a>
+          </div>
         </main>
       </div>
 
