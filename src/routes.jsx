@@ -10,6 +10,7 @@ import VisualizarHTML from "./tools/VisualizarHTML";
 import GeradorSenha from "./tools/GeradorSenha";
 import LinkWhatsApp from "./tools/GerarLinkWhatsapp";
 import GerarPessoa from "./tools/GerarPessoa";
+import MeuIpVerifier from "./tools/MeuIpVerifier";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path: "visualizar-html",
         element: <VisualizarHTML />,
+      },
+      {
+        path: "meu-ip",
+        element: <MeuIpVerifier />,
       }
     ],
   },

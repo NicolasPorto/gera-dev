@@ -12,6 +12,7 @@ export function Sidebar({ open, setOpen, isMobile }) {
     { to: "/formatar-json", label: "Formatar JSON" },
     { to: "/formatar-xml", label: "Formatar XML" },
     { to: "/visualizar-html", label: "Visualizar HTML" },
+    { to: "/meu-ip", label: "Meu IP" },
   ];
 
   if (isMobile) {
