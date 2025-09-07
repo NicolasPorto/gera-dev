@@ -97,6 +97,16 @@ export default function MeuIpVerifier() {
           </div>
         </div>
       </div>
+      <div className="flex gap-2">
+        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 aviso-box">
+            <p className="text-default text-sm font-medium aviso-texto">
+                ❓ Um endereço IP público é um identificador exclusivo atribuído pelo seu Provedor de Serviços de Internet (ISP)
+                 que permite a comunicação direta com outros dispositivos e redes na Internet. Ele funciona como a "morada" principal 
+                 da sua rede, normalmente associada ao seu roteador, e permite que o tráfego da Internet chegue à sua rede doméstica ou 
+                 empresarial, enquanto os dispositivos dentro da rede usam endereços IP privados.
+            </p>
+        </div>
+      </div>
     </div>
   );
 }
