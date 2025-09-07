@@ -33,7 +33,8 @@ function App() {
       "/gerar-pessoa": "GeraDev | Gerar Pessoa",
       "/formatar-json": "GeraDev | Formatar JSON",
       "/formatar-xml": "GeraDev | Formatar XML",
-      "/visualizar-html": "GeraDev | Visualizar HTML"
+      "/visualizar-html": "GeraDev | Visualizar HTML",
+      "/meu-ip": "GeraDev | Meu IP"
     };
 
     document.title = pathTitles[location.pathname] || "GeraDev";
