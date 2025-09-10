@@ -68,8 +68,7 @@ function App() {
 
       <div className="flex flex-1 overflow-hidden relative">
         <Sidebar open={open} setOpen={setOpen} isMobile={isMobile} />
-
-
+        
         <main
           className={`
             w-full

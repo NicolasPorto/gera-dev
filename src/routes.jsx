@@ -3,15 +3,16 @@ import App from "./App";
 import Home from "./pages/Home";
 import './index.css'
 import DocumentosGenerator from "./tools/DocumentosGenerator";
-import JsonFormatter from "./tools/JsonFormatter";
+import FormatarJSON from "./tools/FormatarJSON";
 import QRCodeGenerator from "./tools/QRCodeGenerator";
-import XmlFormatter from "./tools/XmlFormatter";
+import FormatarXML from "./tools/FormatarXML";
+import FormatarSQL from "./tools/FormatarSQL";
 import VisualizarHTML from "./tools/VisualizarHTML";
 import GeradorSenha from "./tools/GeradorSenha";
 import LinkWhatsApp from "./tools/GerarLinkWhatsapp";
 import GerarPessoa from "./tools/GerarPessoa";
-import MeuIpVerifier from "./tools/MeuIpVerifier";
-import JsonStringifyFormatter from "./tools/JsonStringifyFormatter";
+import VerificadorMeuIp from "./tools/VerificadorMeuIp";
+import JsonStringify from "./tools/JsonStringify";
 
 export const router = createBrowserRouter([
   {
@@ -44,11 +45,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "formatar-json",
-        element: <JsonFormatter />,
+        element: <FormatarJSON />,
       },
       {
         path: "formatar-xml",
-        element: <XmlFormatter />,
+        element: <FormatarXML />,
       },
       {
         path: "visualizar-html",
@@ -56,11 +57,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "meu-ip",
-        element: <MeuIpVerifier />,
+        element: <VerificadorMeuIp />,
       },
       {
         path: "json-stringify",
-        element: <JsonStringifyFormatter />,
+        element: <JsonStringify />,
+      },
+      {
+        path: "formatar-sql",
+        element: <FormatarSQL />,
       }
     ],
   },

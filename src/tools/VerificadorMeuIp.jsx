@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function MeuIpVerifier() {
+export default function VerificadorMeuIp() {
   const [meuIp, setMeuIp] = useState("");
   const [copiado, setCopiado] = useState(false);
   const [hoverRefresh, setHoverRefresh] = useState(false);

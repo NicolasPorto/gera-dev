@@ -12,6 +12,12 @@ export default function GeradorSenha() {
         numbers: true,
         symbols: true
     });
+    const [opcoesGeradas, setOpcoesGeradas] = useState({
+        uppercase: true,
+        lowercase: true,
+        numbers: true,
+        symbols: true
+    });
 
     const generatePassword = () => {
         setErro(false);
@@ -25,6 +31,13 @@ export default function GeradorSenha() {
         if (options.lowercase) allowedChars += lowercaseChars;
         if (options.numbers) allowedChars += numberChars;
         if (options.symbols) allowedChars += symbolChars;
+
+        setOpcoesGeradas({
+            uppercase: options.uppercase,
+            lowercase: options.lowercase,
+            numbers: options.numbers,
+            symbols: options.symbols
+        })
 
         if (allowedChars.length === 0) {
             setPassword("Selecione pelo menos uma opção");
@@ -54,6 +67,43 @@ export default function GeradorSenha() {
             ...options,
             [option]: !options[option]
         });
+    };
+
+    const classificarSenha = () => {
+        const { uppercase, lowercase, numbers, symbols } = opcoesGeradas;
+        const comprimento = password.length;
+
+        const tiposCaracteres = [uppercase, lowercase, numbers, symbols].filter(Boolean).length;
+
+        const isSequenciaObvia = /(123+|abc+|qwert+|asdf+)/i.test(password);
+        const isRepeticao = /(.)\1{3,}/.test(password);
+        if (comprimento < 8 || tiposCaracteres === 1) {
+            return 'Fraca';
+        }
+
+        if (isSequenciaObvia || isRepeticao) {
+            return 'Muito Fraca';
+        }
+
+        if (comprimento >= 8 && comprimento <= 11 && tiposCaracteres === 2) {
+            return 'Média';
+        }
+
+        if ((comprimento >= 12 && comprimento <= 15 && tiposCaracteres >= 2) ||
+            (comprimento >= 8 && comprimento <= 11 && tiposCaracteres >= 3)) {
+            return 'Boa';
+        }
+
+        if (comprimento >= 16 && comprimento <= 20 && tiposCaracteres >= 3) {
+            return 'Forte';
+        }
+
+        if ((comprimento >= 20 && tiposCaracteres === 4) ||
+            (comprimento >= 16 && tiposCaracteres >= 3 && symbols && numbers)) {
+            return 'Muito Forte';
+        }
+
+        return 'Média';
     };
 
     useEffect(() => {
@@ -115,7 +165,7 @@ export default function GeradorSenha() {
                     className={` text-center ${erro
                         ? "numero-gerado-erro text-1xl sm:text-1xl md:text-2xl lg:text-2xl"
                         : "numero-gerado text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
-                    }`}>
+                        }`}>
                     {password}
                 </p>
             )}
@@ -223,16 +273,16 @@ export default function GeradorSenha() {
                 <div className="flex justify-between items-center mb-1">
                     <span className="text-default text-sm">Força da senha:</span>
                     <span className="text-default text-sm font-medium">
-                        {password.length < 8 ? "Fraca" :
-                            password.length < 12 ? "Média" :
-                                options.symbols && options.numbers && options.uppercase && options.lowercase ? "Forte" : "Boa"}
+                        {classificarSenha()}
                     </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2.5">
                     <div
-                        className={`h-2.5 rounded-full ${password.length < 8 ? "bg-red-500 w-1/4" :
-                            password.length < 12 ? "bg-yellow-500 w-2/4" :
-                                options.symbols && options.numbers && options.uppercase && options.lowercase ? "bg-green-500 w-full" : "bg-purple-500 w-3/4"
+                        className={`h-2.5 rounded-full ${classificarSenha() === 'Muito Forte' ? "bg-pink-600 w-full" : classificarSenha() === 'Forte' ? "bg-green-500 w-full" :
+                            classificarSenha() === 'Boa' ? "bg-purple-500 w-3/4" :
+                                classificarSenha() === 'Média' ? "bg-yellow-500 w-2/4" :
+                                    classificarSenha() === 'Fraca' ? "bg-red-400 w-1/4" :
+                                        classificarSenha() === 'Muito Fraca' ? "bg-red-500 w-1/4" : ""
                             }`}
                     ></div>
                 </div>

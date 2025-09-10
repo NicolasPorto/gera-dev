@@ -104,7 +104,7 @@ export default function VisualizarHTML() {
                             onClick={limparHTML}
                             className="px-8 py-3 rounded-lg font-medium botao-padrao botao-padrao-ativo hover:scale-105 transition-transform"
                         >
-                            <i className="fa-solid fa-eraser"></i>
+                            <i className="fa-solid fa-eraser fa-lg"></i>
                         </button>
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                             Limpar

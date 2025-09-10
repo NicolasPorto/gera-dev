@@ -11,6 +11,7 @@ export function Sidebar({ open, setOpen, isMobile }) {
     { to: "/gerar-pessoa", label: "Gerar Pessoa" },
     { to: "/formatar-json", label: "Formatar JSON" },
     { to: "/formatar-xml", label: "Formatar XML" },
+    { to: "/formatar-sql", label: "Formatar SQL" },
     { to: "/visualizar-html", label: "Visualizar HTML" },
     { to: "/meu-ip", label: "Obter Meu IP" },
     { to: "/json-stringify", label: "JSON ↔ String" },
@@ -36,7 +37,7 @@ export function Sidebar({ open, setOpen, isMobile }) {
               flex items-center gap-2 px-3 py-2 rounded-lg
               text-sm text-white font-medium
                botao-padrao transition-colors
-              ${location.pathname.includes(to.split("/")[1]) ? "botao-padrao-ativo" : ""}
+              ${location.pathname.includes(to.split("/")[1]) ? "botao-padrao-clicked" : ""}
             `}
           >
             {label}

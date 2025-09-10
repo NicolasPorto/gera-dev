@@ -3,7 +3,7 @@ import { useTheme } from "../components/UseTheme"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import * as prismStyles from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-export default function JsonStringifyFormatter() {
+export default function JsonStringify() {
     const [input, setInput] = useState("");
     const [output, setOutput] = useState("");
     const [error, setError] = useState(false);
