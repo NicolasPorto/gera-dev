@@ -199,12 +199,6 @@ export default function JsonStringifyFormatter() {
                     </>
                 )}
 
-                {error && (
-                    <div className="w-full p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                        <strong>{errorMessage}</strong>
-                    </div>
-                )}
-
                 <div className="p-4 flex flex-col items-center gap-6">
                     <div className="flex gap-4 flex-wrap justify-center">
                         {!outputOn && (
