@@ -29,6 +29,11 @@
   background-color: var(--color-textarea-bg) !important;
 }
 
+[data-theme="white"] .infos-white-theme {
+  border-color: var(--color-textarea-border) !important;
+  background-color: var(--color-textarea-bg) !important;
+}
+
 [data-theme="white"] .textarea-white-theme:focus {
   border-color: #6A0DAD !important;
   background-color: rgba(106, 13, 173, 0.12) !important;

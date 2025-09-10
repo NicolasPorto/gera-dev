@@ -11,6 +11,7 @@ import GeradorSenha from "./tools/GeradorSenha";
 import LinkWhatsApp from "./tools/GerarLinkWhatsapp";
 import GerarPessoa from "./tools/GerarPessoa";
 import MeuIpVerifier from "./tools/MeuIpVerifier";
+import JsonStringifyFormatter from "./tools/JsonStringifyFormatter";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: "meu-ip",
         element: <MeuIpVerifier />,
+      },
+      {
+        path: "json-stringify",
+        element: <JsonStringifyFormatter />,
       }
     ],
   },

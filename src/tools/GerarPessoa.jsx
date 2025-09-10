@@ -72,14 +72,14 @@ export default function PessoaGenerator() {
     return (
         <div className="p-4 flex flex-col items-center gap-6 w-full max-w-3xl mx-auto">
             <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                <div class="relative group">
+                <div className="relative group">
                     <div className="flex items-center gap-2">
-                        <span class="text-default text-sm font-medium mr-2">Sexo:</span>
-                        <div class="relative group">
+                        <span className="text-default text-sm font-medium mr-2">Sexo:</span>
+                        <div className="relative group">
                             <select
                                 value={sexo}
                                 onChange={(e) => setSexo(e.target.value)}
-                                class="
+                                className="
                                 botao-padrao 
                                 px-4 
                                 pr-10 
@@ -95,9 +95,9 @@ export default function PessoaGenerator() {
                                 <option value="M">Masculino</option>
                                 <option value="F">Feminino</option>
                             </select>
-                            <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                                <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                                <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </div>
                         </div>
@@ -152,7 +152,7 @@ export default function PessoaGenerator() {
             </div>
 
             {pessoa && (
-                <div className="w-full bg-opacity-20 bg-purple-200/10 rounded-lg p-6 border border-purple-400">
+                <div className="w-full bg-opacity-20 bg-purple-200/10 rounded-lg border-2 p-6 border-purple-400">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-default">
                         <div className="space-y-4">
                             <div className="flex justify-between items-start">

@@ -17,7 +17,7 @@ function InfoIcon() {
                 />
             </svg>
 
-            <div className="absolute top-full left-0 mt-2 w-72 p-3 bg-gray-900 text-white text-xs rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div className="absolute top-full left-0 mt-2 w-72 p-3 text-xs shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                 <p>
                     🛡️ Ferramentas para fins educacionais e de desenvolvimento. 
                     Uso inadequado é de responsabilidade do usuário.

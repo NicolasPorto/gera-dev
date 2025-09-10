@@ -1,32 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useTheme } from "../components/UseTheme"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import * as prismStyles from 'react-syntax-highlighter/dist/esm/styles/prism';
-
-function useTheme() {
-  const [theme, setTheme] = useState(() => {
-    return document.documentElement.getAttribute('data-theme') || 'dark';
-  });
-
-  useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'data-theme') {
-          const newTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-          setTheme(newTheme);
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  return theme;
-}
 
 export default function JsonFormatter() {
   const [input, setInput] = useState("");
@@ -85,7 +60,7 @@ export default function JsonFormatter() {
               setError(false);
             }}
             placeholder={"{}"}
-            className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-100 textarea-text-color ${error
+            className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-100 textarea-text-color textarea-white-theme ${error
               ? "border-red-500 bg-purple-200/10 focus:border-red-600"
               : "border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
               }`}
@@ -129,7 +104,7 @@ export default function JsonFormatter() {
                     : "botao-padrao-ativo hover:scale-105 transition-transform"
                     }`}
                 >
-                  <i class="fa-solid fa-hammer fa-lg"></i>
+                  <i className="fa-solid fa-hammer fa-lg"></i>
                 </button>
 
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -203,7 +178,7 @@ export default function JsonFormatter() {
                       : "botao-padrao-ativo hover:scale-105 transition-transform"
                       }`}
                   >
-                    <i class="fa-solid fa-eraser fa-lg"></i>
+                    <i className="fa-solid fa-eraser fa-lg"></i>
                   </button>
 
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">

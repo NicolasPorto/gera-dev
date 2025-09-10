@@ -46,7 +46,7 @@ export default function QrCodeGenerator() {
         <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
             <div className="w-full flex flex-col items-center gap-6">
 
-                <div className="mt-6 p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20">
+                <div className="mt-6 p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                     <p className="text-default text-sm text-center">
                         💡 Cole qualquer link abaixo para gerar um QR Code.
                         Use o botão de download para salvar a imagem.
@@ -59,7 +59,7 @@ export default function QrCodeGenerator() {
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         placeholder="https://exemplo.com"
-                        className="w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out textarea-text-color border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
+                        className="infos-white-theme w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out textarea-text-color border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
                         onKeyPress={(e) => e.key === "Enter" && generateQR()}
                     />
                 </div>
@@ -90,7 +90,7 @@ export default function QrCodeGenerator() {
                             onClick={clearQR}
                             className="px-8 py-3 rounded-lg font-medium botao-padrao botao-padrao-ativo hover:scale-105 transition-transform"
                         >
-                            <i class="fa-solid fa-eraser fa-lg"></i>
+                            <i className="fa-solid fa-eraser fa-lg"></i>
                         </button>
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                             Limpar

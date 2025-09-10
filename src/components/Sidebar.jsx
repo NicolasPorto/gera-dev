@@ -12,7 +12,8 @@ export function Sidebar({ open, setOpen, isMobile }) {
     { to: "/formatar-json", label: "Formatar JSON" },
     { to: "/formatar-xml", label: "Formatar XML" },
     { to: "/visualizar-html", label: "Visualizar HTML" },
-    { to: "/meu-ip", label: "Meu IP" },
+    { to: "/meu-ip", label: "Obter Meu IP" },
+    { to: "/json-stringify", label: "JSON ↔ String" },
   ];
 
   if (isMobile) {
@@ -45,7 +46,7 @@ export function Sidebar({ open, setOpen, isMobile }) {
     );
   }
 
-   return (
+  return (
     <nav
       className={`
         fixed left-0 top-0 h-full z-40
