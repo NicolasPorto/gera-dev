@@ -1,9 +1,11 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
 import { ThemeToggle } from "./components/ThemeToggle";
-import InfoIcon from "./components/InfoIcon";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { useTheme } from "./components/UseTheme"
+import InfoIcon from "./components/InfoIcon";
+import Otter from "./assets/Otter";
 
 function App() {
   const location = useLocation();
@@ -55,6 +57,7 @@ function App() {
         )}
 
         <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-default absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+          {/* <Otter /> */}
           <Link to="/" className="hover:opacity-80 transition-opacity">
             GeraDev
           </Link>
@@ -68,7 +71,7 @@ function App() {
 
       <div className="flex flex-1 overflow-hidden relative">
         <Sidebar open={open} setOpen={setOpen} isMobile={isMobile} />
-        
+
         <main
           className={`
             w-full
