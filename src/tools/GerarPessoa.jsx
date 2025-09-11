@@ -74,79 +74,24 @@ export default function PessoaGenerator() {
             <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
                 <div className="relative group">
                     <div className="flex items-center gap-2">
-                        <span className="text-default text-sm font-medium mr-2">Sexo:</span>
-                        <div className="relative group">
-                            <select
-                                value={sexo}
-                                onChange={(e) => setSexo(e.target.value)}
-                                className="
-                                botao-padrao 
-                                px-4 
-                                pr-10 
-                                py-2 
-                                rounded font-medium 
-                                cursor-pointer 
-                                transition-all 
-                                appearance-none 
-                                focus:ring-2 focus:ring-purple-400 
-                                focus:outline-none"
-                            >
-                                <option value="aleatorio">Aleatório</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Feminino</option>
-                            </select>
-                            <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                                <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="relative group">
-                    <button
-                        onClick={gerarPessoa}
-                        onMouseEnter={() => setHoverRefresh(true)}
-                        onMouseLeave={() => setHoverRefresh(false)}
-                        className="botao-padrao px-4 py-2 rounded font-medium flex items-center justify-center gap-2"
-                    >
-                        <svg
-                            className={`w-6 h-6 ${hoverRefresh ? 'animate-spin' : ''}`}
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
+                        <button
+                            onClick={() => setSexo("aleatorio")}
+                            className={`px-3 py-1 rounded-lg font-medium ${sexo === "aleatorio" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
                         >
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4" />
-                        </svg>
-                    </button>
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                        Refresh
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-                    </div>
-                </div>
-                <div className="relative group">
-                    <button
-                        onClick={copiarTudo}
-                        disabled={!pessoa}
-                        className={`botao-padrao px-4 py-2 rounded flex items-center justify-center ${!pessoa ? 'botao-padrao-desativado opacity-50' : ''}`}
-                    >
-                        {campoCopiado === 'tudo' ? (
-                            <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
-                            </svg>
-                        ) : (
-                            <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path fillRule="evenodd" d="M7 9v6a4 4 0 0 0 4 4h4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1v2Z" clipRule="evenodd" />
-                                <path fillRule="evenodd" d="M13 3.054V7H9.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 13 3.054ZM15 3v4a2 2 0 0 1-2 2H9v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3Z" clipRule="evenodd" />
-                            </svg>
-                        )}
-                    </button>
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                        Copiar tudo
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                            Aleatório
+                        </button>
+                        <button
+                            onClick={() => setSexo("M")}
+                            className={`px-3 py-1 rounded-lg font-medium ${sexo === "M" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+                        >
+                            Masculino
+                        </button>
+                        <button
+                            onClick={() => setSexo("F")}
+                            className={`px-3 py-1 rounded-lg font-medium ${sexo === "F" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+                        >
+                            Feminino
+                        </button>
                     </div>
                 </div>
             </div>
@@ -318,9 +263,60 @@ export default function PessoaGenerator() {
                                 </button>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
             )}
+
+            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                <div className="relative group">
+                    <button
+                        onClick={gerarPessoa}
+                        onMouseEnter={() => setHoverRefresh(true)}
+                        onMouseLeave={() => setHoverRefresh(false)}
+                        className="botao-padrao px-4 py-2 rounded font-medium flex items-center justify-center gap-2"
+                    >
+                        <svg
+                            className={`w-6 h-6 ${hoverRefresh ? 'animate-spin' : ''}`}
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4" />
+                        </svg>
+                    </button>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        Refresh
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                    </div>
+                </div>
+                <div className="relative group">
+                    <button
+                        onClick={copiarTudo}
+                        disabled={!pessoa}
+                        className={`botao-padrao px-4 py-2 rounded flex items-center justify-center ${!pessoa ? 'botao-padrao-desativado opacity-50' : ''}`}
+                    >
+                        {campoCopiado === 'tudo' ? (
+                            <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
+                            </svg>
+                        ) : (
+                            <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path fillRule="evenodd" d="M7 9v6a4 4 0 0 0 4 4h4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1v2Z" clipRule="evenodd" />
+                                <path fillRule="evenodd" d="M13 3.054V7H9.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 13 3.054ZM15 3v4a2 2 0 0 1-2 2H9v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3Z" clipRule="evenodd" />
+                            </svg>
+                        )}
+                    </button>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        Copiar
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

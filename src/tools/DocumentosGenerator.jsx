@@ -58,39 +58,6 @@ export default function DocumentosGenerator() {
 
   return (
     <div className="p-4 flex flex-col items-center gap-6">
-      <div className="flex gap-4">
-        <button
-          onClick={() => handleClick("cpf")}
-          className={`botao-padrao px-4 py-2 rounded font-medium ${ativo === "cpf" ? "botao-padrao-clicked" : ""
-            }`}
-        >
-          CPF
-        </button>
-        <button
-          onClick={() => handleClick("cnpj")}
-          className={`botao-padrao px-4 py-2 rounded font-medium ${ativo === "cnpj" ? "botao-padrao-clicked" : ""
-            }`}
-        >
-          CNPJ
-        </button>
-        <button
-          onClick={() => handleClick("rg")}
-          className={`botao-padrao px-4 py-2 rounded font-medium ${ativo === "rg" ? "botao-padrao-clicked" : ""
-            }`}
-        >
-          RG
-        </button>
-      </div>
-
-      {numero && (
-        <p className="
-            numero-gerado text-center
-            text-2xl sm:text-3xl md:text-4xl lg:text-5xl
-          "
-        >
-          {numero}
-        </p>
-      )}
 
       <div className="flex gap-2">
 
@@ -162,6 +129,36 @@ export default function DocumentosGenerator() {
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
           </div>
         </div>
+      </div>
+
+      {numero && (
+        <p className="
+            numero-gerado text-center
+            text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+          "
+        >
+          {numero}
+        </p>
+      )}
+      <div className="flex gap-4">
+        <button
+          onClick={() => handleClick("cpf")}
+          className={`px-4 py-2 rounded-lg font-medium ${ativo === "cpf" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+        >
+          CPF
+        </button>
+        <button
+          onClick={() => handleClick("cnpj")}
+          className={`px-4 py-2 rounded-lg font-medium ${ativo === "cnpj" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+        >
+          CNPJ
+        </button>
+        <button
+          onClick={() => handleClick("rg")}
+          className={`px-4 py-2 rounded-lg font-medium ${ativo === "rg" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+        >
+          RG
+        </button>
       </div>
     </div>
   );

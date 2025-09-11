@@ -103,7 +103,7 @@ export default function GeradorSenha() {
             return 'Muito Forte';
         }
 
-        return 'Média';
+        return 'Erro';
     };
 
     useEffect(() => {
