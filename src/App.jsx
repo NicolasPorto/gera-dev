@@ -3,7 +3,6 @@ import { Sidebar } from "./components/Sidebar";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { useTheme } from "./components/UseTheme"
 import InfoIcon from "./components/InfoIcon";
 import Otter from "./assets/Otter";
 
@@ -11,12 +10,13 @@ function App() {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const [open, setOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1244);
+  const [reduzirSidebar, setReduzirSidebar] = useState(window.innerWidth < 1320 || window.innerHeight < 720);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1260);
-      if (window.innerWidth >= 1244) {
+      setReduzirSidebar(window.innerWidth < 1320 || window.innerHeight < 720);
+      console.log(open)
+      if (window.innerWidth >= 1320 || window.innerHeight >= 720) {
         setOpen(false);
       }
     };
@@ -44,8 +44,8 @@ function App() {
 
   return (
     <div className="h-screen flex flex-col background-default">
-      <header className="py-4 px-6 flex items-center relative teste">
-        {isMobile && (
+      <header className="py-4 px-6 flex items-center relative">
+        {reduzirSidebar && (
           <div className="absolute left-4 top-1/2 -translate-y-1/2">
             <button
               className="text-default"
@@ -57,7 +57,6 @@ function App() {
         )}
 
         <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-default absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-          {/* <Otter /> */}
           <Link to="/" className="hover:opacity-80 transition-opacity">
             GeraDev
           </Link>
@@ -69,51 +68,56 @@ function App() {
         </div>
       </header>
 
-      <div className="flex flex-1 overflow-hidden relative">
-        <Sidebar open={open} setOpen={setOpen} isMobile={isMobile} />
+      <div className="flex flex-1 relative">
+        <Sidebar open={open} setOpen={setOpen} reduzirSidebar={reduzirSidebar} />
 
         <main
           className={`
-            w-full
-            ${!isMobile ? 'pl-[var(--sidebar-width)]' : ''}
-            transition-all duration-300
-            relative
-            min-h-[calc(100vh-64px)]
-          `}
+        flex-1
+        transition-all duration-300
+        flex items-center justify-center
+      `}
         >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-full max-w-4xl flex flex-col items-center justify-center">
-              <Outlet />
-            </div>
-          </div>
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-gray-400 dark:text-purple-300 opacity-70 hover:opacity-100 transition-opacity duration-300">
-            <div className="flex flex-col items-center sm:flex-row">
-              <span className="text-[10px] sm:text-xs font-light mb-1 sm:mb-0 sm:mr-1">Desenvolvido por </span>
-              <div className="flex">
-                <a
-                  href="https://github.com/NicolasPorto"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
-                >
-                  Nicolas Porto
-                </a>
-                <span className="text-[10px] sm:text-xs font-light mx-1">e</span>
-                <a
-                  href="https://github.com/LuisQuintino"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
-                >
-                  Luis Venturini
-                </a>
-              </div>
-            </div>
+          <div className="w-full max-w-4xl flex flex-col items-center justify-center p-4">
+            <Outlet />
           </div>
         </main>
       </div>
 
+      <footer
+        className={`
+      py-4 text-center
+    `}
+      >
+        <div className="text-gray-400 dark:text-purple-300 opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <div className="flex flex-col items-center sm:flex-row justify-center">
+            <span className="text-[10px] sm:text-xs font-light mb-1 sm:mb-0 sm:mr-1">
+              Desenvolvido por{" "}
+            </span>
+            <div className="flex">
+              <a
+                href="https://github.com/NicolasPorto"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
+              >
+                Nicolas Porto
+              </a>
+              <span className="text-[10px] sm:text-xs font-light mx-1">e</span>
+              <a
+                href="https://github.com/LuisQuintino"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
+              >
+                Luis Venturini
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
+
   );
 }
 

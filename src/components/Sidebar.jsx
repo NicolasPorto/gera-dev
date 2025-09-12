@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-export function Sidebar({ open, setOpen, isMobile }) {
+export function Sidebar({ open, setOpen, reduzirSidebar }) {
   const location = useLocation();
 
   const links = [
@@ -17,7 +17,7 @@ export function Sidebar({ open, setOpen, isMobile }) {
     { to: "/json-stringify", label: "JSON ↔ String" },
   ];
 
-  if (isMobile) {
+  if (reduzirSidebar) {
     return (
       <nav
         className={`
