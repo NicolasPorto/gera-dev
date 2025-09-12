@@ -51,7 +51,6 @@ export default function FormatarJSON() {
   return (
     <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
       <div className="w-full flex flex-col items-center gap-6">
-
         {!outputOn && (
           <textarea
             value={input}

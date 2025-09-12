@@ -89,7 +89,7 @@ function App() {
       py-4 text-center
     `}
       >
-        <div className="text-gray-400 dark:text-purple-300 opacity-70 hover:opacity-100 transition-opacity duration-300">
+        <div className="text-gray-400 text-footer opacity-70 hover:opacity-100 transition-opacity duration-300">
           <div className="flex flex-col items-center sm:flex-row justify-center">
             <span className="text-[10px] sm:text-xs font-light mb-1 sm:mb-0 sm:mr-1">
               Desenvolvido por{" "}

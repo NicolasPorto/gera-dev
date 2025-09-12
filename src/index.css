@@ -24,6 +24,14 @@
   color: var(--color-textarea-text);
 }
 
+.text-footer{
+  color: #ad70d8;
+}
+
+[data-theme="white"] .text-footer {
+  color:#5b2085 !important;
+}
+
 [data-theme="white"] .textarea-white-theme {
   border-color: var(--color-textarea-border) !important;
   background-color: var(--color-textarea-bg) !important;

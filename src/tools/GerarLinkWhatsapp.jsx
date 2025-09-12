@@ -37,31 +37,28 @@ export default function GerarLinkWhatsapp() {
 
     const isButtonDisabled = phonenumber.replace(/\D/g, '').length < 11;
     return (
-        <div className="flex flex-col items-centermax-w-3xl">
+        <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
             <div className="w-full flex flex-col items-center gap-6">
                 {!linkAlreadyGenerated ?
                     (
                         <>
-                            <div className="w-l">
-                                <InputMask
-                                    type="tel"
-                                    value={phonenumber}
-                                    onChange={(e) => setPhoneNumber(e.target.value)}
-                                    placeholder="(  ) ____-____"
-                                    mask="(99) 99999-9999"
-                                    className="infos-white-theme w-small p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out textarea-text-color border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
-                                />
-                            </div>
+                            <InputMask
+                                type="tel"
+                                value={phonenumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                placeholder="(  ) ____-____"
+                                mask="(99) 99999-9999"
+                                className="w-small p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all 
+                                               duration-300 ease-in-out textarea-text-color textarea-white-theme border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
+                            />
 
-                            <div className="w-md h-50">
-                                <textarea
-                                    value={infoText}
-                                    placeholder="Olá!"
-                                    onChange={(e) => setInfoText(e.target.value)}
-                                    disabled={isButtonDisabled}
-                                    className="infos-white-theme w-md h-50 p-4 border-2 rounded-lg font-mono text-md focus:outline-none resize-none transition-all duration-300 ease-in-out textarea-text-color border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
-                                />
-                            </div>
+                            <textarea
+                                value={infoText}
+                                placeholder="Olá!"
+                                onChange={(e) => setInfoText(e.target.value)}
+                                disabled={isButtonDisabled}
+                                className="border-gray-300/20 bg-purple-200/10 focus:border-purple-400 w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-50 textarea-text-color textarea-white-theme"
+                            />
 
                             <div className="p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                                 <p className="text-default text-sm text-center">
