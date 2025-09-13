@@ -92,7 +92,7 @@ export default function PasswordGenerator() {
             return t("Media");
         }
 
-        if ((length >= 12 && length <= 15 && characterTypes >= 2) ||
+        if ((length >= 12 && length < 20 && characterTypes >= 2) ||
             (length >= 8 && length <= 11 && characterTypes >= 3)) {
             return t("Boa");
         }
@@ -102,8 +102,17 @@ export default function PasswordGenerator() {
         }
 
         if ((length >= 20 && characterTypes === 4) ||
-            (length >= 16 && characterTypes >= 3 && symbols && numbers)) {
+            (length >= 16 && characterTypes >= 3 && symbols && numbers) ||
+            (length >= 20 && symbols && lowercase) ||
+            (length >= 20 && symbols && uppercase) ||
+            (length >= 20 && symbols && numbers)) {
             return t("MuitoForte");
+        }
+
+        if ((length >= 20 && lowercase && numbers) ||
+            (length >= 20 && uppercase && lowercase)||
+            (length >= 20 && uppercase && numbers)) {
+            return t("Forte");
         }
 
         return t("Erro");
@@ -324,7 +333,7 @@ export default function PasswordGenerator() {
                     <div
                         className={`h-2.5 rounded-full ${sortPassword() === t("MuitoForte") ? "bg-pink-600 w-full" : sortPassword() === t("Forte") ? "bg-green-500 w-full" :
                             sortPassword() === t("Boa") ? "bg-purple-500 w-3/4" :
-                                sortPassword() === t("Média") ? "bg-yellow-500 w-2/4" :
+                                sortPassword() === t("Media") ? "bg-yellow-500 w-2/4" :
                                     sortPassword() === t("Fraca") ? "bg-red-400 w-1/4" :
                                         sortPassword() === t("MuitoFraca") ? "bg-red-500 w-1/4" : ""
                             }`}
