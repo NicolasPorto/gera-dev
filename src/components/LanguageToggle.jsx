@@ -15,13 +15,13 @@ export function LanguageToggle() {
     return (
         <button
             onClick={changeLanguage}
-            className="default-button px-2 py-1 rounded flex items-center justify-center"
+            className="rounded flex items-center justify-center"
             title={isEnglish ? 'Change to English' : 'Mudar para português'}
         >
             {isEnglish ? (
-                <span className="fi fi-us hover:opacity-50 transition-opacity duration-300" style={{ fontSize: '2rem' }}></span>
+                <span className="fi fi-us hover:opacity-60 transition-opacity duration-300 rounded cursor-pointer default-button" style={{ fontSize: '2.4rem' }}></span>
             ) : (
-                <span className="fi fi-br hover:opacity-50 transition-opacity duration-300" style={{ fontSize: '2rem' }}></span>
+                <span className="fi fi-br hover:opacity-60 transition-opacity duration-300 rounded cursor-pointer default-button" style={{ fontSize: '2.4rem' }}></span>
             )}
         </button>
     );
