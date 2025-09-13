@@ -26,19 +26,16 @@ export function ThemeToggle({ reduceComponents }) {
     }
   };
 
-  const svgSize = reduceComponents ? '4' : '6'; // w-4 h-4 ou w-6 h-6
-  const paddingY = reduceComponents ? '1' : '2';
-  const paddingX = reduceComponents ? '2' : '4';
-
   return (
     <button
       onClick={toggleTheme}
-      className={`default-button rounded flex items-center justify-center px-${paddingX} py-${paddingY}`}
+      className={`default-button rounded flex items-center justify-center
+        ${reduceComponents ? 'px-2 py-1' : 'px-4 py-2'}`}
       title={isWhiteTheme ? t("MudarParaTemaEscuro") : t("MudarParaTemaClaro")}
     >
       {isWhiteTheme ? (
         <svg
-          className={`w-${svgSize} h-${svgSize} text-gray-800 dark:text-white`}
+          className={`text-gray-800 dark:text-white ${reduceComponents ? 'w-4 h-4' : 'w-6 h-6'}`}
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -50,7 +47,7 @@ export function ThemeToggle({ reduceComponents }) {
         </svg>
       ) : (
         <svg
-          className={`w-${svgSize} h-${svgSize} text-gray-800 dark:text-white`}
+          className={`text-gray-800 dark:text-white ${reduceComponents ? 'w-4 h-4' : 'w-6 h-6'}`}
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
