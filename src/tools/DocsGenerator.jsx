@@ -145,19 +145,19 @@ export default function DocsGenerator() {
       <div className="flex gap-4">
         <button
           onClick={() => handleClick("cpf")}
-          className={`px-4 py-2 rounded-lg font-medium ${active === "cpf" ? "default-button" : "default-button-transparent border border-purple-600"}`}
+          className={`px-4 py-1 rounded-lg font-medium ${active === "cpf" ? "default-button" : "default-button-transparent border border-purple-600"}`}
         >
           CPF
         </button>
         <button
           onClick={() => handleClick("cnpj")}
-          className={`px-4 py-2 rounded-lg font-medium ${active === "cnpj" ? "default-button" : "default-button-transparent border border-purple-600"}`}
+          className={`px-4 py-1 rounded-lg font-medium ${active === "cnpj" ? "default-button" : "default-button-transparent border border-purple-600"}`}
         >
           CNPJ
         </button>
         <button
           onClick={() => handleClick("rg")}
-          className={`px-4 py-2 rounded-lg font-medium ${active === "rg" ? "default-button" : "default-button-transparent border border-purple-600"}`}
+          className={`px-4 py-1 rounded-lg font-medium ${active === "rg" ? "default-button" : "default-button-transparent border border-purple-600"}`}
         >
           RG
         </button>
