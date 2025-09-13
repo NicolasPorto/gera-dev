@@ -2,7 +2,7 @@
 
 O GeraDev é uma plataforma completa que oferece ferramentas essenciais para desenvolvedores e estudantes, facilitando a geração, formatação e manipulação de dados em seus projetos e ambientes de teste.
 
-Acesso: 🌐 https://geradev.com.br
+Acesso: 🌐 https://geradev.com.br (Suporte para Inglês e Português)
 
 ### 🚀 Ferramentas Disponíveis
 
