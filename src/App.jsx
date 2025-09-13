@@ -29,7 +29,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("ts")
     const pathTitles = {
       "/": t("GeraDev"),
       "/gerar-documentos": `GeraDev | ${t("DescGerarDocumentos")}`,
