@@ -46,7 +46,7 @@ Acesso: 🌐 https://geradev.com.br
 - **Vite** - Ferramenta de build e desenvolvimento frontend
 - **Vercel** - Plataforma de deploy e hospedagem
 
-### Suporta mudança de idioma 🇧🇷 🇺🇸 
+### Suporta mudança de idioma - 🇧🇷 🇺🇸 
 É possível alterar o idioma do Geradev para inglês, através do botão no canto superior direito.
 
 ### ⚠️ Aviso Importante
