@@ -1,55 +1,57 @@
 import { useState, useEffect } from "react";
-import { gerarCPF, gerarCNPJ, gerarRG, formatarCPF, formatarRG, formatarCNPJ } from "../utils/documentos";
+import { generateCPF, generateCNPJ, generateRG, formatCPF, formatRG, formatCNPJ } from "../utils/documents";
+import { useTranslation } from 'react-i18next';
 
-export default function DocumentosGenerator() {
-  const [numero, setNumero] = useState("");
-  const [numeroSemMascara, setNumeroSemMascara] = useState("");
-  const [ativo, setAtivo] = useState("");
-  const [copiado, setCopiado] = useState(false);
+export default function DocsGenerator() {
+  const [number, setNumber] = useState("");
+  const [numberWithoutMask, setNumberWithoutMask] = useState("");
+  const [active, setActive] = useState("");
+  const [copied, setCopied] = useState(false);
   const [maskOn, setMaskOn] = useState(false);
   const [hoverRefresh, setHoverRefresh] = useState(false);
+  const { t } = useTranslation();
 
-  function handleClick(tipo) {
-    if (tipo === "copiar") {
-      const textoParaCopiar = maskOn ? numero : numeroSemMascara;
-      navigator.clipboard.writeText(textoParaCopiar);
-      setCopiado(true);
+  function handleClick(type) {
+    if (type === "copy") {
+      const textToCopy = maskOn ? number : numberWithoutMask;
+      navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
 
       setTimeout(() => {
-        setCopiado(false);
+        setCopied(false);
       }, 2000);
       return;
     }
 
-    if (tipo === "mask") {
+    if (type === "mask") {
       setMaskOn(!maskOn);
       return;
     }
 
-    setAtivo(tipo);
-    let novoNumero = "";
-    if (tipo === "cpf") novoNumero = gerarCPF();
-    if (tipo === "cnpj") novoNumero = gerarCNPJ();
-    if (tipo === "rg") novoNumero = gerarRG();
+    setActive(type);
+    let newNumber = "";
+    if (type === "cpf") newNumber = generateCPF();
+    if (type === "cnpj") newNumber = generateCNPJ();
+    if (type === "rg") newNumber = generateRG();
 
-    setNumeroSemMascara(novoNumero);
-    setNumero(maskOn ? aplicarMascara(tipo, novoNumero) : novoNumero);
+    setNumberWithoutMask(newNumber);
+    setNumber(maskOn ? applyMask(type, newNumber) : newNumber);
   }
 
-  function aplicarMascara(tipo, numero) {
+  function applyMask(tipo, number) {
     switch (tipo) {
-      case "cpf": return formatarCPF(numero);
-      case "cnpj": return formatarCNPJ(numero);
-      case "rg": return formatarRG(numero);
-      default: return numero;
+      case "cpf": return formatCPF(number);
+      case "cnpj": return formatCNPJ(number);
+      case "rg": return formatRG(number);
+      default: return number;
     }
   }
 
   useEffect(() => {
-    if (numeroSemMascara && ativo) {
-      setNumero(maskOn ? aplicarMascara(ativo, numeroSemMascara) : numeroSemMascara);
+    if (numberWithoutMask && active) {
+      setNumber(maskOn ? applyMask(active, numberWithoutMask) : numberWithoutMask);
     }
-  }, [maskOn, ativo, numeroSemMascara]);
+  }, [maskOn, active, numberWithoutMask]);
 
   useEffect(() => {
     setMaskOn(true);
@@ -63,10 +65,10 @@ export default function DocumentosGenerator() {
 
         <div className="relative group">
           <button
-            onClick={() => handleClick("copiar")}
-            className={`botao-padrao px-4 py-2 rounded flex items-center justify-center`}
+            onClick={() => handleClick("copy")}
+            className={`default-button px-4 py-2 rounded flex items-center justify-center`}
           >
-            {copiado ? (
+            {copied ? (
               <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
               </svg>
@@ -78,17 +80,17 @@ export default function DocumentosGenerator() {
             )}
           </button>
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            Copiar
+            {t("Copiar")}
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
           </div>
         </div>
 
         <div className="relative group">
           <button
-            onClick={() => handleClick(ativo)}
+            onClick={() => handleClick(active)}
             onMouseEnter={() => setHoverRefresh(true)}
             onMouseLeave={() => setHoverRefresh(false)}
-            className={`botao-padrao px-4 py-2 rounded`}
+            className={`default-button px-4 py-2 rounded`}
           >
             <svg
               className={`w-6 h-6 ${hoverRefresh ? 'animate-spin' : ''}`}
@@ -103,7 +105,7 @@ export default function DocumentosGenerator() {
             </svg>
           </button>
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            Refresh
+            {t("Recarregar")}
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
           </div>
         </div>
@@ -111,7 +113,7 @@ export default function DocumentosGenerator() {
         <div className="relative group">
           <button
             onClick={() => handleClick("mask")}
-            className={`botao-padrao px-4 py-2 rounded`}
+            className={`default-button px-4 py-2 rounded`}
           >
             {maskOn ? (
               <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -125,37 +127,37 @@ export default function DocumentosGenerator() {
             )}
           </button>
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            Máscara
+            {t("Mascara")}
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
           </div>
         </div>
       </div>
 
-      {numero && (
+      {number && (
         <p className="
-            numero-gerado text-center
+            generated-number text-center
             text-2xl sm:text-3xl md:text-4xl lg:text-5xl
           "
         >
-          {numero}
+          {number}
         </p>
       )}
       <div className="flex gap-4">
         <button
           onClick={() => handleClick("cpf")}
-          className={`px-4 py-2 rounded-lg font-medium ${ativo === "cpf" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+          className={`px-4 py-2 rounded-lg font-medium ${active === "cpf" ? "default-button" : "default-button-transparent border border-purple-600"}`}
         >
           CPF
         </button>
         <button
           onClick={() => handleClick("cnpj")}
-          className={`px-4 py-2 rounded-lg font-medium ${ativo === "cnpj" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+          className={`px-4 py-2 rounded-lg font-medium ${active === "cnpj" ? "default-button" : "default-button-transparent border border-purple-600"}`}
         >
           CNPJ
         </button>
         <button
           onClick={() => handleClick("rg")}
-          className={`px-4 py-2 rounded-lg font-medium ${ativo === "rg" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+          className={`px-4 py-2 rounded-lg font-medium ${active === "rg" ? "default-button" : "default-button-transparent border border-purple-600"}`}
         >
           RG
         </button>

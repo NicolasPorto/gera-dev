@@ -2,17 +2,18 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import './index.css'
-import DocumentosGenerator from "./tools/DocumentosGenerator";
-import FormatarJSON from "./tools/FormatarJSON";
+import DocsGenerator from "./tools/DocsGenerator";
+import JSONFormatter from "./tools/JSONFormatter";
 import QRCodeGenerator from "./tools/QRCodeGenerator";
-import FormatarXML from "./tools/FormatarXML";
-import FormatarSQL from "./tools/FormatarSQL";
-import VisualizarHTML from "./tools/VisualizarHTML";
-import GeradorSenha from "./tools/GeradorSenha";
-import LinkWhatsApp from "./tools/GerarLinkWhatsapp";
-import GerarPessoa from "./tools/GerarPessoa";
-import VerificadorMeuIp from "./tools/VerificadorMeuIp";
+import XMLFormatter from "./tools/XMLFormatter";
+import SQLFormatter from "./tools/SQLFormatter";
+import HTMLVisualizer from "./tools/HTMLVisualizer";
+import PasswordGenerator from "./tools/PasswordGenerator";
+import WhatsappLinkGenerator from "./tools/WhatsappLinkGenerator";
+import PersonGenerator from "./tools/PersonGenerator";
+import MyIPVisualizer from "./tools/MyIPVisualizer";
 import JsonStringify from "./tools/JsonStringify";
+import URLEncodeDecode from "./tools/URLEncodeDecode";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "gerar-documentos",
-        element: <DocumentosGenerator />,
+        element: <DocsGenerator />,
       },
       {
         path: "gerar-qrcode",
@@ -33,39 +34,43 @@ export const router = createBrowserRouter([
       },
       {
         path: "gerar-senha",
-        element: <GeradorSenha />,
+        element: <PasswordGenerator />,
       },
       {
         path: "gerar-pessoa",
-        element: <GerarPessoa />,
+        element: <PersonGenerator />,
       },
       {
         path: "link-whatsapp",
-        element: <LinkWhatsApp />,
+        element: <WhatsappLinkGenerator />,
       },
       {
         path: "formatar-json",
-        element: <FormatarJSON />,
+        element: <JSONFormatter />,
       },
       {
         path: "formatar-xml",
-        element: <FormatarXML />,
+        element: <XMLFormatter />,
+      },
+      {
+        path: "formatar-sql",
+        element: <SQLFormatter />,
       },
       {
         path: "visualizar-html",
-        element: <VisualizarHTML />,
+        element: <HTMLVisualizer />,
       },
       {
         path: "meu-ip",
-        element: <VerificadorMeuIp />,
+        element: <MyIPVisualizer />,
       },
       {
         path: "json-stringify",
         element: <JsonStringify />,
       },
       {
-        path: "formatar-sql",
-        element: <FormatarSQL />,
+        path: "url-encode-decode",
+        element: <URLEncodeDecode />,
       }
     ],
   },

@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
-export default function GeradorSenha() {
+export default function PasswordGenerator() {
     const [password, setPassword] = useState("");
     const [length, setLength] = useState(12);
-    const [erro, setErro] = useState(false);
-    const [copiado, setCopiado] = useState(false);
+    const [error, setError] = useState(false);
+    const [copied, setCopied] = useState(false);
     const [hoverRefresh, setHoverRefresh] = useState(false);
+    const { t } = useTranslation();
     const [options, setOptions] = useState({
         uppercase: true,
         lowercase: true,
         numbers: true,
         symbols: true
     });
-    const [opcoesGeradas, setOpcoesGeradas] = useState({
+
+    const [generatedOptions, setGeneratedOptions] = useState({
         uppercase: true,
         lowercase: true,
         numbers: true,
@@ -20,7 +23,7 @@ export default function GeradorSenha() {
     });
 
     const generatePassword = () => {
-        setErro(false);
+        setError(false);
         const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
         const numberChars = "0123456789";
@@ -32,7 +35,7 @@ export default function GeradorSenha() {
         if (options.numbers) allowedChars += numberChars;
         if (options.symbols) allowedChars += symbolChars;
 
-        setOpcoesGeradas({
+        setGeneratedOptions({
             uppercase: options.uppercase,
             lowercase: options.lowercase,
             numbers: options.numbers,
@@ -40,8 +43,8 @@ export default function GeradorSenha() {
         })
 
         if (allowedChars.length === 0) {
-            setPassword("Selecione pelo menos uma opção");
-            setErro(true);
+            setPassword(t("SelecioneUmaOpcao"));
+            setError(true);
             return;
         }
 
@@ -56,9 +59,9 @@ export default function GeradorSenha() {
 
     const copyPassword = () => {
         navigator.clipboard.writeText(password);
-        setCopiado(true);
+        setCopied(true);
         setTimeout(() => {
-            setCopiado(false);
+            setCopied(false);
         }, 2000);
     };
 
@@ -69,41 +72,41 @@ export default function GeradorSenha() {
         });
     };
 
-    const classificarSenha = () => {
-        const { uppercase, lowercase, numbers, symbols } = opcoesGeradas;
-        const comprimento = password.length;
+    const sortPassword = () => {
+        const { uppercase, lowercase, numbers, symbols } = generatedOptions;
+        const length = password.length;
 
-        const tiposCaracteres = [uppercase, lowercase, numbers, symbols].filter(Boolean).length;
+        const characterTypes = [uppercase, lowercase, numbers, symbols].filter(Boolean).length;
 
-        const isSequenciaObvia = /(123+|abc+|qwert+|asdf+)/i.test(password);
-        const isRepeticao = /(.)\1{3,}/.test(password);
-        if (comprimento < 8 || tiposCaracteres === 1) {
-            return 'Fraca';
+        const isObviousSequence = /(123+|abc+|qwert+|asdf+)/i.test(password);
+        const isRepetition = /(.)\1{3,}/.test(password);
+        if (length < 8 || characterTypes === 1) {
+            return t("Fraca");
         }
 
-        if (isSequenciaObvia || isRepeticao) {
-            return 'Muito Fraca';
+        if (isObviousSequence || isRepetition) {
+            return t("MuitoFraca");
         }
 
-        if (comprimento >= 8 && comprimento <= 11 && tiposCaracteres === 2) {
-            return 'Média';
+        if (length >= 8 && length <= 11 && characterTypes === 2) {
+            return t("Media");
         }
 
-        if ((comprimento >= 12 && comprimento <= 15 && tiposCaracteres >= 2) ||
-            (comprimento >= 8 && comprimento <= 11 && tiposCaracteres >= 3)) {
-            return 'Boa';
+        if ((length >= 12 && length <= 15 && characterTypes >= 2) ||
+            (length >= 8 && length <= 11 && characterTypes >= 3)) {
+            return t("Boa");
         }
 
-        if (comprimento >= 16 && comprimento <= 20 && tiposCaracteres >= 3) {
-            return 'Forte';
+        if (length >= 16 && length <= 20 && characterTypes >= 3) {
+            return t("Forte");
         }
 
-        if ((comprimento >= 20 && tiposCaracteres === 4) ||
-            (comprimento >= 16 && tiposCaracteres >= 3 && symbols && numbers)) {
-            return 'Muito Forte';
+        if ((length >= 20 && characterTypes === 4) ||
+            (length >= 16 && characterTypes >= 3 && symbols && numbers)) {
+            return t("MuitoForte");
         }
 
-        return 'Erro';
+        return t("Erro");
     };
 
     useEffect(() => {
@@ -116,9 +119,9 @@ export default function GeradorSenha() {
                 <div className="relative group">
                     <button
                         onClick={copyPassword}
-                        className={`botao-padrao px-4 py-2 rounded flex items-center justify-center`}
+                        className={`default-button px-4 py-2 rounded flex items-center justify-center`}
                     >
-                        {copiado ? (
+                        {copied ? (
                             <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                             </svg>
@@ -130,7 +133,7 @@ export default function GeradorSenha() {
                         )}
                     </button>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                        Copiar
+                        {t("Copiar")}
                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                     </div>
                 </div>
@@ -140,7 +143,7 @@ export default function GeradorSenha() {
                         onClick={generatePassword}
                         onMouseEnter={() => setHoverRefresh(true)}
                         onMouseLeave={() => setHoverRefresh(false)}
-                        className={`botao-padrao px-4 py-2 rounded`}
+                        className={`default-button px-4 py-2 rounded`}
                     >
                         <svg
                             className={`w-6 h-6 ${hoverRefresh ? 'animate-spin' : ''}`}
@@ -155,16 +158,16 @@ export default function GeradorSenha() {
                         </svg>
                     </button>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                        Refresh
+                        {t("Recarregar")}
                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                     </div>
                 </div>
             </div>
             {password && (
                 <p
-                    className={` text-center ${erro
-                        ? "numero-gerado-erro text-1xl sm:text-1xl md:text-2xl lg:text-2xl"
-                        : "numero-gerado text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+                    className={` text-center ${error
+                        ? "generated-number-error text-1xl sm:text-1xl md:text-2xl lg:text-2xl"
+                        : "generated-number text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
                         }`}>
                     {password}
                 </p>
@@ -184,15 +187,15 @@ export default function GeradorSenha() {
                 <div className="flex justify-between text-default text-sm mt-1">
                     <span>6</span>
                     <label className="block text-default mb-2">
-                        Comprimento: {length}
+                        {t("Comprimento")}: {length}
                     </label>
                     <span>30</span>
                 </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-                <div className="flex items-center">
-                    <label className="relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="uppercase">
+                <div className=" flex items-center">
+                    <label className="w-full relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="uppercase">
                         <input
                             id="uppercase"
                             type="checkbox"
@@ -200,18 +203,18 @@ export default function GeradorSenha() {
                             onChange={() => toggleOption("uppercase")}
                             className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-purple-600 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-purple-600 checked:bg-purple-600 hover:before:opacity-10"
                         />
-                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/10 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/11 -translate-y-2/4 -translate-x-2/3 peer-checked:opacity-100">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                             </svg>
                         </span>
                         <span className="ml-3 text-default font-medium">
-                            Letras maiúsculas
+                            {t("LetrasMaiusculas")}
                         </span>
                     </label>
                 </div>
                 <div className="flex items-center">
-                    <label className="relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="lowercase">
+                    <label className="w-full relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="lowercase">
                         <input
                             id="lowercase"
                             type="checkbox"
@@ -219,18 +222,18 @@ export default function GeradorSenha() {
                             onChange={() => toggleOption("lowercase")}
                             className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-purple-600 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-purple-600 checked:bg-purple-600 hover:before:opacity-10"
                         />
-                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/10 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/11 -translate-y-2/4 -translate-x-2/3 peer-checked:opacity-100">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                             </svg>
                         </span>
                         <span className="ml-3 text-default font-medium">
-                            Letras minúsculas
+                            {t("LetrasMinusculas")}
                         </span>
                     </label>
                 </div>
                 <div className="flex items-center">
-                    <label className="relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="numbers">
+                    <label className="w-full relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="numbers">
                         <input
                             id="numbers"
                             type="checkbox"
@@ -238,18 +241,18 @@ export default function GeradorSenha() {
                             onChange={() => toggleOption("numbers")}
                             className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-purple-600 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-purple-600 checked:bg-purple-600 hover:before:opacity-10"
                         />
-                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/13 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/11 -translate-y-2/4 -translate-x-2/3 peer-checked:opacity-100">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                             </svg>
                         </span>
                         <span className="ml-3 text-default font-medium">
-                            Números
+                            {t("Numeros")}
                         </span>
                     </label>
                 </div>
                 <div className="flex items-center">
-                    <label className="relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="symbols">
+                    <label className="w-full relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="symbols">
                         <input
                             id="symbols"
                             type="checkbox"
@@ -257,13 +260,13 @@ export default function GeradorSenha() {
                             onChange={() => toggleOption("symbols")}
                             className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-purple-600 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-purple-600 checked:bg-purple-600 hover:before:opacity-10"
                         />
-                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/13 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/11 -translate-y-2/4 -translate-x-2/3 peer-checked:opacity-100">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                             </svg>
                         </span>
                         <span className="ml-3 text-default font-medium">
-                            Símbolos
+                            {t("Simbolos")}
                         </span>
                     </label>
                 </div>
@@ -271,18 +274,18 @@ export default function GeradorSenha() {
 
             <div className="w-full max-w-md mt-2">
                 <div className="flex justify-between items-center mb-1">
-                    <span className="text-default text-sm">Força da senha:</span>
+                    <span className="text-default text-sm">{t("ForcaSenha")}</span>
                     <span className="text-default text-sm font-medium">
-                        {classificarSenha()}
+                        {sortPassword()}
                     </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2.5">
                     <div
-                        className={`h-2.5 rounded-full ${classificarSenha() === 'Muito Forte' ? "bg-pink-600 w-full" : classificarSenha() === 'Forte' ? "bg-green-500 w-full" :
-                            classificarSenha() === 'Boa' ? "bg-purple-500 w-3/4" :
-                                classificarSenha() === 'Média' ? "bg-yellow-500 w-2/4" :
-                                    classificarSenha() === 'Fraca' ? "bg-red-400 w-1/4" :
-                                        classificarSenha() === 'Muito Fraca' ? "bg-red-500 w-1/4" : ""
+                        className={`h-2.5 rounded-full ${sortPassword() === t("MuitoForte") ? "bg-pink-600 w-full" : sortPassword() === t("Forte") ? "bg-green-500 w-full" :
+                            sortPassword() === t("Boa") ? "bg-purple-500 w-3/4" :
+                                sortPassword() === t("Média") ? "bg-yellow-500 w-2/4" :
+                                    sortPassword() === t("Fraca") ? "bg-red-400 w-1/4" :
+                                        sortPassword() === t("MuitoFraca") ? "bg-red-500 w-1/4" : ""
                             }`}
                     ></div>
                 </div>

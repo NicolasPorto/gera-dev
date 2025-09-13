@@ -1,29 +1,27 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 
-export default function VisualizarHTML() {
+export default function HTMLVisualizer() {
     const [htmlCode, setHtmlCode] = useState("");
     const [isPreview, setIsPreview] = useState(false);
+    const { t } = useTranslation();
 
-    const visualizarHTML = () => {
+    const viewHTML = () => {
         if (htmlCode.trim()) {
             setIsPreview(true);
         }
     };
 
-    const editarHTML = () => {
+    const editHTML = () => {
         setIsPreview(false);
     };
 
-    const limparHTML = () => {
+    const clearHTML = () => {
         setHtmlCode("");
         setIsPreview(false);
     };
 
     const isButtonDisabled = !htmlCode.trim();
-
-    const criarHtmlPreview = () => {
-        return { __html: htmlCode };
-    };
 
     return (
         <div className="flex flex-col items-center justify-center p-6 w-full max-w-5xl mx-auto">
@@ -31,8 +29,7 @@ export default function VisualizarHTML() {
 
                 <div className="w-full p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                     <p className="text-default text-sm text-center">
-                        💡 Cole seu código HTML abaixo para visualizar como ele ficaria.
-                        Use o botão "Visualizar" para ver o resultado.
+                        💡 {t("InfoHTML")}
                     </p>
                 </div>
 
@@ -44,7 +41,7 @@ export default function VisualizarHTML() {
                         className="w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-96 textarea-text-color textarea-white-theme border-gray-300/20 bg-purple-200/10 focus:border-purple-400 custom-scrollbar"
                         onKeyDown={(e) => {
                             if (e.ctrlKey && e.key === 'Enter') {
-                                visualizarHTML();
+                                viewHTML();
                             }
                         }}
                     />
@@ -63,11 +60,11 @@ export default function VisualizarHTML() {
                     {!isPreview ? (
                         <div className="relative group">
                             <button
-                                onClick={visualizarHTML}
+                                onClick={viewHTML}
                                 disabled={isButtonDisabled}
-                                className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
-                                    ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
-                                    : "botao-padrao-ativo hover:scale-105 transition-transform"
+                                className={`px-8 py-3 rounded-lg font-medium default-button ${isButtonDisabled
+                                    ? "default-button-inactive opacity-50 cursor-not-allowed"
+                                    : "default-button-active hover:scale-105 transition-transform"
                                     }`}
                             >
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -77,15 +74,15 @@ export default function VisualizarHTML() {
 
                             </button>
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                Visualizar
+                                {t("Visualizar")}
                                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                             </div>
                         </div>
                     ) : (
                         <div className="relative group">
                             <button
-                                onClick={editarHTML}
-                                className="px-8 py-3 rounded-lg font-medium botao-padrao botao-padrao-ativo hover:scale-105 transition-transform"
+                                onClick={editHTML}
+                                className="px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
                             >
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fillRule="evenodd" d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z" clipRule="evenodd" />
@@ -93,7 +90,7 @@ export default function VisualizarHTML() {
                                 </svg>
                             </button>
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                Editar
+                                {t("Editar")}
                                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                             </div>
                         </div>
@@ -101,13 +98,13 @@ export default function VisualizarHTML() {
 
                     <div className="relative group">
                         <button
-                            onClick={limparHTML}
-                            className="px-8 py-3 rounded-lg font-medium botao-padrao botao-padrao-ativo hover:scale-105 transition-transform"
+                            onClick={clearHTML}
+                            className="px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
                         >
                             <i className="fa-solid fa-eraser fa-lg"></i>
                         </button>
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            Limpar
+                            {t("Limpar")}
                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                         </div>
                     </div>
@@ -115,7 +112,7 @@ export default function VisualizarHTML() {
 
                 <div className="p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                     <p className="text-default text-sm text-center">
-                        ⌨️ Atalho: Ctrl + Enter para visualizar
+                        ⌨️ {t("AtalhoVisualizar")}
                     </p>
                 </div>
             </div>

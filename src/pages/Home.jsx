@@ -1,4 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 function Home() {
+    const { t } = useTranslation();
+
     return (
         <div className="flex flex-col items-center justify-center h-full text-center px-6">
             <svg
@@ -18,22 +22,43 @@ function Home() {
             </svg>
 
             <div className="max-w-md mx-auto">
-                <h1 className="text-2xl font-bold text-default mb-6">
+                <h1 className="text-2xl font-bold text-default mb-3">
                     GeraDev Tools
                 </h1>
-
                 <p className="text-default mb-4 leading-relaxed">
-                    Plataforma dedicada a fornecer ferramentas úteis para geração
-                    e formatação de dados, auxiliando desenvolvedores e estudantes
-                    em seus projetos e testes.
+                    {t("Sobre")}
                 </p>
 
 
+                <div className="text-gray-400 text-footer opacity-70 hover:opacity-100 transition-opacity duration-300 mb-4">
+                    <div className="flex flex-col items-center sm:flex-row justify-center">
+                        <span className="text-[10px] sm:text-xs font-light mb-1 sm:mb-0 sm:mr-1">
+                           2025 © {t("DesenvolvidoPor")}{" "}
+                        </span>
+                        <div className="flex">
+                            <a
+                                href="https://github.com/NicolasPorto"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
+                            >
+                                Nicolas Porto
+                            </a>
+                            <span className="text-[10px] sm:text-xs font-light mx-1">{t("e")}</span>
+                            <a
+                                href="https://github.com/LuisQuintino"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
+                            >
+                                Luis Venturini 
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div className="w-full p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                     <p className="text-default text-sm text-center ">
-                        🛡️ Aviso importante: Estas ferramentas são para fins
-                        educacionais e de desenvolvimento. O uso inadequado
-                        é de responsabilidade do usuário.
+                        🛡️ {t("AvisoSobre")}
                     </p>
                 </div>
             </div>

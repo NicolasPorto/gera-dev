@@ -1,72 +1,74 @@
 import { useState, useEffect } from "react";
-import { gerarCPF, gerarRG, formatarCPF, formatarRG } from "../utils/documentos";
-import { gerarEndereco, gerarNome, gerarIdade, gerarEmail, gerarTelefone } from "../utils/pessoa";
+import { generateCPF, generateRG, formatCPF, formatRG } from "../utils/documents";
+import { generateAddress, generateName, generateAge, generateEmail, generatePhone } from "../utils/person";
+import { useTranslation } from 'react-i18next';
 
-export default function PessoaGenerator() {
-    const [pessoa, setPessoa] = useState(null);
-    const [sexo, setSexo] = useState('aleatorio');
-    const [copiado, setCopiado] = useState(false);
-    const [campoCopiado, setCampoCopiado] = useState(null);
+export default function PersonGenerator() {
+    const [person, setPerson] = useState(null);
+    const [gender, setGender] = useState('random');
+    const [copied, setCopied] = useState(false);
+    const [copiedField, setCopiedField] = useState(null);
     const [hoverRefresh, setHoverRefresh] = useState(false);
+    const { t } = useTranslation();
 
-    const gerarPessoa = () => {
-        const nomeCompleto = gerarNome(sexo === 'aleatorio' ? null : sexo);
-        const idade = gerarIdade();
-        const email = gerarEmail(nomeCompleto);
-        const telefone = gerarTelefone();
-        const endereco = gerarEndereco();
-        const cpf = formatarCPF(gerarCPF());
-        const rg = formatarRG(gerarRG());
+    const generatePerson = () => {
+        const fullName = generateName(gender === 'random' ? null : gender);
+        const age = generateAge();
+        const email = generateEmail(fullName);
+        const phone = generatePhone();
+        const address = generateAddress();
+        const cpf = formatCPF(generateCPF());
+        const rg = formatRG(generateRG());
 
-        setPessoa({
-            nome: nomeCompleto,
-            idade,
+        setPerson({
+            name: fullName,
+            age: age,
             email,
-            telefone,
-            endereco: `${endereco.rua}, ${endereco.cidade} - ${endereco.estado}, CEP: ${endereco.cep}`,
+            phone: phone,
+            address: `${address.street}, ${address.city} - ${address.state}, ${t("CEP")}: ${address.zipCode}`,
             cpf,
             rg
         });
     };
 
-    const copiarParaAreaTransferencia = (campo, valor) => {
-        if (!pessoa) return;
+    const copy = (field, value) => {
+        if (!person) return;
 
-        navigator.clipboard.writeText(valor);
-        setCopiado(true);
-        setCampoCopiado(campo);
+        navigator.clipboard.writeText(value);
+        setCopied(true);
+        setCopiedField(field);
 
         setTimeout(() => {
-            setCopiado(false);
-            setCampoCopiado(null);
+            setCopied(false);
+            setCopiedField(null);
         }, 2000);
     };
 
-    const copiarTudo = () => {
-        if (!pessoa) return;
+    const copyAll = () => {
+        if (!person) return;
 
         const texto = `
-            Nome: ${pessoa.nome}
-            Idade: ${pessoa.idade} anos
-            Email: ${pessoa.email}
-            Telefone: ${pessoa.telefone}
-            Endereço: ${pessoa.endereco}
-            CPF: ${pessoa.cpf}
-            RG: ${pessoa.rg}
+            Nome: ${person.name}
+            Idade: ${person.age} ${t("Anos")}
+            Email: ${person.email}
+            Telefone: ${person.phone}
+            Endereço: ${person.address}
+            CPF: ${person.cpf}
+            RG: ${person.rg}
         `.trim();
 
         navigator.clipboard.writeText(texto);
-        setCopiado(true);
-        setCampoCopiado('tudo');
+        setCopied(true);
+        setCopiedField('tudo');
 
         setTimeout(() => {
-            setCopiado(false);
-            setCampoCopiado(null);
+            setCopied(false);
+            setCopiedField(null);
         }, 2000);
     };
 
     useEffect(() => {
-        gerarPessoa();
+        generatePerson();
     }, []);
 
     return (
@@ -75,42 +77,42 @@ export default function PessoaGenerator() {
                 <div className="relative group">
                     <div className="flex items-center gap-2">
                         <button
-                            onClick={() => setSexo("aleatorio")}
-                            className={`px-3 py-1 rounded-lg font-medium ${sexo === "aleatorio" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+                            onClick={() => setGender("random")}
+                            className={`px-3 py-1 rounded-lg font-medium ${gender === "random" ? "default-button" : "default-button-transparent border border-purple-600"}`}
                         >
-                            Aleatório
+                            {t("Aleatorio")}
                         </button>
                         <button
-                            onClick={() => setSexo("M")}
-                            className={`px-3 py-1 rounded-lg font-medium ${sexo === "M" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+                            onClick={() => setGender("M")}
+                            className={`px-3 py-1 rounded-lg font-medium ${gender === "M" ? "default-button" : "default-button-transparent border border-purple-600"}`}
                         >
-                            Masculino
+                            {t("Masculino")}
                         </button>
                         <button
-                            onClick={() => setSexo("F")}
-                            className={`px-3 py-1 rounded-lg font-medium ${sexo === "F" ? "botao-padrao" : "botao-padrao-transparente border border-purple-600"}`}
+                            onClick={() => setGender("F")}
+                            className={`px-3 py-1 rounded-lg font-medium ${gender === "F" ? "default-button" : "default-button-transparent border border-purple-600"}`}
                         >
-                            Feminino
+                            {t("Feminino")}
                         </button>
                     </div>
                 </div>
             </div>
 
-            {pessoa && (
+            {person && (
                 <div className="w-full bg-opacity-20 bg-purple-200/10 rounded-lg border-2 p-6 border-purple-400">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-default">
                         <div className="space-y-4">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <span className="font-semibold">Nome:</span>
-                                    <p className="text-lg">{pessoa.nome}</p>
+                                    <span className="font-semibold">{t("Nome")}:</span>
+                                    <p className="text-lg">{person.name}</p>
                                 </div>
                                 <button
-                                    onClick={() => copiarParaAreaTransferencia('nome', pessoa.nome)}
-                                    className="p-2 rounded ml-2 botao-padrao-transparente"
-                                    title="Copiar nome"
+                                    onClick={() => copy('nome', person.name)}
+                                    className="p-2 rounded ml-2 default-button-transparent"
+                                    title={`${t("Copiar")} ${t("Nome")}`}
                                 >
-                                    {campoCopiado === 'nome' ? (
+                                    {copiedField === 'nome' ? (
                                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                         </svg>
@@ -125,15 +127,15 @@ export default function PessoaGenerator() {
 
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <span className="font-semibold">Idade:</span>
-                                    <p>{pessoa.idade} anos</p>
+                                    <span className="font-semibold">{t("Idade")}:</span>
+                                    <p>{person.age} {t("Anos")}</p>
                                 </div>
                                 <button
-                                    onClick={() => copiarParaAreaTransferencia('idade', pessoa.idade.toString())}
-                                    className="p-2 rounded ml-2 botao-padrao-transparente"
-                                    title="Copiar idade"
+                                    onClick={() => copy('idade', person.age.toString())}
+                                    className="p-2 rounded ml-2 default-button-transparent"
+                                    title={`${t("Copiar")} ${t("Idade")}`}
                                 >
-                                    {campoCopiado === 'idade' ? (
+                                    {copiedField === 'idade' ? (
                                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                         </svg>
@@ -149,14 +151,14 @@ export default function PessoaGenerator() {
                             <div className="flex justify-between items-start">
                                 <div>
                                     <span className="font-semibold">Email:</span>
-                                    <p>{pessoa.email}</p>
+                                    <p>{person.email}</p>
                                 </div>
                                 <button
-                                    onClick={() => copiarParaAreaTransferencia('email', pessoa.email)}
-                                    className="p-2 rounded ml-2 botao-padrao-transparente"
-                                    title="Copiar email"
+                                    onClick={() => copy('email', person.email)}
+                                    className="p-2 rounded ml-2 default-button-transparent"
+                                    title={`${t("Copiar")} Email`}
                                 >
-                                    {campoCopiado === 'email' ? (
+                                    {copiedField === 'email' ? (
                                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                         </svg>
@@ -171,15 +173,15 @@ export default function PessoaGenerator() {
 
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <span className="font-semibold">Telefone:</span>
-                                    <p>{pessoa.telefone}</p>
+                                    <span className="font-semibold">{t("Telefone")}:</span>
+                                    <p>{person.phone}</p>
                                 </div>
                                 <button
-                                    onClick={() => copiarParaAreaTransferencia('telefone', pessoa.telefone)}
-                                    className="p-2 rounded ml-2 botao-padrao-transparente"
-                                    title="Copiar telefone"
+                                    onClick={() => copy('telefone', person.phone)}
+                                    className="p-2 rounded ml-2 default-button-transparent"
+                                    title={`${t("Copiar")} ${t("Telefone")}`}
                                 >
-                                    {campoCopiado === 'telefone' ? (
+                                    {copiedField === 'telefone' ? (
                                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                         </svg>
@@ -196,15 +198,15 @@ export default function PessoaGenerator() {
                         <div className="space-y-4">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <span className="font-semibold">Endereço:</span>
-                                    <p>{pessoa.endereco}</p>
+                                    <span className="font-semibold">{t("Endereco")}:</span>
+                                    <p>{person.address}</p>
                                 </div>
                                 <button
-                                    onClick={() => copiarParaAreaTransferencia('endereco', pessoa.endereco)}
-                                    className="p-2 rounded ml-2 botao-padrao-transparente"
-                                    title="Copiar endereço"
+                                    onClick={() => copy('endereco', person.address)}
+                                    className="p-2 rounded ml-2 default-button-transparent"
+                                    title={`${t("Copiar")} ${t("Endereco")}`}
                                 >
-                                    {campoCopiado === 'endereco' ? (
+                                    {copiedField === 'endereco' ? (
                                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                         </svg>
@@ -220,14 +222,14 @@ export default function PessoaGenerator() {
                             <div className="flex justify-between items-start">
                                 <div>
                                     <span className="font-semibold">CPF:</span>
-                                    <p>{pessoa.cpf}</p>
+                                    <p>{person.cpf}</p>
                                 </div>
                                 <button
-                                    onClick={() => copiarParaAreaTransferencia('cpf', pessoa.cpf)}
-                                    className="p-2 rounded ml-2 botao-padrao-transparente"
-                                    title="Copiar CPF"
+                                    onClick={() => copy('cpf', person.cpf)}
+                                    className="p-2 rounded ml-2 default-button-transparent"
+                                    title={`${t("Copiar")} CPF`}
                                 >
-                                    {campoCopiado === 'cpf' ? (
+                                    {copiedField === 'cpf' ? (
                                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                         </svg>
@@ -243,14 +245,14 @@ export default function PessoaGenerator() {
                             <div className="flex justify-between items-start">
                                 <div>
                                     <span className="font-semibold">RG:</span>
-                                    <p>{pessoa.rg}</p>
+                                    <p>{person.rg}</p>
                                 </div>
                                 <button
-                                    onClick={() => copiarParaAreaTransferencia('rg', pessoa.rg)}
-                                    className="p-2 rounded ml-2 botao-padrao-transparente"
-                                    title="Copiar RG"
+                                    onClick={() => copy('rg', person.rg)}
+                                    className="p-2 rounded ml-2 default-button-transparent"
+                                    title={`${t("Copiar")} RG`}
                                 >
-                                    {campoCopiado === 'rg' ? (
+                                    {copiedField === 'rg' ? (
                                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                         </svg>
@@ -273,10 +275,10 @@ export default function PessoaGenerator() {
                 <div className="flex gap-4">
                     <div className="relative group">
                         <button
-                            onClick={gerarPessoa}
+                            onClick={generatePerson}
                             onMouseEnter={() => setHoverRefresh(true)}
                             onMouseLeave={() => setHoverRefresh(false)}
-                            className="botao-padrao px-4 py-2 rounded font-medium flex items-center justify-center gap-2"
+                            className="default-button px-4 py-2 rounded font-medium flex items-center justify-center gap-2"
                         >
                             <svg
                                 className={`w-6 h-6 ${hoverRefresh ? 'animate-spin' : ''}`}
@@ -291,17 +293,17 @@ export default function PessoaGenerator() {
                             </svg>
                         </button>
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            Refresh
+                            {t("Recarregar")}
                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                         </div>
                     </div>
                     <div className="relative group">
                         <button
-                            onClick={copiarTudo}
-                            disabled={!pessoa}
-                            className={`botao-padrao px-4 py-2 rounded flex items-center justify-center ${!pessoa ? 'botao-padrao-desativado opacity-50' : ''}`}
+                            onClick={copyAll}
+                            disabled={!person}
+                            className={`default-button px-4 py-2 rounded flex items-center justify-center ${!person ? 'default-button-inactive opacity-50' : ''}`}
                         >
-                            {campoCopiado === 'tudo' ? (
+                            {copiedField === 'tudo' ? (
                                 <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                 </svg>
@@ -313,7 +315,7 @@ export default function PessoaGenerator() {
                             )}
                         </button>
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            Copiar
+                            {t("Copiar")}
                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                         </div>
                     </div>

@@ -1,45 +1,47 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
-export default function VerificadorMeuIp() {
+export default function MyIPVisualizer() {
   const [meuIp, setMeuIp] = useState("");
-  const [copiado, setCopiado] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [hoverRefresh, setHoverRefresh] = useState(false);
-  const [carregando, setCarregando] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
-  function copiarIp() {
+  function copyIp() {
     navigator.clipboard.writeText(meuIp);
-    setCopiado(true);
+    setCopied(true);
 
     setTimeout(() => {
-      setCopiado(false);
+      setCopied(false);
     }, 2000);
   };
 
-  function buscarIp() {
-    setCarregando(true);
+  function getIp() {
+    setLoading(true);
     fetch('https://api.ipify.org?format=json')
       .then(response => response.json())
       .then(data => {
         setMeuIp(data.ip);
-        setCarregando(false);
+        setLoading(false);
       })
       .catch(error => {
         console.log(error);
-        setCarregando(false);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
-    buscarIp();
+    getIp();
   }, []);
 
   return (
     <div className="p-4 flex flex-col items-center gap-6">
       <p className="ml-3 text-default font-medium">
-        Seu IP público é:
+        {t("IPPublico")}:
       </p>
 
-      {carregando ? (
+      {loading ? (
         <div className="flex items-center justify-center h-10">
           <div className="animate-pulse flex space-x-1">
             <div className="h-3 w-3 bg-gray-500 rounded-full animation-delay-100"></div>
@@ -56,11 +58,11 @@ export default function VerificadorMeuIp() {
       <div className="flex gap-2">
         <div className="relative group">
           <button
-            onClick={() => copiarIp()}
-            disabled={carregando || !meuIp}
-            className={`botao-padrao px-4 py-2 rounded flex items-center justify-center ${(carregando || !meuIp) ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={() => copyIp()}
+            disabled={loading || !meuIp}
+            className={`default-button px-4 py-2 rounded flex items-center justify-center ${(loading || !meuIp) ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            {copiado ? (
+            {copied ? (
               <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
               </svg>
@@ -72,21 +74,21 @@ export default function VerificadorMeuIp() {
             )}
           </button>
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            Copiar
+            {copied ? t("Copiado") : t("Copiar")}
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
           </div>
         </div>
 
         <div className="relative group">
           <button
-            onClick={() => buscarIp()}
+            onClick={() => getIp()}
             onMouseEnter={() => setHoverRefresh(true)}
             onMouseLeave={() => setHoverRefresh(false)}
-            className={`botao-padrao px-4 py-2 rounded ${carregando ? 'opacity-50 cursor-not-allowed' : ''}`}
-            disabled={carregando}
+            className={`default-button px-4 py-2 rounded ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={loading}
           >
             <svg
-              className={`w-6 h-6 ${hoverRefresh && !carregando ? 'animate-spin' : ''}`}
+              className={`w-6 h-6 ${hoverRefresh && !loading ? 'animate-spin' : ''}`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -98,7 +100,7 @@ export default function VerificadorMeuIp() {
             </svg>
           </button>
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            {carregando ? "Carregando..." : "Recarregar"}
+            {loading ? t("Carregando") : t("Recarregar")}
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
           </div>
         </div>
@@ -106,10 +108,7 @@ export default function VerificadorMeuIp() {
       <div className="flex gap-2">
         <div className="w-full p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
           <p className="text-default text-sm text-center ">
-            ❗ Um endereço IP público é um identificador exclusivo atribuído pelo seu Provedor de Serviços de Internet (ISP)
-            que permite a comunicação direta com outros dispositivos e redes na Internet. Ele funciona como a "morada" principal
-            da sua rede, normalmente associada ao seu roteador, e permite que o tráfego da Internet chegue à sua rede doméstica ou
-            empresarial, enquanto os dispositivos dentro da rede usam endereços IP privados.
+            ❗ {t("InfoIP")}
           </p>
         </div>
       </div>

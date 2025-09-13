@@ -2,19 +2,21 @@ import { useState } from "react";
 import { useTheme } from "../components/UseTheme"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import * as prismStyles from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { useTranslation } from 'react-i18next';
 
-export default function FormatarJSON() {
+export default function JSONFormatter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState(false);
   const [outputOn, setOutputOn] = useState(false);
-  const [copiado, setCopiado] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const { t } = useTranslation();
 
-  function formatar() {
+  function format() {
     try {
       const obj = JSON.parse(input);
-      const jsonBonito = JSON.stringify(obj, null, 2);
-      setOutput(jsonBonito);
+      const jsonPretty = JSON.stringify(obj, null, 2);
+      setOutput(jsonPretty);
       setOutputOn(true);
       setError(false);
     } catch (e) {
@@ -24,18 +26,18 @@ export default function FormatarJSON() {
     }
   }
 
-  function handleNovo() {
+  function handleNew() {
     setOutputOn(false);
     setOutput("");
     setInput("");
   }
 
-  function handleCopiar() {
+  function handleCopy() {
     navigator.clipboard.writeText(output);
-    setCopiado(true);
+    setCopied(true);
 
     setTimeout(() => {
-      setCopiado(false);
+      setCopied(false);
     }, 2000);
     return;
   }
@@ -96,18 +98,18 @@ export default function FormatarJSON() {
             {!outputOn && (
               <div className="relative group">
                 <button
-                  onClick={formatar}
+                  onClick={format}
                   disabled={isButtonDisabled}
-                  className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
-                    ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
-                    : "botao-padrao-ativo hover:scale-105 transition-transform"
+                  className={`px-8 py-3 rounded-lg font-medium default-button ${isButtonDisabled
+                    ? "default-button-inactive opacity-50 cursor-not-allowed"
+                    : "default-button-active hover:scale-105 transition-transform"
                     }`}
                 >
                   <i className="fa-solid fa-hammer fa-lg"></i>
                 </button>
 
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  Formatar
+                  {t("Formatar")}
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                 </div>
               </div>
@@ -118,15 +120,15 @@ export default function FormatarJSON() {
                 <div className="relative group">
                   <button
                     onClick={() => {
-                      handleCopiar();
+                      handleCopy();
                     }}
                     disabled={isButtonDisabled}
-                    className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
-                      ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
-                      : "botao-padrao-ativo hover:scale-105 transition-transform"
+                    className={`px-8 py-3 rounded-lg font-medium default-button ${isButtonDisabled
+                      ? "default-button-inactive opacity-50 cursor-not-allowed"
+                      : "default-button-active hover:scale-105 transition-transform"
                       }`}
                   >
-                    {copiado ? (
+                    {copied ? (
                       <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                       </svg>
@@ -139,7 +141,7 @@ export default function FormatarJSON() {
                   </button>
 
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                    {copiado ? "Copiado!" : "Copiar"}
+                    {copied ? t("Copiado") : t("Copiar")}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                   </div>
                 </div>
@@ -150,9 +152,9 @@ export default function FormatarJSON() {
                       setOutputOn(false);
                     }}
                     disabled={isButtonDisabled}
-                    className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
-                      ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
-                      : "botao-padrao-ativo hover:scale-105 transition-transform"
+                    className={`px-8 py-3 rounded-lg font-medium default-button ${isButtonDisabled
+                      ? "default-button-inactive opacity-50 cursor-not-allowed"
+                      : "default-button-active hover:scale-105 transition-transform"
                       }`}
                   >
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -161,7 +163,7 @@ export default function FormatarJSON() {
                     </svg>
                   </button>
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                    Editar
+                    {t("Editar")}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                   </div>
                 </div>
@@ -169,19 +171,19 @@ export default function FormatarJSON() {
                 <div className="relative group">
                   <button
                     onClick={() => {
-                      handleNovo()
+                      handleNew()
                     }}
                     disabled={isButtonDisabled}
-                    className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
-                      ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
-                      : "botao-padrao-ativo hover:scale-105 transition-transform"
+                    className={`px-8 py-3 rounded-lg font-medium default-button ${isButtonDisabled
+                      ? "default-button-inactive opacity-50 cursor-not-allowed"
+                      : "default-button-active hover:scale-105 transition-transform"
                       }`}
                   >
                     <i className="fa-solid fa-eraser fa-lg"></i>
                   </button>
 
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                    Limpar
+                    {t("Limpar")}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                   </div>
                 </div>

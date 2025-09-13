@@ -1,4 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 function InfoIcon() {
+  const { t } = useTranslation();
+
     return (
         <div className="relative group inline-flex items-center">
             <svg 
@@ -19,8 +23,7 @@ function InfoIcon() {
 
             <div className="absolute top-full left-0 mt-2 w-72 p-3 text-xs shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                 <p>
-                    🛡️ Ferramentas para fins educacionais e de desenvolvimento. 
-                    Uso inadequado é de responsabilidade do usuário.
+                    🛡️ {t("InfoIcon")}
                 </p>
             </div>
         </div>

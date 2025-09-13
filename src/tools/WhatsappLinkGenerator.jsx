@@ -1,24 +1,26 @@
 import { useState } from "react";
 import InputMask from 'react-input-mask';
+import { useTranslation } from 'react-i18next';
 
-export default function GerarLinkWhatsapp() {
+export default function WhatsappLinkGenerator() {
     const [phonenumber, setPhoneNumber] = useState("");
     const [infoText, setInfoText] = useState("");
     const [linkWhatsapp, setLinkWhatsapp] = useState("");
     const [linkAlreadyGenerated, setLinkAlreadyGenerated] = useState(false);
-    const [copiado, setCopiado] = useState(false);
+    const [copied, setCopied] = useState(false);
     const templateUrlWaMe = "https://wa.me/"
+    const { t } = useTranslation();
 
-    function copiarLink() {
+    function copyLink() {
         navigator.clipboard.writeText(linkWhatsapp);
-        setCopiado(true);
+        setCopied(true);
 
         setTimeout(() => {
-            setCopiado(false);
+            setCopied(false);
         }, 2000);
     };
 
-    const gerarLinkWhatsapp = () => {
+    const generateWhatsappLink = () => {
         let link = templateUrlWaMe + phonenumber.replace(/\D/g, '')
         if (infoText.trim() != "")
             link += `?text=${infoText}`
@@ -31,7 +33,7 @@ export default function GerarLinkWhatsapp() {
         setPhoneNumber("");
         setInfoText("");
         setLinkWhatsapp(false);
-        setCopiado(false);
+        setCopied(false);
         setLinkAlreadyGenerated(false);
     };
 
@@ -54,7 +56,7 @@ export default function GerarLinkWhatsapp() {
 
                             <textarea
                                 value={infoText}
-                                placeholder="Olá!"
+                                placeholder={t("Ola")}
                                 onChange={(e) => setInfoText(e.target.value)}
                                 disabled={isButtonDisabled}
                                 className="border-gray-300/20 bg-purple-200/10 focus:border-purple-400 w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-50 textarea-text-color textarea-white-theme"
@@ -62,7 +64,7 @@ export default function GerarLinkWhatsapp() {
 
                             <div className="p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                                 <p className="text-default text-sm text-center">
-                                    💡 Cole um número de telefone válido e a mensagem desejada abaixo
+                                    💡 {t("WhatsInfo")}
                                 </p>
                             </div>
                         </>
@@ -76,7 +78,7 @@ export default function GerarLinkWhatsapp() {
                                         href={linkWhatsapp}
                                         className="w-small p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out textarea-text-color border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
                                     >
-                                        Clique aqui para redirecionar
+                                        {t("Redirecionar")}
                                     </a>
                                 </div>
                             </div>
@@ -88,11 +90,11 @@ export default function GerarLinkWhatsapp() {
                     {!linkAlreadyGenerated && (
                         <div className="relative group">
                             <button
-                                onClick={gerarLinkWhatsapp}
+                                onClick={generateWhatsappLink}
                                 disabled={isButtonDisabled || linkAlreadyGenerated}
-                                className={`px-8 py-3 rounded-lg font-medium botao-padrao ${(isButtonDisabled || linkAlreadyGenerated)
-                                    ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
-                                    : "botao-padrao-ativo hover:scale-105 transition-transform"
+                                className={`px-8 py-3 rounded-lg font-medium default-button ${(isButtonDisabled || linkAlreadyGenerated)
+                                    ? "default-button-inactive opacity-50 cursor-not-allowed"
+                                    : "default-button-active hover:scale-105 transition-transform"
                                     }`}
                             >
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -101,7 +103,7 @@ export default function GerarLinkWhatsapp() {
                                 </svg>
                             </button>
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                Gerar
+                                {t("Gerar")}
                                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                             </div>
                         </div>
@@ -110,12 +112,12 @@ export default function GerarLinkWhatsapp() {
                     <div className="relative group">
                         <button
                             onClick={clearInputs}
-                            className="px-8 py-3 rounded-lg font-medium botao-padrao botao-padrao-ativo hover:scale-105 transition-transform"
+                            className="px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
                         >
                             <i className="fa-solid fa-eraser fa-lg"></i>
                         </button>
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            Limpar
+                            {t("Limpar")}
                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                         </div>
                     </div>
@@ -123,14 +125,14 @@ export default function GerarLinkWhatsapp() {
                     {linkAlreadyGenerated && (
                         <div className="relative group">
                             <button
-                                onClick={copiarLink}
-                                disabled={!linkAlreadyGenerated && !copiado}
-                                className={`px-8 py-3 rounded-lg font-medium botao-padrao ${!linkAlreadyGenerated && !copiado
-                                    ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
-                                    : "botao-padrao-ativo hover:scale-105 transition-transform"
+                                onClick={copyLink}
+                                disabled={!linkAlreadyGenerated && !copied}
+                                className={`px-8 py-3 rounded-lg font-medium default-button ${!linkAlreadyGenerated && !copied
+                                    ? "default-button-inactive opacity-50 cursor-not-allowed"
+                                    : "default-button-active hover:scale-105 transition-transform"
                                     }`}
                             >
-                                {copiado ? (
+                                {copied ? (
                                     <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                         <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                     </svg>
@@ -142,7 +144,7 @@ export default function GerarLinkWhatsapp() {
                                 )}
                             </button>
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                Copiar
+                                {t("Copiar")}
                                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                             </div>
                         </div>

@@ -1,28 +1,31 @@
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
-export function Sidebar({ open, setOpen, reduzirSidebar }) {
+export function Sidebar({ open, setOpen, reduceSidebar }) {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const links = [
-    { to: "/gerar-documentos", label: "Gerar Documentos" },
-    { to: "/gerar-qrcode", label: "Gerar QR Code" },
-    { to: "/gerar-senha", label: "Gerar Senha" },
-    { to: "/link-whatsapp", label: "Gerar Link WhatsApp" },
-    { to: "/gerar-pessoa", label: "Gerar Pessoa" },
-    { to: "/formatar-json", label: "Formatar JSON" },
-    { to: "/formatar-xml", label: "Formatar XML" },
-    { to: "/formatar-sql", label: "Formatar SQL" },
-    { to: "/visualizar-html", label: "Visualizar HTML" },
-    { to: "/meu-ip", label: "Obter Meu IP" },
-    { to: "/json-stringify", label: "JSON ↔ String" },
+    { to: "/gerar-documentos", label: t("GerarDocumentos") },
+    { to: "/gerar-qrcode", label: t("GerarQRCode") },
+    { to: "/gerar-senha", label: t("GerarSenha") },
+    { to: "/link-whatsapp", label: t("GerarLinkWhatsApp") },
+    { to: "/gerar-pessoa", label: t("GerarPessoa") },
+    { to: "/formatar-json", label: t("FormatarJSON") },
+    { to: "/formatar-xml", label: t("FormatarXML") },
+    { to: "/formatar-sql", label: t("FormatarSQL") },
+    { to: "/visualizar-html", label: t("VisualizarHTML") },
+    { to: "/meu-ip", label: t("MeuIP") },
+    { to: "/json-stringify", label: t("JsonString") },
+    { to: "/url-encode-decode", label: t("DecodificarCodificar") },
   ];
 
-  if (reduzirSidebar) {
+  if (reduceSidebar) {
     return (
       <nav
         className={`
           fixed top-20 left-4 z-50
-          w-56  botao-padrao rounded-2xl shadow-lg backdrop-blur-sm
+          w-56  default-button rounded-2xl shadow-lg backdrop-blur-sm
           transform transition-transform duration-300
           ${open ? "translate-x-0 opacity-100" : "-translate-x-80 opacity-0"}
           flex flex-col p-3 gap-1
@@ -36,8 +39,8 @@ export function Sidebar({ open, setOpen, reduzirSidebar }) {
             className={`
               flex items-center gap-2 px-3 py-2 rounded-lg
               text-sm text-white font-medium
-               botao-padrao transition-colors
-              ${location.pathname.includes(to.split("/")[1]) ? "botao-padrao-clicked" : ""}
+               default-button transition-colors
+              ${location.pathname.includes(to.split("/")[1]) ? "default-button-clicked" : ""}
             `}
           >
             {label}
@@ -61,9 +64,9 @@ export function Sidebar({ open, setOpen, reduzirSidebar }) {
           to={to}
           className={`
             font-medium
-            botao-padrao px-4 py-3 rounded-lg
+            default-button px-4 py-3 rounded-lg
             transition-transform hover:scale-105
-            ${location.pathname.includes(to.split("/")[1]) ? "botao-padrao-ativo underline-style" : ""}
+            ${location.pathname.includes(to.split("/")[1]) ? "default-button-active underline-style" : ""}
           `}
         >
           {label}

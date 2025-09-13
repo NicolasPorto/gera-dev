@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
 import QRCode from "qrcode";
+import { useTranslation } from 'react-i18next';
 
 export default function QrCodeGenerator() {
     const [url, setUrl] = useState("");
     const [qrImage, setQrImage] = useState("");
     const canvasRef = useRef(null);
+    const { t } = useTranslation();
 
     const generateQR = async () => {
         if (url.trim()) {
@@ -48,8 +50,7 @@ export default function QrCodeGenerator() {
 
                 <div className="mt-6 p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
                     <p className="text-default text-sm text-center">
-                        💡 Cole qualquer link abaixo para gerar um QR Code.
-                        Use o botão de download para salvar a imagem.
+                        💡 {t("InfoQRCode")}
                     </p>
                 </div>
 
@@ -69,9 +70,9 @@ export default function QrCodeGenerator() {
                         <button
                             onClick={generateQR}
                             disabled={isButtonDisabled}
-                            className={`px-8 py-3 rounded-lg font-medium botao-padrao ${isButtonDisabled
-                                ? "botao-padrao-desativado opacity-50 cursor-not-allowed"
-                                : "botao-padrao-ativo hover:scale-105 transition-transform"
+                            className={`px-8 py-3 rounded-lg font-medium default-button ${isButtonDisabled
+                                ? "default-button-inactive opacity-50 cursor-not-allowed"
+                                : "default-button-active hover:scale-105 transition-transform"
                                 }`}
                         >
                             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -80,7 +81,7 @@ export default function QrCodeGenerator() {
                             </svg>
                         </button>
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            Gerar
+                            {t("Gerar")}
                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                         </div>
                     </div>
@@ -88,12 +89,12 @@ export default function QrCodeGenerator() {
                     <div className="relative group">
                         <button
                             onClick={clearQR}
-                            className="px-8 py-3 rounded-lg font-medium botao-padrao botao-padrao-ativo hover:scale-105 transition-transform"
+                            className="px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
                         >
                             <i className="fa-solid fa-eraser fa-lg"></i>
                         </button>
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            Limpar
+                            {t("Limpar")}
                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                         </div>
                     </div>
@@ -111,7 +112,7 @@ export default function QrCodeGenerator() {
                         </div>
 
                         <p className="text-default text-sm text-center max-w-md">
-                            QR Code gerado para:{" "}<br />
+                            {t("QRCodeGeradoPara")}{" "}<br />
                             <span className="font-mono text-purple-400 break-all">
                                 {url}
                             </span>
@@ -120,7 +121,7 @@ export default function QrCodeGenerator() {
                         <div className="relative group">
                             <button
                                 onClick={downloadQR}
-                                className="px-6 py-2 rounded-lg font-medium botao-padrao botao-padrao-ativo hover:scale-105 transition-transform"
+                                className="px-6 py-2 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
                             >
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path clipRule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" Rule="evenodd" />
@@ -128,7 +129,7 @@ export default function QrCodeGenerator() {
                                 </svg>
                             </button>
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                Download PNG
+                                {t("Baixar")}
                                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
                             </div>
                         </div>

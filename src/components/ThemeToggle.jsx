@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function ThemeToggle() {
   const [isWhiteTheme, setIsWhiteTheme] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -27,8 +29,8 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="botao-padrao px-4 py-2 rounded flex items-center justify-center"
-      title={isWhiteTheme ? 'Mudar para tema escuro' : 'Mudar para tema claro'}
+      className="default-button px-4 py-2 rounded flex items-center justify-center"
+      title={isWhiteTheme ? t("MudarParaTemaEscuro") : t("MudarParaTemaClaro")}
     >
       {isWhiteTheme ? (
         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

@@ -91,37 +91,37 @@
 }
 
 :root {
-  --sidebar-width: 14rem;
+  --sidebar-width: 16rem;
 }
 
-.botao-padrao {
+.default-button {
   cursor: pointer;
   background-color: var(--color-button-default);
   transition: all 0.2s ease;
   color: white;
 }
 
-.botao-padrao-transparente {
+.default-button-transparent {
   cursor: pointer;
   transition: all 0.2s ease;
   color: white;
 }
 
-[data-theme="white"] .botao-padrao-transparente {
+[data-theme="white"] .default-button-transparent {
   color: #7e3aaf;
 }
 
 
-.botao-padrao-desativado {
+.default-button-inactive {
   cursor: not-allowed;
 }
 
-.botao-padrao-ativo {
+.default-button-active {
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.botao-padrao-clicked {
+.default-button-clicked {
   cursor: pointer;
   background-color: #4c1d95;
   transition: all 0.2s ease;
@@ -130,13 +130,13 @@
   color: white;
 }
 
-.botao-padrao:hover {
+.default-button:hover {
   background-color: #4c1d95;
   box-shadow: 0 6px 8px rgba(0,0,0,0.15);
   transform: translateY(-2px);
 }
 
-.numero-gerado {
+.generated-number {
   font-size: 3rem;
   font-weight: bold;
   font-family: monospace;
@@ -147,7 +147,7 @@
   margin-top: 1rem;
 }
 
-.numero-gerado-erro {
+.generated-number-error {
   font-size: 2rem;
   font-weight: bold;
   font-family: monospace;
@@ -158,13 +158,13 @@
   margin-top: 1rem;
 }
 
-.numero-gerado { font-size: 3rem; }             
-@media (max-width: 768px) { .numero-gerado { font-size: 2rem; } }
-@media (max-width: 640px) { .numero-gerado { font-size: 2rem; } }
+.generated-number { font-size: 3rem; }             
+@media (max-width: 768px) { .generated-number { font-size: 2rem; } }
+@media (max-width: 640px) { .generated-number { font-size: 2rem; } }
 
-.numero-gerado-erro { font-size: 2rem; }             
-@media (max-width: 768px) { .numero-gerado-erro { font-size: 2rem; } }
-@media (max-width: 640px) { .numero-gerado-erro { font-size: 1.4rem; } }
+.generated-number-error { font-size: 2rem; }             
+@media (max-width: 768px) { .generated-number-error { font-size: 2rem; } }
+@media (max-width: 640px) { .generated-number-error { font-size: 1.4rem; } }
 
 .underline-style {
   position: relative;
@@ -202,14 +202,14 @@
   color: white;
 }
 
-.botao-padrao-claro {
+.default-button-white {
   cursor: pointer;
   background-color: #7e3aaf;
   transition: all 0.2s ease;
   color: black;
 }
 
-.botao-padrao-claro-clicked {
+.default-button-white-clicked {
   cursor: pointer;
   background-color: #9166af;
   transition: all 0.2s ease;
@@ -218,36 +218,36 @@
   color: black;
 }
 
-.botao-padrao-claro:hover {
+.default-button-white:hover {
   background-color: #9166af;
   box-shadow: 0 6px 8px rgba(0,0,0,0.15);
   transform: translateY(-2px);
 }
 
-.botao-padrao-claro svg,
-.botao-padrao-claro-clicked svg,
-.botao-padrao-claro:hover svg {
+.default-button-white svg,
+.default-button-white-clicked svg,
+.default-button-white:hover svg {
   color: white;
 }
 
-[data-theme="white"] .botao-padrao {
+[data-theme="white"] .default-button {
   background-color: #7e3aaf;
   color: rgb(255, 255, 255);
 }
 
-[data-theme="white"] .botao-padrao-clicked {
+[data-theme="white"] .default-button-clicked {
   background-color: #9166af;
   color: rgb(255, 255, 255);
 }
 
-[data-theme="white"] .botao-padrao:hover {
+[data-theme="white"] .default-button:hover {
   background-color: #9166af;
   color: rgb(255, 255, 255);
 }
 
-[data-theme="white"] .botao-padrao svg,
-[data-theme="white"] .botao-padrao-clicked svg,
-[data-theme="white"] .botao-padrao:hover svg {
+[data-theme="white"] .default-button svg,
+[data-theme="white"] .default-button-clicked svg,
+[data-theme="white"] .default-button:hover svg {
   color: white;
 }
 
@@ -288,27 +288,27 @@
 }
 /* SCROLL */
 
-.aviso-box {
+.warning-box {
   background-color: rgba(106, 13, 173, 0.7);
 }
 
-[data-theme="white"] .aviso-box {
+[data-theme="white"] .warning-box {
   background-color: rgba(106, 13, 173, 0.7);
   border: 1px solid rgba(106, 13, 173, 0.2);
 }
 
-.aviso-container {
+.warning-container {
   background-color: transparent;
 }
 
-.aviso-texto {
+.warning-texto {
   color: rgb(255, 255, 255);
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.4;
 }
 
-[data-theme="white"] .aviso-texto {
+[data-theme="white"] .warning-texto {
   color: rgb(255, 255, 255) !important;
 }
 
