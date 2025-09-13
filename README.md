@@ -2,7 +2,7 @@
 
 O GeraDev é uma plataforma completa que oferece ferramentas essenciais para desenvolvedores e estudantes, facilitando a geração, formatação e manipulação de dados em seus projetos e ambientes de teste.
 
-Acesso: 🌐 https://geradev.com.br (Suporte para Inglês e Português)
+Acesso: 🌐 https://geradev.com.br
 
 ### 🚀 Ferramentas Disponíveis
 
@@ -45,6 +45,9 @@ Acesso: 🌐 https://geradev.com.br (Suporte para Inglês e Português)
 - **React** - Biblioteca JavaScript para construção da interface
 - **Vite** - Ferramenta de build e desenvolvimento frontend
 - **Vercel** - Plataforma de deploy e hospedagem
+
+### 🇧🇷 🇺🇸 Suporta mudança de idioma
+É possível alterar o idioma do Geradev para inglês, através do botão no canto superior direito.
 
 ### ⚠️ Aviso Importante
 - Estas ferramentas são destinadas exclusivamente para fins educacionais, de desenvolvimento e teste.
