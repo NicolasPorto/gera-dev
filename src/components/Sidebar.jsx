@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-export function Sidebar({ open, setOpen, reduceSidebar }) {
+export function Sidebar({ open, setOpen, reduceComponents }) {
   const location = useLocation();
   const { t } = useTranslation();
 
@@ -20,7 +20,7 @@ export function Sidebar({ open, setOpen, reduceSidebar }) {
     { to: "/url-encode-decode", label: t("DecodificarCodificar") },
   ];
 
-  if (reduceSidebar) {
+  if (reduceComponents) {
     return (
       <nav
         className={`

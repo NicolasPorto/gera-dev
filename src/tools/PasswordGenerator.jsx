@@ -192,80 +192,121 @@ export default function PasswordGenerator() {
                     <span>30</span>
                 </div>
             </div>
-
-            <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-                <div className=" flex items-center">
-                    <label className="w-full relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="uppercase">
-                        <input
-                            id="uppercase"
-                            type="checkbox"
-                            checked={options.uppercase}
-                            onChange={() => toggleOption("uppercase")}
-                            className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-purple-600 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-purple-600 checked:bg-purple-600 hover:before:opacity-10"
-                        />
-                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/11 -translate-y-2/4 -translate-x-2/3 peer-checked:opacity-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+            <div className="grid grid-cols-2 gap-3 w-full max-w-md items-center justify-center">
+                <div className="flex items-center">
+                    <label className="flex items-center gap-3 cursor-pointer" htmlFor="uppercase">
+                        <div className="relative h-5 w-5">
+                            <input
+                                id="uppercase"
+                                type="checkbox"
+                                checked={options.uppercase}
+                                onChange={() => toggleOption("uppercase")}
+                                className="peer h-5 w-5 appearance-none rounded-md border border-purple-600 checked:bg-purple-600 cursor-pointer"
+                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="absolute inset-0 m-auto h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                />
                             </svg>
-                        </span>
-                        <span className="ml-3 text-default font-medium">
-                            {t("LetrasMaiusculas")}
-                        </span>
+                        </div>
+                        <span className="text-default font-medium">{t("LetrasMaiusculas")}</span>
                     </label>
                 </div>
                 <div className="flex items-center">
-                    <label className="w-full relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="lowercase">
-                        <input
-                            id="lowercase"
-                            type="checkbox"
-                            checked={options.lowercase}
-                            onChange={() => toggleOption("lowercase")}
-                            className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-purple-600 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-purple-600 checked:bg-purple-600 hover:before:opacity-10"
-                        />
-                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/11 -translate-y-2/4 -translate-x-2/3 peer-checked:opacity-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                    <label className="flex items-center gap-3 cursor-pointer" htmlFor="lowercase">
+                        <div className="relative h-5 w-5">
+                            <input
+                                id="lowercase"
+                                type="checkbox"
+                                checked={options.lowercase}
+                                onChange={() => toggleOption("lowercase")}
+                                className="peer h-5 w-5 appearance-none rounded-md border border-purple-600 checked:bg-purple-600 cursor-pointer"
+                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="absolute inset-0 m-auto h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                />
                             </svg>
-                        </span>
-                        <span className="ml-3 text-default font-medium">
+                        </div>
+                        <span className="text-default font-medium">
                             {t("LetrasMinusculas")}
                         </span>
                     </label>
                 </div>
                 <div className="flex items-center">
-                    <label className="w-full relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="numbers">
-                        <input
-                            id="numbers"
-                            type="checkbox"
-                            checked={options.numbers}
-                            onChange={() => toggleOption("numbers")}
-                            className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-purple-600 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-purple-600 checked:bg-purple-600 hover:before:opacity-10"
-                        />
-                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/11 -translate-y-2/4 -translate-x-2/3 peer-checked:opacity-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                    <label className="flex items-center gap-3 cursor-pointer" htmlFor="numbers">
+                        <div className="relative h-5 w-5">
+                            <input
+                                id="numbers"
+                                type="checkbox"
+                                checked={options.numbers}
+                                onChange={() => toggleOption("numbers")}
+                                className="peer h-5 w-5 appearance-none rounded-md border border-purple-600 checked:bg-purple-600 cursor-pointer"
+                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="absolute inset-0 m-auto h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                />
                             </svg>
-                        </span>
-                        <span className="ml-3 text-default font-medium">
+                        </div>
+                        <span className="text-default font-medium">
                             {t("Numeros")}
                         </span>
                     </label>
                 </div>
                 <div className="flex items-center">
-                    <label className="w-full relative flex items-center p-2 rounded-full cursor-pointer" htmlFor="symbols">
-                        <input
-                            id="symbols"
-                            type="checkbox"
-                            checked={options.symbols}
-                            onChange={() => toggleOption("symbols")}
-                            className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-purple-600 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-purple-600 checked:bg-purple-600 hover:before:opacity-10"
-                        />
-                        <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-1/11 -translate-y-2/4 -translate-x-2/3 peer-checked:opacity-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                    <label className="flex items-center gap-3 cursor-pointer" htmlFor="symbols">
+                        <div className="relative h-5 w-5">
+                            <input
+                                id="symbols"
+                                type="checkbox"
+                                checked={options.symbols}
+                                onChange={() => toggleOption("symbols")}
+                                className="peer h-5 w-5 appearance-none rounded-md border border-purple-600 checked:bg-purple-600 cursor-pointer"
+                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="absolute inset-0 m-auto h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                />
                             </svg>
-                        </span>
-                        <span className="ml-3 text-default font-medium">
+                        </div>
+                        <span className="text-default font-medium">
                             {t("Simbolos")}
                         </span>
                     </label>

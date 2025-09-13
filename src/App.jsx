@@ -13,11 +13,11 @@ function App() {
 
   const isHome = location.pathname === "/";
   const [open, setOpen] = useState(false);
-  const [reduceSidebar, setReduceSidebar] = useState(window.innerWidth < 1320 || window.innerHeight < 720);
+  const [reduceComponents, setReduceComponents] = useState(window.innerWidth < 1320 || window.innerHeight < 720);
 
   useEffect(() => {
     const handleResize = () => {
-      setReduceSidebar(window.innerWidth < 1320 || window.innerHeight < 720);
+      setReduceComponents(window.innerWidth < 1320 || window.innerHeight < 720);
 
       if (window.innerWidth >= 1320 || window.innerHeight >= 720) {
         setOpen(false);
@@ -50,7 +50,7 @@ function App() {
   return (
     <div className="h-screen flex flex-col background-default">
       <header className="py-4 px-6 flex items-center relative">
-        {reduceSidebar && (
+        {reduceComponents && (
           <div className="absolute left-4 top-1/2 -translate-y-1/2">
             <button
               className="text-default"
@@ -69,20 +69,20 @@ function App() {
         </div>
 
         <div className="ml-auto flex gap-2">
-          <ThemeToggle />
-          <LanguageToggle />
+          <ThemeToggle reduceComponents={reduceComponents}/>
+          <LanguageToggle reduceComponents={reduceComponents}/>
         </div>
       </header>
 
       <div className="flex flex-1 relative">
-        <Sidebar open={open} setOpen={setOpen} reduceSidebar={reduceSidebar} />
+        <Sidebar open={open} setOpen={setOpen} reduceComponents={reduceComponents} />
 
         <main
           className={`
-        flex-1
-        transition-all duration-300
-        flex items-center justify-center
-      `}
+            flex-1
+            transition-all duration-300
+            flex items-center justify-center
+          `}
         >
           <div className="w-full max-w-4xl flex flex-col items-center justify-center p-4">
             <Outlet />
@@ -93,8 +93,8 @@ function App() {
       {!isHome && (
         <footer
           className={`
-      py-4 text-center
-    `}
+            py-4 text-center
+          `}
         >
           <div className="text-gray-400 text-footer opacity-70 hover:opacity-100 transition-opacity duration-300">
             <div className="flex flex-col items-center sm:flex-row justify-center">
