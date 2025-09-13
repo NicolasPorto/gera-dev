@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     const pathTitles = {
-      "/": t("GeraDev"),
+      "/": 'GeraDev',
       "/gerar-documentos": `GeraDev | ${t("DescGerarDocumentos")}`,
       "/gerar-qrcode": `GeraDev | ${t("DescGerarQRCode")}`,
       "/gerar-senha": `GeraDev | ${t("DescGerarSenha")}`,
