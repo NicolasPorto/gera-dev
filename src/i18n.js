@@ -87,7 +87,11 @@ const resources = {
             "InfoDecodificar": "Decode URL-encoded text back to original form.",
             "InfoCodificar": "Encode text for use in URL parameters.",
             "TextoEncode": "Paste a text or URL to encode (e.g., https://geradev.com.br/gerar-documentos)",
-            "TextoDecode": "Paste a URL-encoded text to decode (e.g., https%3A%2F%2Fgeradev.com.br%2Fgerar-documentos)"
+            "TextoDecode": "Paste a URL-encoded text to decode (e.g., https%3A%2F%2Fgeradev.com.br%2Fgerar-documentos)",
+            "Geradores": "Generators",
+            "Formatadores": "Formatters",
+            "FuncoesString": "String Functions",
+            "Rede": "Network"
         }
     },
     pt: {
@@ -174,7 +178,11 @@ const resources = {
             "InfoDecodificar": "Decodifique o texto codificado em URL de volta à forma original.",
             "InfoCodificar": "Codificar texto para uso em parâmetros de URL no padrão universal.",
             "TextoEncode": "Cole um texto ou URL para codificar (ex: https://geradev.com.br/gerar-documentos)",
-            "TextoDecode": "Cole um texto ou URL para decodificar (ex: https%3A%2F%2Fgeradev.com.br%2Fgerar-documentos)"
+            "TextoDecode": "Cole um texto ou URL para decodificar (ex: https%3A%2F%2Fgeradev.com.br%2Fgerar-documentos)",
+            "Geradores": "Geradores",
+            "Formatadores": "Formatadores",
+            "FuncoesString": "Funções String",
+            "Rede": "Rede"
         }
     }
 };

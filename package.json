@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.13",
     "@vitejs/plugin-react": "^5.0.2",
     "flag-icons": "^7.5.0",
     "i18next": "^25.5.2",

@@ -101,6 +101,14 @@
   color: white;
 }
 
+.default-button-sidebar {
+  border: 2px solid rgba(255, 255, 255, 0.096);
+}
+
+[data-theme="white"] .default-button-sidebar {
+  border: 2px solid rgba(255, 0, 170, 0.2);
+}
+
 .default-button-transparent {
   cursor: pointer;
   transition: all 0.2s ease;
@@ -324,4 +332,43 @@ html, body, #root {
   height: 100%;
   width: 100%;
   background-color: var(--color-background-default);
+}
+
+.sidebar-collapse {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none; 
+  transition:
+    max-height 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 500ms ease;
+  will-change: max-height, opacity;
+}
+
+.sidebar-collapse.open {
+  max-height: var(--acc-max, 600px);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.collapse-content {
+  transform: translateY(-8px);
+   transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-collapse.open .collapse-content {
+  transform: translateY(0);
+}
+
+.chev {
+  display: inline-flex;
+  transform: rotate(0deg);
+  transition: transform 400ms ease;
+}
+.chev.rotated {
+  transform: rotate(90deg);
+}
+
+:root {
+  --accordion-item-height: 56px;
 }
