@@ -17,7 +17,8 @@ Acesso: 🌐 https://geradev.com.br
 - [x] Visualizador de HTML;
 - [x] Meu IP;
 - [x] Conversão de JSON para Stringfy;
-- [x] Url Decode/Encode.
+- [x] Url Decode/Encode;
+- [x] Calculador de hora extra.
 
 ## Sobre as Ferramentas
 
@@ -46,6 +47,9 @@ Acesso: 🌐 https://geradev.com.br
 
 ### 🌐 Rede e Conectividade
 - **Meu IP:** Identifica e exibe seu endereço IP público
+
+### 🔢 Calculadoras
+- **Calculador de hora extra:** Calcule o valor das horas extras com base no seu salário mensal, horas trabalhadas e percentual adicional.
 
 ### ✈️ Suporta mudança de idioma - 🇧🇷 🇺🇸 
 É possível alterar o idioma do Geradev para inglês, através do botão no canto superior direito.
