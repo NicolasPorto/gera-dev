@@ -13,8 +13,6 @@ export function LanguageToggle({ reduceComponents }) {
   };
 
   const flagSize = reduceComponents ? '1.6rem' : '2.4rem';
-  const buttonPadding = reduceComponents ? '0.25rem' : '0.5rem';
-
   return (
     <button
       onClick={changeLanguage}

@@ -40,6 +40,12 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
         { to: "/meu-ip", label: t("MeuIP") }
       ],
     },
+    {
+      title: t("Utilidades"),
+      links: [
+        { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") }
+      ],
+    },
   ];
 
   const [openSections, setOpenSections] = useState({});

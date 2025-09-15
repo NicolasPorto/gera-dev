@@ -14,6 +14,7 @@ import PersonGenerator from "./tools/PersonGenerator";
 import MyIPVisualizer from "./tools/MyIPVisualizer";
 import JsonStringify from "./tools/JsonStringify";
 import URLEncodeDecode from "./tools/URLEncodeDecode";
+import OvertimeCalculator from "./tools/OvertimeCalculator";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
       {
         path: "url-encode-decode",
         element: <URLEncodeDecode />,
+      },
+      {
+        path: "calculo-hora-extra",
+        element: <OvertimeCalculator />,
       }
     ],
   },

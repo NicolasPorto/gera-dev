@@ -91,7 +91,22 @@ const resources = {
             "Geradores": "Generators",
             "Formatadores": "Formatters",
             "FuncoesString": "String Functions",
-            "Rede": "Network"
+            "Rede": "Network",
+            "Hora início/fim": "Start/end time",
+            "Quantidade de horas": "Number of hours",
+            "Horas Trabalhadas": "Work Time",
+            "Hora Início": "Start Time",
+            "Hora Fim": "End Time",
+            "Salário Mensal (R$)": "Monthly Salary ($)",
+            "Percentual Adicional": "Additional Percentage",
+            "Calcular": "Calculate",
+            "Total Horas Extras": "Total Overtime Hours",
+            "Valor Horas Extras": "Overtime Pay",
+            "Salário com Hora Extra": "Salary with Overtime Pay",
+            "R$": "$",
+            "Utilidades": "Utilities",
+            "CalculoHoraExtra": "Calculate Overtime",
+            "InfoHoraExtra": "Calculate the value of overtime based on your monthly salary, hours worked, and additional percentage."
         }
     },
     pt: {
@@ -182,7 +197,22 @@ const resources = {
             "Geradores": "Geradores",
             "Formatadores": "Formatadores",
             "FuncoesString": "Funções String",
-            "Rede": "Rede"
+            "Rede": "Rede",
+            "Hora início/fim": "Hora início/fim",
+            "Quantidade de horas": "Quantidade de horas",
+            "Horas Trabalhadas": "Horas Trabalhadas",
+            "Hora Início": "Hora Início",
+            "Hora Fim": "Hora Fim",
+            "Salário Mensal (R$)": "Salário Mensal (R$)",
+            "Percentual Adicional": "Percentual Adicional",
+            "Calcular": "Calcular",
+            "Total Horas Extras": "Total Horas Extras",
+            "Valor Horas Extras": "Valor Horas Extras",
+            "Salário com Hora Extra": "Salário com Hora Extra",
+            "R$": "R$",
+            "Utilidades": "Utilidades",
+            "CalculoHoraExtra": "Calcular Hora Extra",
+            "InfoHoraExtra": "Calcule o valor das horas extras com base no seu salário mensal, horas trabalhadas e percentual adicional."
         }
     }
 };

@@ -13,6 +13,7 @@
     "@tailwindcss/vite": "^4.1.13",
     "@vitejs/plugin-react": "^5.0.2",
     "flag-icons": "^7.5.0",
+    "framer-motion": "^12.23.12",
     "i18next": "^25.5.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "lucide-react": "^0.542.0",
