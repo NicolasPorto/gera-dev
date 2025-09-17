@@ -1,4 +1,6 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
+import { Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Home() {
     const { t } = useTranslation();
@@ -25,15 +27,10 @@ function Home() {
                 <h1 className="text-2xl font-bold text-default mb-3">
                     GeraDev Tools
                 </h1>
-                <p className="text-default mb-4 leading-relaxed">
-                    {t("Sobre")}
-                </p>
-
-
-                <div className="text-gray-400 text-footer opacity-70 hover:opacity-100 transition-opacity duration-300 mb-4">
+                <div className="text-gray-400 text-footer opacity-70 hover:opacity-100 transition-opacity duration-300 mt-4 mb-4">
                     <div className="flex flex-col items-center sm:flex-row justify-center">
                         <span className="text-[10px] sm:text-xs font-light mb-1 sm:mb-0 sm:mr-1">
-                           2025 © {t("DesenvolvidoPor")}{" "}
+                            2025 © {t("DesenvolvidoPor")}{" "}
                         </span>
                         <div className="flex">
                             <a
@@ -51,16 +48,34 @@ function Home() {
                                 rel="noopener noreferrer"
                                 className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
                             >
-                                Luis Venturini 
+                                Luis Venturini
                             </a>
                         </div>
                     </div>
                 </div>
-                <div className="w-full p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
-                    <p className="text-default text-sm text-center ">
+                <p className="text-default mb-4 leading-relaxed">
+                    {t("Sobre")}
+                </p>
+
+                <Link
+                    to="/conversor-json-class"
+                    className="block info-card animation-info-card"
+                >
+                    <div className="info-header">
+                        <Sparkles className="icon" />
+                        <h2 className="info-title">{t("NovaFuncionalidade")}</h2>
+                    </div>
+                    <p className="info-text">
+                        <Trans i18nKey="NovaFuncionalidadeInfo" components={{ strong: <strong /> }} />
+                    </p>
+                </Link>
+
+                {/* <div className="info-card">
+                    <p className="info-text">
                         🛡️ {t("AvisoSobre")}
                     </p>
-                </div>
+                </div> */}
+
             </div>
         </div>
     );

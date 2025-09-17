@@ -112,7 +112,9 @@ const resources = {
             "CsharpParaJson": "JSON to C#",
             "JsonParaCsharp": "C# to JSON",
             "JsonClass": "JSON ↔ C#",
-            "Conversores": "Converters"
+            "Conversores": "Converters",
+            "NovaFuncionalidade": "New Feature",
+            "NovaFuncionalidadeInfo": "Now you can convert any <strong>JSON</strong> directly into a <strong>C# class</strong> with just one click!"
         }
     },
     pt: {
@@ -224,7 +226,9 @@ const resources = {
             "CsharpParaJson": "JSON para C#",
             "JsonParaCsharp": "C# para JSON",
             "JsonClass": "JSON ↔ C#",
-            "Conversores": "Conversores"
+            "Conversores": "Conversores",
+            "NovaFuncionalidade": "Nova Funcionalidade",
+            "NovaFuncionalidadeInfo": "Agora você pode converter qualquer <strong>JSON</strong> diretamente em uma <strong>classe C#</strong> com apenas um clique!"
         }
     }
 };
