@@ -19,6 +19,7 @@ Acesso: 🌐 https://geradev.com.br
 - [x] Conversão de JSON para Stringfy;
 - [x] Url Decode/Encode;
 - [x] Calculador de hora extra.
+- [x] Conversor de JSON para classe c#.
 
 ## Sobre as Ferramentas
 
@@ -51,6 +52,9 @@ Acesso: 🌐 https://geradev.com.br
 ### 🔢 Calculadoras
 - **Calculador de hora extra:** Calcule o valor das horas extras com base no seu salário mensal, horas trabalhadas e percentual adicional.
 
+### ☄️ Conversores
+- **Conversor de JSON para classe C#:** Converta um JSON para uma classe em C# ou o inverso com apenas um clique.
+- 
 ### ✈️ Suporta mudança de idioma - 🇧🇷 🇺🇸 
 É possível alterar o idioma do Geradev para inglês, através do botão no canto superior direito.
 
