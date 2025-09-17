@@ -106,8 +106,8 @@ export default function MyIPVisualizer() {
         </div>
       </div>
       <div className="flex gap-2">
-        <div className="w-full p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
-          <p className="text-default text-sm text-center ">
+        <div className="info-card w-full">
+          <p className="info-text">
             ❗ {t("InfoIP")}
           </p>
         </div>

@@ -133,8 +133,8 @@ export default function OvertimeCalculator() {
 
     return (
         <div className="p-4 flex flex-col items-center gap-6 w-full">
-            <div className="p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
-                <p className="text-default text-sm text-center">
+            <div className="info-card">
+                <p className="info-text">
                     💡 {t("InfoHoraExtra")}
                 </p>
             </div>

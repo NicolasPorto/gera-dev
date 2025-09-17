@@ -27,8 +27,8 @@ export default function HTMLVisualizer() {
         <div className="flex flex-col items-center justify-center p-6 w-full max-w-5xl mx-auto">
             <div className="w-full flex flex-col items-center gap-6">
 
-                <div className="w-full p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
-                    <p className="text-default text-sm text-center">
+                <div className="info-card w-full">
+                    <p className="info-text">
                         💡 {t("InfoHTML")}
                     </p>
                 </div>
@@ -110,8 +110,8 @@ export default function HTMLVisualizer() {
                     </div>
                 </div>
 
-                <div className="p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
-                    <p className="text-default text-sm text-center">
+                <div className="info-card">
+                    <p className="info-text">
                         ⌨️ {t("AtalhoVisualizar")}
                     </p>
                 </div>

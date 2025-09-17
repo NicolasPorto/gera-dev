@@ -49,8 +49,8 @@ export default function QrCodeGenerator() {
         <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
             <div className="w-full flex flex-col items-center gap-6">
 
-                <div className="mt-6 p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
-                    <p className="text-default text-sm text-center">
+                <div className="info-card">
+                    <p className="info-text">
                         💡 {t("InfoQRCode")}
                     </p>
                 </div>

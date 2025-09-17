@@ -62,8 +62,8 @@ export default function WhatsappLinkGenerator() {
                                 className="border-gray-300/20 bg-purple-200/10 focus:border-purple-400 w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-50 textarea-text-color textarea-white-theme"
                             />
 
-                            <div className="p-4 bg-purple-200/10 rounded-lg border-2 border-gray-300/20 infos-white-theme">
-                                <p className="text-default text-sm text-center">
+                            <div className="info-card">
+                                <p className="info-text">
                                     💡 {t("WhatsInfo")}
                                 </p>
                             </div>
