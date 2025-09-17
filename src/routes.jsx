@@ -15,6 +15,7 @@ import MyIPVisualizer from "./tools/MyIPVisualizer";
 import JsonStringify from "./tools/JsonStringify";
 import URLEncodeDecode from "./tools/URLEncodeDecode";
 import OvertimeCalculator from "./tools/OvertimeCalculator";
+import JsonToClassConverter from "./tools/JsonToClassConverter";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "calculo-hora-extra",
         element: <OvertimeCalculator />,
+      },
+      {
+        path: "conversor-json-class",
+        element: <JsonToClassConverter />,
       }
     ],
   },

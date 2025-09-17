@@ -230,12 +230,18 @@ export default function JsonStringify() {
                             <>
                                 <div className="relative group">
                                     <button
-                                        onClick={handleCopy}
-                                        className="px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
+                                        onClick={() => {
+                                            handleCopy();
+                                        }}
+                                        disabled={isButtonDisabled}
+                                        className={`px-8 py-3 rounded-lg font-medium default-button ${isButtonDisabled
+                                            ? "default-button-inactive opacity-50 cursor-not-allowed"
+                                            : "default-button-active hover:scale-105 transition-transform"
+                                            }`}
                                     >
                                         {copied ? (
                                             <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 极s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
+                                                <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
                                             </svg>
                                         ) : (
                                             <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -247,7 +253,7 @@ export default function JsonStringify() {
 
                                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                         {copied ? t("Copiado") : t("Copiar")}
-                                        <div className="absolute top-full left-1/极 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                                     </div>
                                 </div>
 

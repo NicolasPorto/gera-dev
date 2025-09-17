@@ -117,6 +117,18 @@ export default function OvertimeCalculator() {
         return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
     };
 
+    const formatTimeInput = (value) => {
+        let val = value.replace(/\D/g, "");
+
+        if (val.length > 4) val = val.slice(-4);
+
+        val = val.padStart(4, "0");
+
+        const h = val.slice(0, 2);
+        const m = val.slice(2);
+
+        return `${h}:${m}`;
+    };
     const isButtonDisabled = !salary || (useTime && (!startTime || !endTime)) || (!useTime && !hours) || startTimeError || endTimeError;
 
     return (
@@ -152,7 +164,11 @@ export default function OvertimeCalculator() {
                         <input
                             type="text"
                             value={hours}
-                            onChange={(e) => handleTimeInput(e.target.value, setHours, setStartTimeError)}
+                            onChange={(e) => {
+                                const val = formatTimeInput(e.target.value);
+                                setHours(val);
+                                setStartTimeError(val.length === 5 ? !isValidTime(val) : false);
+                            }}
                             placeholder="HH:MM"
                             className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none transition-all textarea-text-color textarea-white-theme
                             ${startTimeError ? "border-red-500" : "border-gray-300/20"} 
@@ -168,10 +184,7 @@ export default function OvertimeCalculator() {
                                     type="text"
                                     value={startTime}
                                     onChange={(e) => {
-                                        let val = e.target.value.replace(/\D/g, "");
-                                        if (val.length > 4) val = val.slice(0, 4);
-                                        if (val.length >= 3) val = val.slice(0, 2) + ":" + val.slice(2);
-
+                                        const val = formatTimeInput(e.target.value);
                                         setStartTime(val);
                                         setStartTimeError(val.length === 5 ? !isValidTime(val) : false);
                                     }}
@@ -190,10 +203,7 @@ export default function OvertimeCalculator() {
                                     type="text"
                                     value={endTime}
                                     onChange={(e) => {
-                                        let val = e.target.value.replace(/\D/g, "");
-                                        if (val.length > 4) val = val.slice(0, 4);
-                                        if (val.length >= 3) val = val.slice(0, 2) + ":" + val.slice(2);
-
+                                        const val = formatTimeInput(e.target.value);
                                         setEndTime(val);
                                         setEndTimeError(val.length === 5 ? !isValidTime(val) : false);
                                     }}

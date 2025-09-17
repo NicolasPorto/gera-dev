@@ -106,7 +106,13 @@ const resources = {
             "R$": "$",
             "Utilidades": "Utilities",
             "CalculoHoraExtra": "Calculate Overtime",
-            "InfoHoraExtra": "Calculate the value of overtime based on your monthly salary, hours worked, and additional percentage."
+            "InfoHoraExtra": "Calculate the value of overtime based on your monthly salary, hours worked, and additional percentage.",
+            "InfoJsonToCsharp": "Paste valid JSON to generate C# classes.",
+            "InfoCsharpToJson": "Paste a C# class to generate JSON.",
+            "CsharpParaJson": "JSON to C#",
+            "JsonParaCsharp": "C# to JSON",
+            "JsonClass": "JSON ↔ C#",
+            "Conversores": "Converters"
         }
     },
     pt: {
@@ -212,7 +218,13 @@ const resources = {
             "R$": "R$",
             "Utilidades": "Utilidades",
             "CalculoHoraExtra": "Calcular Hora Extra",
-            "InfoHoraExtra": "Calcule o valor das horas extras com base no seu salário mensal, horas trabalhadas e percentual adicional."
+            "InfoHoraExtra": "Calcule o valor das horas extras com base no seu salário mensal, horas trabalhadas e percentual adicional.",
+            "InfoJsonToCsharp": "Cole um JSON válido para gerar classes C#",
+            "InfoCsharpToJson": "Cole uma classe C# para gerar JSON",
+            "CsharpParaJson": "JSON para C#",
+            "JsonParaCsharp": "C# para JSON",
+            "JsonClass": "JSON ↔ C#",
+            "Conversores": "Conversores"
         }
     }
 };

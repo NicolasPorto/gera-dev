@@ -69,8 +69,8 @@ function App() {
         </div>
 
         <div className="ml-auto flex gap-2">
-          <ThemeToggle reduceComponents={reduceComponents}/>
-          <LanguageToggle reduceComponents={reduceComponents}/>
+          <ThemeToggle reduceComponents={reduceComponents} />
+          <LanguageToggle reduceComponents={reduceComponents} />
         </div>
       </header>
 

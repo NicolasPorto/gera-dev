@@ -10,6 +10,7 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
   const sections = [
     {
       title: t("Geradores"),
+      key: "generators",
       links: [
         { to: "/gerar-documentos", label: t("GerarDocumentos") },
         { to: "/gerar-qrcode", label: t("GerarQRCode") },
@@ -20,6 +21,7 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
     },
     {
       title: t("Formatadores"),
+      key: "formatters",
       links: [
         { to: "/formatar-json", label: t("FormatarJSON") },
         { to: "/formatar-xml", label: t("FormatarXML") },
@@ -28,7 +30,15 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       ],
     },
     {
+      title: t("Conversores"),
+      key: "converters",
+      links: [
+        { to: "/conversor-json-class", label: t("JsonClass") },
+      ],
+    },,
+    {
       title: t("FuncoesString"),
+      key: "stringFunctions",
       links: [
         { to: "/json-stringify", label: t("JsonString") },
         { to: "/url-encode-decode", label: t("DecodificarCodificar") },
@@ -36,12 +46,14 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
     },
     {
       title: t("Rede"),
+      key: "network",
       links: [
         { to: "/meu-ip", label: t("MeuIP") }
       ],
     },
     {
       title: t("Utilidades"),
+      key: "utilities",
       links: [
         { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") }
       ],
@@ -50,17 +62,23 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
 
   const [openSections, setOpenSections] = useState({});
 
-  const toggleSection = (title) => {
+  const toggleSection = (key) => {
     setOpenSections((prev) => ({
-      [title]: !prev[title]
+      [key]: !prev[key]
     }));
   };
 
   useEffect(() => {
     const path = location.pathname;
-    sections.forEach(({ title, links }) => {
+
+    if (path === "/") {
+      setOpenSections({});
+      return;
+    }
+
+    sections.forEach(({ key, links }) => {
       if (links.some((link) => path.startsWith(link.to))) {
-        setOpenSections((prev) => ({ ...prev, [title]: true }));
+        setOpenSections((prev) => ({ ...prev, [key]: true }));
       }
     });
   }, [location.pathname]);
@@ -84,23 +102,23 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
           flex flex-col p-3 gap-2 custom-scrollbar overflow-y-auto
         `}
       >
-        {sections.map(({ title, links }, i) => {
+        {sections.map(({ title, key, links }, i) => {
           const id = `sec-compact-${i}`;
           return (
-            <div key={title}>
+            <div key={key}>
               <button
-                onClick={() => toggleSection(title)}
-                aria-expanded={!!openSections[title]}
+                onClick={() => toggleSection(key)}
+                aria-expanded={!!openSections[key]}
                 aria-controls={id}
                 className="flex justify-between items-center w-full text-left px-3 py-2 rounded-lg font-semibold text-white hover:bg-purple-700 transition"
               >
                 {title}
-                <Icon open={!!openSections[title]} />
+                <Icon open={!!openSections[key]} />
               </button>
 
               <div
                 id={id}
-                className={`sidebar-collapse ${openSections[title] ? "open" : ""}`}
+                className={`sidebar-collapse ${openSections[key] ? "open" : ""}`}
                 style={{ ["--acc-max"]: `${links.length * ITEM_HEIGHT_PX}px` }}
               >
                 <div className="collapse-content pl-3 flex flex-col gap-1 mt-1">
@@ -137,23 +155,23 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
         pt-6
       `}
     >
-      {sections.map(({ title, links }, i) => {
+      {sections.map(({ title, key, links }, i) => {
         const id = `sec-normal-${i}`;
         return (
-          <div key={title}>
+          <div key={key}>
             <button
-              onClick={() => toggleSection(title)}
-              aria-expanded={!!openSections[title]}
+              onClick={() => toggleSection(key)}
+              aria-expanded={!!openSections[key]}
               aria-controls={id}
               className="flex justify-between items-center w-full text-left px-4 py-3 rounded-lg font-semibold text-white default-button hover:bg-purple-700 transition default-button-sidebar"
             >
               {title}
-              <Icon open={!!openSections[title]} />
+              <Icon open={!!openSections[key]} />
             </button>
 
             <div
               id={id}
-              className={`sidebar-collapse ${openSections[title] ? "open" : ""}`}
+              className={`sidebar-collapse ${openSections[key] ? "open" : ""}`}
               style={{ ["--acc-max"]: `${links.length * ITEM_HEIGHT_PX}px` }}
             >
               <div className="collapse-content pl-4 flex flex-col gap-2 mt-2">
