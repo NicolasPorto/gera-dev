@@ -25,8 +25,7 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       links: [
         { to: "/formatar-json", label: t("FormatarJSON") },
         { to: "/formatar-xml", label: t("FormatarXML") },
-        { to: "/formatar-sql", label: t("FormatarSQL") },
-        { to: "/visualizar-html", label: t("VisualizarHTML") },
+        { to: "/formatar-sql", label: t("FormatarSQL") }
       ],
     },
     {
@@ -55,7 +54,8 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       title: t("Utilidades"),
       key: "utilities",
       links: [
-        { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") }
+        { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") },
+        { to: "/visualizar-html", label: t("VisualizarHTML") }
       ],
     },
   ];
