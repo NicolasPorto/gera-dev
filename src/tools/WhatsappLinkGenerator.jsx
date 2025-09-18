@@ -59,7 +59,7 @@ export default function WhatsappLinkGenerator() {
                                 placeholder={t("Ola")}
                                 onChange={(e) => setInfoText(e.target.value)}
                                 disabled={isButtonDisabled}
-                                className="border-gray-300/20 bg-purple-200/10 focus:border-purple-400 w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-50 textarea-text-color textarea-white-theme"
+                                className="border-gray-300/20 bg-purple-200/10 custom-scrollbar focus:border-purple-400 w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-50 textarea-text-color textarea-white-theme"
                             />
 
                             <div className="info-card">

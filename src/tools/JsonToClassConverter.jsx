@@ -3,6 +3,7 @@ import { useTheme } from "../components/UseTheme"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import * as prismStyles from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTranslation } from 'react-i18next';
+import { classToJson, jsonToCSharpTop } from "../utils/jsonClassConverter";
 
 export default function JsonClassConverter() {
   const [input, setInput] = useState("");
@@ -25,7 +26,7 @@ export default function JsonClassConverter() {
 
       if (detectedMode === "json-to-csharp") {
         const parsed = JSON.parse(input);
-        const classCode = jsonToCSharp(parsed, "Root");
+        const classCode = jsonToCSharpTop(parsed, "Root");
         setOutput(classCode);
       } else {
         const json = classToJson(input);
@@ -34,6 +35,7 @@ export default function JsonClassConverter() {
       setOutputOn(true);
       setError(false);
     } catch (e) {
+      console.log(e);
       setError(true);
       setOutputOn(false);
       setOutput("");
@@ -83,86 +85,13 @@ export default function JsonClassConverter() {
     setError(false);
   }
 
-  const isButtonDisabled = input.trim() === "";
-
   const getSyntaxStyle = () => {
     return theme === 'white' ? prismStyles.coldarkLight : prismStyles.coldarkDark;
   };
 
+  const isButtonDisabled = input.trim() === "";
   const modeDetected = detectAutoMode(input);
   const displayMode = mode === "auto" ? modeDetected : mode;
-
-  // ---------- Conversão JSON → C# ----------
-  function jsonToCSharp(obj, className) {
-    let props = [];
-    for (const key in obj) {
-      const value = obj[key];
-      let type = "string";
-
-      if (typeof value === "number") {
-        type = Number.isInteger(value) ? "int" : "double";
-      } else if (typeof value === "boolean") {
-        type = "bool";
-      } else if (Array.isArray(value)) {
-        if (value.length > 0 && typeof value[0] === "object") {
-          type = `List<${capitalize(key)}>`;
-        } else {
-          type = "List<string>";
-        }
-      } else if (typeof value === "object" && value !== null) {
-        type = capitalize(key);
-      }
-
-      props.push(`    public ${type} ${capitalize(key)} { get; set; }`);
-    }
-
-    let nested = "";
-    for (const key in obj) {
-      if (typeof obj[key] === "object" && !Array.isArray(obj[key]) && obj[key] !== null) {
-        nested += "\n\n" + jsonToCSharp(obj[key], capitalize(key));
-      }
-    }
-
-    return `public class ${className}\n{\n${props.join("\n")}\n}${nested}`;
-  }
-
-  function classToJson(classText) {
-    const regex = /public\s+(\w+)\s+(\w+)\s*\{.*?\}/g;
-    let match;
-    let obj = {};
-
-    while ((match = regex.exec(classText)) !== null) {
-      const type = match[1];
-      const name = match[2];
-      obj[uncapitalize(name)] = sampleValue(type);
-    }
-    return obj;
-  }
-
-  function sampleValue(type) {
-    switch (type.toLowerCase()) {
-      case "int":
-      case "long":
-      case "double":
-      case "decimal":
-        return 0;
-      case "bool":
-      case "boolean":
-        return false;
-      case "string":
-        return "example";
-      default:
-        if (type.startsWith("List")) return [];
-        return {};
-    }
-  }
-
-  function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-  function uncapitalize(str) {
-    return str.charAt(0).toLowerCase() + str.slice(1);
-  }
 
   return (
     <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
@@ -204,7 +133,7 @@ export default function JsonClassConverter() {
             value={input}
             onChange={handleInputChange}
             placeholder={displayMode === "json-to-csharp" ? '{ "name": "John", "age": 30 }' : "public class Root { public string Name { get; set; } }"}
-            className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-100 textarea-text-color textarea-white-theme ${error
+            className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-100 textarea-text-color custom-scrollbar textarea-white-theme ${error
               ? "border-red-500 bg-purple-200/10 focus:border-red-600"
               : "border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
               }`}

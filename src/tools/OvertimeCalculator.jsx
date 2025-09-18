@@ -171,8 +171,8 @@ export default function OvertimeCalculator() {
                             }}
                             placeholder="HH:MM"
                             className={`w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none transition-all textarea-text-color textarea-white-theme
-                            ${startTimeError ? "border-red-500" : "border-gray-300/20"} 
-                            bg-purple-200/10 focus:border-purple-400`}
+                                ${startTimeError ? "border-red-500" : "border-gray-300/20"} 
+                                bg-purple-200/10 focus:border-purple-400`}
                         />
                     </div>
                 ) : (
