@@ -128,6 +128,7 @@ export function classToJson(input) {
 export function jsonToCSharpTop(parsed, rootName = "Root") {
     const classes = {};
     let usesList = false;
+    let usesDateTime = false;
 
     function uniqueClassName(base) {
         let name = base;
@@ -144,7 +145,27 @@ export function jsonToCSharpTop(parsed, rootName = "Root") {
             return Number.isInteger(value) ? 'int' : 'double';
         }
         if (typeof value === 'boolean') return 'bool';
+
+        if (typeof value === 'string') {
+            if (isDateTimeString(value)) {
+                usesDateTime = true;
+                return 'DateTime';
+            }
+            return 'string';
+        }
+
         return 'string';
+    }
+
+    function isDateTimeString(str) {
+        const dateTimePatterns = [
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/, 
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?[+-]\d{2}:\d{2}$/, 
+            /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/,
+            /^\d{4}-\d{2}-\d{2}$/,
+        ];
+
+        return dateTimePatterns.some(pattern => pattern.test(str));
     }
 
     function singularize(word) {
@@ -223,6 +244,10 @@ export function jsonToCSharpTop(parsed, rootName = "Root") {
         ordered.push(classes[k]);
     }
 
-    const usingLine = usesList ? 'using System.Collections.Generic;\n\n' : '';
-    return usingLine + ordered.join('\n\n');
+    let usingLines = '';
+    if (usesList) usingLines += 'using System.Collections.Generic;\n';
+    if (usesDateTime) usingLines += 'using System;\n';
+    if (usingLines) usingLines += '\n';
+
+    return usingLines + ordered.join('\n\n');
 }

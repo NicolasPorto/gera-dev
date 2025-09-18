@@ -34,7 +34,7 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       links: [
         { to: "/conversor-json-class", label: t("JsonClass") },
       ],
-    },,
+    },
     {
       title: t("FuncoesString"),
       key: "stringFunctions",
@@ -54,8 +54,8 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       title: t("Utilidades"),
       key: "utilities",
       links: [
-        { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") },
-        { to: "/visualizar-html", label: t("VisualizarHTML") }
+        { to: "/visualizar-html", label: t("VisualizarHTML") },
+        { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") }
       ],
     },
   ];

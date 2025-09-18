@@ -51,7 +51,7 @@ export default function HTMLVisualizer() {
                             srcDoc={htmlCode}
                             title="HTML Preview"
                             sandbox="allow-same-origin"
-                            className="w-full h-full border-none"
+                            className="w-full h-full border-none custom-scrollbar"
                         />
                     </div>
                 )}
