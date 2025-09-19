@@ -95,13 +95,18 @@ export default function XMLFormatter() {
                 background: 'transparent',
                 padding: '0.6rem',
                 margin: 0,
-                fontSize: '0.775rem'
+                fontSize: '0.775rem',
+                wordBreak: 'break-all',
+                whiteSpace: 'pre-wrap'
               }}
               codeTagProps={{
                 style: {
-                  fontFamily: 'monospace'
+                  fontFamily: 'monospace',
+                  wordBreak: 'break-all',
+                  whiteSpace: 'pre-wrap'
                 }
               }}
+              wrapLongLines={true}
               className="border-2 rounded-lg border-gray-300/20 bg-purple-200/10 font-mono text-sm overflow-y-auto resize-none whitespace-pre-wrap break-all custom-scrollbar textarea-white-theme h-100"
             >
               {output}
