@@ -181,13 +181,18 @@ export default function JsonStringify() {
                                     background: 'transparent',
                                     padding: '0.6rem',
                                     margin: 0,
-                                    fontSize: '0.775rem'
+                                    fontSize: '0.775rem',
+                                    wordBreak: 'break-all',
+                                    whiteSpace: 'pre-wrap'
                                 }}
                                 codeTagProps={{
                                     style: {
-                                        fontFamily: 'monospace'
+                                        fontFamily: 'monospace',
+                                        wordBreak: 'break-all',
+                                        whiteSpace: 'pre-wrap'
                                     }
                                 }}
+                                wrapLongLines={true}
                             >
                                 {output}
                             </SyntaxHighlighter>

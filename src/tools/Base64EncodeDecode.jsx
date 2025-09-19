@@ -4,7 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import * as prismStyles from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTranslation } from 'react-i18next';
 
-export default function UrlEncodeDecode() {
+export default function Base64EncodeDecode() {
     const [input, setInput] = useState("");
     const [output, setOutput] = useState("");
     const [error, setError] = useState(false);
@@ -18,10 +18,10 @@ export default function UrlEncodeDecode() {
     function process() {
         try {
             if (mode === "encode") {
-                const encoded = encodeURIComponent(input);
+                const encoded = btoa(unescape(encodeURIComponent(input)));
                 setOutput(encoded);
             } else {
-                const decoded = decodeURIComponent(input);
+                const decoded = decodeURIComponent(escape(atob(input)));
                 setOutput(decoded);
             }
             setOutputOn(true);
@@ -29,7 +29,7 @@ export default function UrlEncodeDecode() {
         } catch (e) {
             setError(true);
             setOutputOn(false);
-            setOutput("Error: Invalid URI sequence");
+            setOutput("Erro");
         }
     }
 
@@ -70,9 +70,9 @@ export default function UrlEncodeDecode() {
 
     function getMessage() {
         if (mode === "encode") {
-            return t("InfoCodificar");
+            return t("InfoCodificarBase64");
         } else {
-            return t("InfoDecodificar");
+            return t("InfoDecodificarBase64");
         }
     }
 
@@ -86,13 +86,13 @@ export default function UrlEncodeDecode() {
                                 onClick={() => setManualMode("encode")}
                                 className={`px-3 py-1 rounded-lg font-medium ${mode === "encode" ? "default-button" : "default-button-transparent border border-purple-600"}`}
                             >
-                                {t("Codificar")}
+                                {t("Codificar", "Codificar")}
                             </button>
                             <button
                                 onClick={() => setManualMode("decode")}
                                 className={`px-3 py-1 rounded-lg font-medium ${mode === "decode" ? "default-button" : "default-button-transparent border border-purple-600"}`}
                             >
-                                {t("Decodificar")}
+                                {t("Decodificar", "Decodificar")}
                             </button>
                         </div>
                     </div>
@@ -108,7 +108,7 @@ export default function UrlEncodeDecode() {
                     <textarea
                         value={input}
                         onChange={handleInputChange}
-                        placeholder={mode === "encode" ? t("TextoEncode") : t("TextoDecode")}
+                        placeholder={mode === "encode" ? t("TextoBase64Encode") : t("TextoBase64Decode")}
                         className={`custom-scrollbar w-full p-4 border-2 rounded-lg font-mono text-sm focus:outline-none resize-none transition-all duration-300 ease-in-out h-100 textarea-text-color textarea-white-theme ${error
                             ? "border-red-500 bg-purple-200/10 focus:border-red-600"
                             : "border-gray-300/20 bg-purple-200/10 focus:border-purple-400"
@@ -160,14 +160,13 @@ export default function UrlEncodeDecode() {
                                 >
                                     {mode === "encode" ? (
                                         <i className="fa-solid fa-lock fa-lg"></i>
-
                                     ) : (
                                         <i className="fa-solid fa-unlock fa-lg"></i>
                                     )}
                                 </button>
 
                                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    {mode === "encode" ? t("Codificar") : t("Decodificar")}
+                                    {mode === "encode" ? t("Codificar", "Codificar") : t("Decodificar", "Decodificar")}
                                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                                 </div>
                             </div>
@@ -193,7 +192,7 @@ export default function UrlEncodeDecode() {
                                     </button>
 
                                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                        {copied ? (t("Copiado")) : (t("Copiar"))}
+                                        {copied ? (t("Copiado", "Copiado")) : (t("Copiar", "Copiar"))}
                                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                                     </div>
                                 </div>
@@ -211,7 +210,7 @@ export default function UrlEncodeDecode() {
                                         </svg>
                                     </button>
                                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                        {t("Editar")}
+                                        {t("Editar", "Editar")}
                                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                                     </div>
                                 </div>
@@ -225,7 +224,7 @@ export default function UrlEncodeDecode() {
                                     </button>
 
                                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                        {t("Limpar")}
+                                        {t("Limpar", "Limpar")}
                                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
                                     </div>
                                 </div>

@@ -16,6 +16,8 @@ import JsonStringify from "./tools/JsonStringify";
 import URLEncodeDecode from "./tools/URLEncodeDecode";
 import OvertimeCalculator from "./tools/OvertimeCalculator";
 import JsonToClassConverter from "./tools/JsonToClassConverter";
+import Base64EncodeDecode from "./tools/Base64EncodeDecode";
+import HashGenerator from "./tools/HashGenerador";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +83,14 @@ export const router = createBrowserRouter([
       {
         path: "conversor-json-class",
         element: <JsonToClassConverter />,
+      },
+      {
+        path: "base64-encode-decode",
+        element: <Base64EncodeDecode />,
+      },
+      {
+        path: "gerar-hash",
+        element: <HashGenerator />,
       }
     ],
   },

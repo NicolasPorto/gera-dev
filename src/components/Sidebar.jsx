@@ -17,6 +17,7 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
         { to: "/gerar-senha", label: t("GerarSenha") },
         { to: "/link-whatsapp", label: t("GerarLinkWhatsApp") },
         { to: "/gerar-pessoa", label: t("GerarPessoa") },
+        { to: "/gerar-hash", label: t("GerarHash") },
       ],
     },
     {
@@ -33,14 +34,15 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       key: "converters",
       links: [
         { to: "/conversor-json-class", label: t("JsonClass") },
+        { to: "/json-stringify", label: t("JsonString") },
       ],
     },
     {
-      title: t("FuncoesString"),
+      title: t("Encode/Decode"),
       key: "stringFunctions",
       links: [
-        { to: "/json-stringify", label: t("JsonString") },
         { to: "/url-encode-decode", label: t("DecodificarCodificar") },
+        { to: "/base64-encode-decode", label: t("Base54EncodeDecode") }
       ],
     },
     {
