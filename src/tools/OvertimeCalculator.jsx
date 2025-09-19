@@ -101,16 +101,6 @@ export default function OvertimeCalculator() {
         });
     };
 
-    const handleTimeInput = (value, setValue, setError) => {
-        let val = value.replace(/\D/g, "");
-        if (val.length > 4) val = val.slice(0, 4);
-        if (val.length >= 3) val = val.slice(0, 2) + ":" + val.slice(2);
-        setValue(val);
-
-        if (val.length === 5) setError(!isValidTime(val));
-        else setError(false);
-    };
-
     const decimalToHHMM = (decimal) => {
         const h = Math.floor(decimal);
         const m = Math.round((decimal - h) * 60);
@@ -238,7 +228,7 @@ export default function OvertimeCalculator() {
                         type="range"
                         min="50"
                         max="200"
-                        step="25"
+                        step="10"
                         value={percent}
                         onChange={(e) => setPercent(parseInt(e.target.value))}
                     />
