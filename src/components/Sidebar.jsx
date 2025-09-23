@@ -42,7 +42,8 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       key: "stringFunctions",
       links: [
         { to: "/url-encode-decode", label: t("DecodificarCodificar") },
-        { to: "/base64-encode-decode", label: t("Base54EncodeDecode") }
+        { to: "/base64-encode-decode", label: t("Base64EncodeDecode") },
+        { to: "/jwt-encode-decode", label: t("JWTEncodeDecode") }
       ],
     },
     {

@@ -32,6 +32,16 @@
   color:#5b2085 !important;
 }
 
+.sub-header {
+  border-color: color-mix(in oklab, var(--color-gray-300) 20%, transparent);
+  background-color: color-mix(in oklab, var(--color-purple-900) 30%, transparent);
+}
+
+[data-theme="white"] .sub-header {
+  border-color: var(--color-textarea-border) !important;
+  background-color: var(--color-textarea-bg) !important;
+}
+
 [data-theme="white"] .textarea-white-theme {
   border-color: var(--color-textarea-border) !important;
   background-color: var(--color-textarea-bg) !important;

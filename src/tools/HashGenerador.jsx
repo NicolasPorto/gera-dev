@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTheme } from "../components/UseTheme";
-import * as prismStyles from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTranslation } from 'react-i18next';
 import CryptoJS from 'crypto-js';
 

@@ -58,7 +58,7 @@ function Home() {
                 </p>
 
                 <Link
-                    to="/conversor-json-class"
+                    to="/jwt-encode-decode"
                     className="block info-card animation-info-card"
                 >
                     <div className="info-header">

@@ -42,7 +42,12 @@ function App() {
       "/formatar-sql": `GeraDev | ${t("FormatarSQL")}`,
       "/meu-ip": `GeraDev | ${t("DescMeuIP")}`,
       "/json-stringify": `GeraDev | ${t("JsonString")}`,
-      "/url-encode-decode": `GeraDev | ${t("DecodificarCodificar")}`
+      "/url-encode-decode": `GeraDev | ${t("DecodificarCodificar")}`,
+      "/calculo-hora-extra": `GeraDev | ${t("CalculoHoraExtra")}`,
+      "/conversor-json-class": `GeraDev | ${t("JsonClass")}`,
+      "/base64-encode-decode": `GeraDev | ${t("Base64EncodeDecode")}`,
+      "/gerar-hash": `GeraDev | ${t("GerarHash")}`,
+      "/jwt-encode-decode": `GeraDev | ${t("JWTEncodeDecode")}`
     };
     document.title = pathTitles[location.pathname] || "GeraDev";
   }, [location, t, i18n.language]);

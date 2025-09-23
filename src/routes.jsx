@@ -18,6 +18,7 @@ import OvertimeCalculator from "./tools/OvertimeCalculator";
 import JsonToClassConverter from "./tools/JsonToClassConverter";
 import Base64EncodeDecode from "./tools/Base64EncodeDecode";
 import HashGenerator from "./tools/HashGenerador";
+import JWTDecoderEncoder from "./tools/JWTDecoderEncoder";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
       {
         path: "gerar-hash",
         element: <HashGenerator />,
+      },
+      {
+        path: "jwt-encode-decode",
+        element: <JWTDecoderEncoder />,
       }
     ],
   },
