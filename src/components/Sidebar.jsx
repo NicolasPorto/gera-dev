@@ -58,7 +58,8 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       key: "utilities",
       links: [
         { to: "/visualizar-html", label: t("VisualizarHTML") },
-        { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") }
+        { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") },
+        { to: "/string-utilities", label: t("Padronizador de Texto") }
       ],
     },
   ];
