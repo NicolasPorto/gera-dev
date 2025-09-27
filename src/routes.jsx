@@ -19,6 +19,7 @@ import JsonToClassConverter from "./tools/JsonToClassConverter";
 import Base64EncodeDecode from "./tools/Base64EncodeDecode";
 import HashGenerator from "./tools/HashGenerador";
 import JWTDecoderEncoder from "./tools/JWTDecoderEncoder";
+import StringUtilities from "./tools/StringUtilities";
 
 export const router = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ export const router = createBrowserRouter([
       {
         path: "jwt-encode-decode",
         element: <JWTDecoderEncoder />,
+      },
+      {
+        path: "string-utilities",
+        element: <StringUtilities />,
       }
     ],
   },
