@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import * as prismStyles from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTheme } from "../components/UseTheme"
-import { format } from 'sql-formatter';
 import { useTranslation } from 'react-i18next';
 
 export default function SQLFormatter() {
