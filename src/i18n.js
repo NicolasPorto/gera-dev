@@ -137,7 +137,12 @@ const resources = {
             "HoraAtual": "Current time",
             "DecodificarToken": "Decode Token",
             "CopiarToken": "Copy Token",
-            "NovoToken": "New Token"
+            "NovoToken": "New Token",
+            "Letras Minúsculas": "Chars to Lower Case",
+            "Letras Maiúsculas": "Chars to Upper Case",
+            "Primeira Letra Maíuscula": "First Letter Upper Case",
+            "Padronizador de Texto": "String Utilities",
+            "Embaralhar Palavra": "Shuffle Word"
         }
     },
     pt: {
@@ -274,7 +279,12 @@ const resources = {
             "HoraAtual": "Hora atual",
             "DecodificarToken": "Decodificar Token",
             "CopiarToken": "Copiar Token",
-            "NovoToken": "Novo Token"
+            "NovoToken": "Novo Token",
+            "Letras Minúsculas": "Letras Minúsculas",
+            "Letras Maiúsculas": "Letras Maiúsculas",
+            "Primeira Letra Maíuscula": "Primeira Letra Maíuscula",
+            "Padronizador de Texto": "Padronizador de Texto",
+            "Embaralhar Palavra": "Embaralhar Palavra"
         }
     }
 };
