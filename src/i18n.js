@@ -153,7 +153,7 @@ const resources = {
             "DescGerarLinkWhatsApp": "Link WhatsApp",
             "DescGerarPessoa": "Gerar Pessoa",
             "DescFormatarJSON": "Formatar JSON",
-            "DescFormatarXMLL": "Formatar XML",
+            "DescFormatarXML": "Formatar XML",
             "DescVisualizarHTML": "Visualizar HTML",
             "DescMeuIP": "Meu IP",
             "DesenvolvidoPor": "Desenvolvido por",
