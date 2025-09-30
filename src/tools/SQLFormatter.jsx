@@ -34,7 +34,6 @@ export default function SQLFormatter() {
             setOutputOn(true);
             setError(false);
         } catch (e) {
-            console.log(e)
             setError(true);
             setOutputOn(false);
             setOutput("");

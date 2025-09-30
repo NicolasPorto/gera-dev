@@ -36,20 +36,17 @@ export default function SQLFormatter() {
 
     function handleFirstWordLetterUpper() {
         let wordsList = input.split(" ");
-        console.log(wordsList);
 
         for (let i = 0; wordsList.length > i; i++) {
             let newWord = wordsList[i].toLowerCase().split('');
             newWord[0] = newWord[0].toUpperCase();
             
-            console.log(newWord);
             wordsList[i] = newWord.join('');
         }
 
         wordsList.forEach((x) => {
 
         });
-        console.log(wordsList);
         setInput(wordsList.join(" "));
     }
 
