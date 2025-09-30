@@ -13,9 +13,16 @@ export default function XMLFormatter() {
   const [copied, setCopied] = useState(false);
   const { t } = useTranslation();
 
+  function decodeUnicodeString(str) {
+    return str.replace(/\\u([0-9a-fA-F]{4})/g, (match, hex) => {
+      return String.fromCharCode(parseInt(hex, 16));
+    });
+  }
+
   function format() {
     try {
-      const xmlFormatted = xmlFormat(input);
+      const xmlDecoded = decodeUnicodeString(input);
+      const xmlFormatted = xmlFormat(xmlDecoded);
       setOutput(xmlFormatted);
       setOutputOn(true);
       setError(false);
@@ -28,7 +35,8 @@ export default function XMLFormatter() {
 
   function minify() {
     try {
-      const xmlMinified = xmlFormat.minify(input, {
+      const xmlDecoded = decodeUnicodeString(input);
+      const xmlMinified = xmlFormat.minify(xmlDecoded, {
         filter: (node) => node.type !== 'Comment',
         collapseContent: true
       });

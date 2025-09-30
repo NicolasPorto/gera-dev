@@ -104,27 +104,25 @@ function App() {
           <div className="text-gray-400 text-footer opacity-70 hover:opacity-100 transition-opacity duration-300">
             <div className="flex flex-col items-center sm:flex-row justify-center">
               <span className="text-[10px] sm:text-xs font-light mb-1 sm:mb-0 sm:mr-1">
-                2025 © {t("DesenvolvidoPor")}{" "}
-              </span>
-              <div className="flex">
+                2025 © {t("DesenvolvidoPor")}
                 <a
                   href="https://github.com/NicolasPorto"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
                 >
-                  Nicolas Porto
+                Nicolas Porto
                 </a>
-                <span className="text-[10px] sm:text-xs font-light mx-1">{t("e")}</span>
+                {t("e")}
                 <a
                   href="https://github.com/LuisQuintino"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
                 >
-                  Luis Venturini
+                Luis Venturini
                 </a>
-              </div>
+              </span>
             </div>
           </div>
         </footer>

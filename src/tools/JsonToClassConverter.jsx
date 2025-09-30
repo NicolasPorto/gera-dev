@@ -35,7 +35,6 @@ export default function JsonClassConverter() {
       setOutputOn(true);
       setError(false);
     } catch (e) {
-      console.log(e);
       setError(true);
       setOutputOn(false);
       setOutput("");
