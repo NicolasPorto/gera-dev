@@ -66,6 +66,9 @@ export default function SQLFormatter() {
 
     return (
         <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
+            <div className="w-full flex justify-end text-default mb-4 leading-relaxed font-bold">
+                <a>Quantidade de caracteres: {input.length}</a>
+            </div>
             <div className="w-full flex flex-col items-center gap-6">
                 <textarea
                     value={input}
