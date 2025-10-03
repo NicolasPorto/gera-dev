@@ -18,7 +18,7 @@ export default function SQLFormatter() {
             currentIndex--;
 
             [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
+                array[randomIndex], array[currentIndex]];
         }
     }
 
@@ -40,7 +40,7 @@ export default function SQLFormatter() {
         for (let i = 0; wordsList.length > i; i++) {
             let newWord = wordsList[i].toLowerCase().split('');
             newWord[0] = newWord[0].toUpperCase();
-            
+
             wordsList[i] = newWord.join('');
         }
 
@@ -80,17 +80,13 @@ export default function SQLFormatter() {
 
                 <div className="p-4 flex flex-col items-center gap-6">
                     <div className="flex gap-4 flex-wrap justify-center">
-                        
+
                         <div className="relative group">
                             <button
                                 onClick={() => setInput(input.toLowerCase())}
                                 className={`px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform`}
                             >
-                                <i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
-                                    </svg>
-                                </i>
+                                <i class="fa-solid fa-circle-arrow-up fa-rotate-180 fa-lg"></i>
                             </button>
 
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -103,11 +99,7 @@ export default function SQLFormatter() {
                                 onClick={() => setInput(input.toUpperCase())}
                                 className={`px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform`}
                             >
-                                <i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
-                                    </svg>
-                                </i>
+                                <i class="fa-solid fa-circle-arrow-up fa-lg"></i>
                             </button>
 
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -120,11 +112,7 @@ export default function SQLFormatter() {
                                 onClick={handleFirstWordLetterUpper}
                                 className={`px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform`}
                             >
-                                <i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                                    </svg>
-                                </i>
+                                <i class="fa-solid fa-font fa-lg"></i>
                             </button>
 
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -137,11 +125,10 @@ export default function SQLFormatter() {
                                 onClick={handleShuffleString}
                                 className={`px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform`}
                             >
-                                <i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                                    </svg>
-                                </i>
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.484 9.166 15 7h5m0 0-3-3m3 3-3 3M4 17h4l1.577-2.253M4 7h4l7 10h5m0 0-3 3m3-3-3-3" />
+                                </svg>
+
                             </button>
 
                             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
