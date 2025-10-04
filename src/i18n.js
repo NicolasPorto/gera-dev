@@ -142,7 +142,15 @@ const resources = {
             "Letras Maiúsculas": "Chars to Upper Case",
             "Primeira Letra Maíuscula": "First Letter Upper Case",
             "Padronizador de Texto": "String Utilities",
-            "Embaralhar Palavra": "Shuffle Word"
+            "Embaralhar Palavra": "Shuffle Word",
+            "Base64Arquivo": "Base64 ↔ File",
+            "Base64ParaArquivo": "Base64 → File",
+            "ArquivoParaBase64": "File → Base64",
+            "InfoArquivoParaBase64": "Convert files to Base64 for easy embedding in documents or transmission.",
+            "InfoBase64ParaArquivo": "Convert Base64 text back to its original file format.",
+            "Selecionar": "Select",
+            "BaixarArquivo": "Download File",
+            "ColeOBase64": "Paste your Base64 code here"
         }
     },
     pt: {
@@ -284,7 +292,15 @@ const resources = {
             "Letras Maiúsculas": "Letras Maiúsculas",
             "Primeira Letra Maíuscula": "Primeira Letra Maíuscula",
             "Padronizador de Texto": "Padronizador de Texto",
-            "Embaralhar Palavra": "Embaralhar Palavra"
+            "Embaralhar Palavra": "Embaralhar Palavra",
+            "Base64Arquivo": "Base64 ↔ Arquivo",
+            "Base64ParaArquivo": "Base64 → Arquivo",
+            "ArquivoParaBase64": "Arquivo → Base64",
+            "InfoArquivoParaBase64": "Converta arquivos para Base64 para fácil incorporação em documentos ou transmissão.",
+            "InfoBase64ParaArquivo": "Converta texto Base64 de volta ao seu formato de arquivo original.",
+            "Selecionar": "Selecionar",
+            "BaixarArquivo": "Baixar Arquivo",
+            "ColeOBase64": "Cole aqui seu código em Base64"
         }
     }
 };

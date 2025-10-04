@@ -35,6 +35,7 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
       links: [
         { to: "/conversor-json-class", label: t("JsonClass") },
         { to: "/json-stringify", label: t("JsonString") },
+        { to: "/conversor-base64-arquivo", label: t("Base64Arquivo") },
       ],
     },
     {

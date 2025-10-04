@@ -47,7 +47,9 @@ function App() {
       "/conversor-json-class": `GeraDev | ${t("JsonClass")}`,
       "/base64-encode-decode": `GeraDev | ${t("Base64EncodeDecode")}`,
       "/gerar-hash": `GeraDev | ${t("GerarHash")}`,
-      "/jwt-encode-decode": `GeraDev | ${t("JWTEncodeDecode")}`
+      "/jwt-encode-decode": `GeraDev | ${t("JWTEncodeDecode")}`,
+      "/string-utilities": `GeraDev | ${t("Padronizador de Texto")}`,
+      "/conversor-base64-arquivo": `GeraDev | ${t("Base64Arquivo")}`
     };
     document.title = pathTitles[location.pathname] || "GeraDev";
   }, [location, t, i18n.language]);

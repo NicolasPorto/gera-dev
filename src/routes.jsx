@@ -20,6 +20,7 @@ import Base64EncodeDecode from "./tools/Base64EncodeDecode";
 import HashGenerator from "./tools/HashGenerador";
 import JWTDecoderEncoder from "./tools/JWTDecoderEncoder";
 import StringUtilities from "./tools/StringUtilities";
+import Base64FileConverter from "./tools/Base64FileConverter";
 
 export const router = createBrowserRouter([
   {
@@ -101,6 +102,10 @@ export const router = createBrowserRouter([
       {
         path: "string-utilities",
         element: <StringUtilities />,
+      },
+      {
+        path: "conversor-base64-arquivo",
+        element: <Base64FileConverter />,
       }
     ],
   },
