@@ -12,6 +12,7 @@ export default function Base64FileConverter() {
     const [mode, setMode] = useState("file-to-base64");
     const [fileType, setFileType] = useState("pdf");
     const [copied, setCopied] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
     const { t } = useTranslation();
     const theme = useTheme();
@@ -65,6 +66,27 @@ export default function Base64FileConverter() {
         setError(false);
     }
 
+    function handleDragOver(e) {
+        e.preventDefault();
+        setIsDragging(true);
+    }
+
+    function handleDragLeave(e) {
+        e.preventDefault();
+        setIsDragging(false);
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        setIsDragging(false);
+
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            const fakeEvent = { target: { files: [file] } };
+            handleFileUpload(fakeEvent);
+        }
+    }
+
     return (
         <div className="flex flex-col items-center justify-center p-6 w-full max-w-3xl mx-auto">
             <div className="w-full flex flex-col items-center gap-4">
@@ -107,9 +129,6 @@ export default function Base64FileConverter() {
                 {mode === "file-to-base64" && (
                     <>
                         <div className="w-full flex flex-col items-center gap-4">
-                            {fileName && (
-                                <p className="text-footer">{`Arquivo: ${fileName}`}</p>
-                            )}
 
                             {outputBase64 && (
                                 <div className="w-full border-2 rounded-lg border-gray-300/20 bg-purple-200/10 font-mono text-sm overflow-y-auto resize-none whitespace-pre-wrap break-all custom-scrollbar textarea-white-theme h-100">
@@ -137,6 +156,49 @@ export default function Base64FileConverter() {
                                     </SyntaxHighlighter>
                                 </div>
                             )}
+                            {fileName && (
+                                <p className="text-footer">{`Arquivo: ${fileName}`}</p>
+                            )}
+
+                        </div>
+                        <div className="relative group">
+                            <input
+                                type="file"
+                                id="fileUpload"
+                                onChange={handleFileUpload}
+                                ref={(ref) => (window.fileInputRef = ref)}
+                                className="hidden"
+                            />
+
+                            <div
+                                onDragOver={handleDragOver}
+                                onDragLeave={handleDragLeave}
+                                onDrop={handleDrop}
+                                className={`flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 transition-all cursor-pointer textarea-white-theme
+                                    ${isDragging ? 
+                                        "border-purple-500 bg-purple-100/10" : 
+                                        "border-gray-400/30 bg-purple-200/5"
+                                    }`}
+                                onClick={() => window.fileInputRef && window.fileInputRef.click()}
+                            >
+                                <svg
+                                    className="w-10 h-10 text-purple-500 mb-2"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M12 5v14M5 12h14" />
+                                </svg>
+                                <p className="text-sm text-gray-300 info-text">
+                                    {isDragging
+                                        ? t("SolteOArquivo")
+                                        : t("ArrasteOArquivo")}
+                                </p>
+                            </div>
                         </div>
                     </>
                 )}
@@ -183,32 +245,6 @@ export default function Base64FileConverter() {
 
                 <div className="p-4 flex flex-col items-center gap-6">
                     <div className="flex gap-4 flex-wrap justify-center">
-
-                        {mode === "file-to-base64" && (
-                            <div className="relative group">
-                                <input
-                                    type="file"
-                                    id="fileUpload"
-                                    onChange={handleFileUpload}
-                                    ref={(ref) => (window.fileInputRef = ref)}
-                                    className="hidden"
-                                />
-
-                                <button
-                                    onClick={() => window.fileInputRef && window.fileInputRef.click()}
-                                    className="px-8 py-3 rounded-lg font-medium default-button hover:scale-105 transition-transform"
-                                >
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                        <path fill-rule="evenodd" d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 .087.586l2.977-7.937A1 1 0 0 1 6 10h12V9a2 2 0 0 0-2-2h-4.532l-1.9-2.28A2 2 0 0 0 8.032 4H4Zm2.693 8H6.5l-3 8H18l3-8H6.693Z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-
-                                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    {(t("Selecionar"))}
-                                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-purple-900"></div>
-                                </div>
-                            </div>
-                        )}
 
                         {mode === "base64-to-file" && (
                             <div className="relative group">

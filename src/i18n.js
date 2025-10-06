@@ -114,7 +114,7 @@ const resources = {
             "JsonClass": "JSON ↔ C#",
             "Conversores": "Converters",
             "NovaFuncionalidade": "New Feature",
-            "NovaFuncionalidadeInfo": "Decode a <strong>JWT</strong> token and view its information clearly and organized!",
+            "NovaFuncionalidadeInfo": "Convert <strong>files</strong> to <strong>Base64</strong> for easy embedding in documents or transmission!",
             "InfoCodificarBase64": "Encode text to Base64 for secure storage or transmission.",
             "InfoDecodificarBase64": "Decode Base64 text back to its original format.",
             "Base64EncodeDecode": "Base64",
@@ -150,7 +150,9 @@ const resources = {
             "InfoBase64ParaArquivo": "Convert Base64 text back to its original file format.",
             "Selecionar": "Select",
             "BaixarArquivo": "Download File",
-            "ColeOBase64": "Paste your Base64 code here"
+            "ColeOBase64": "Paste your Base64 code here",
+            "SolteOArquivo": "Drop the file here",
+            "ArrasteOArquivo": "Drag the file here or click to select"
         }
     },
     pt: {
@@ -264,7 +266,7 @@ const resources = {
             "JsonClass": "JSON ↔ C#",
             "Conversores": "Conversores",
             "NovaFuncionalidade": "Nova Funcionalidade",
-            "NovaFuncionalidadeInfo": "Decodifique um token <strong>JWT</strong> e visualize suas informações de forma clara e organizada!",
+            "NovaFuncionalidadeInfo": "Converta <strong>arquivos</strong> para <strong>Base64</strong> para fácil incorporação em documentos ou transmissão!",
             "InfoCodificarBase64": "Codifique o texto em Base64 para armazenamento ou transmissão segura.",
             "InfoDecodificarBase64": "Decodifique o texto Base64 de volta ao seu formato original.",
             "Base64EncodeDecode": "Base64",
@@ -300,7 +302,9 @@ const resources = {
             "InfoBase64ParaArquivo": "Converta texto Base64 de volta ao seu formato de arquivo original.",
             "Selecionar": "Selecionar",
             "BaixarArquivo": "Baixar Arquivo",
-            "ColeOBase64": "Cole aqui seu código em Base64"
+            "ColeOBase64": "Cole aqui seu código em Base64",
+            "SolteOArquivo": "Solte o arquivo aqui",
+            "ArrasteOArquivo": "Arraste o arquivo aqui ou clique para selecionar"
         }
     }
 };

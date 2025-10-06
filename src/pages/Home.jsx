@@ -56,7 +56,7 @@ function Home() {
                 </p>
 
                 <Link
-                    to="/jwt-encode-decode"
+                    to="/conversor-base64-arquivo"
                     className="block info-card animation-info-card"
                 >
                     <div className="info-header">
