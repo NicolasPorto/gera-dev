@@ -138,8 +138,8 @@ const resources = {
             "DecodificarToken": "Decode Token",
             "CopiarToken": "Copy Token",
             "NovoToken": "New Token",
-            "Letras Minúsculas": "Chars to Lower Case",
-            "Letras Maiúsculas": "Chars to Upper Case",
+            "Letras Minúsculas": "To Lower case",
+            "Letras Maiúsculas": "To Upper Case",
             "Primeira Letra Maíuscula": "First Letter Upper Case",
             "Padronizador de Texto": "String Utilities",
             "Embaralhar Palavra": "Shuffle Word",
@@ -152,7 +152,8 @@ const resources = {
             "BaixarArquivo": "Download File",
             "ColeOBase64": "Paste your Base64 code here",
             "SolteOArquivo": "Drop the file here",
-            "ArrasteOArquivo": "Drag the file here or click to select"
+            "ArrasteOArquivo": "Drag the file here or click to select",
+            "GerarGuid": "Gerenate your GUID"
         }
     },
     pt: {
@@ -304,7 +305,8 @@ const resources = {
             "BaixarArquivo": "Baixar Arquivo",
             "ColeOBase64": "Cole aqui seu código em Base64",
             "SolteOArquivo": "Solte o arquivo aqui",
-            "ArrasteOArquivo": "Arraste o arquivo aqui ou clique para selecionar"
+            "ArrasteOArquivo": "Arraste o arquivo aqui ou clique para selecionar",
+            "GerarGuid": "Gerar seu GUID"
         }
     }
 };
