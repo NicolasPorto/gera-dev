@@ -18,6 +18,7 @@ export function Sidebar({ open, setOpen, reduceComponents }) {
         { to: "/link-whatsapp", label: t("GerarLinkWhatsApp") },
         { to: "/gerar-pessoa", label: t("GerarPessoa") },
         { to: "/gerar-hash", label: t("GerarHash") },
+        { to: "/guid-generator", label: t("GerarGuid") },
       ],
     },
     {

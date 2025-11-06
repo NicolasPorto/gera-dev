@@ -21,6 +21,7 @@ import HashGenerator from "./tools/HashGenerador";
 import JWTDecoderEncoder from "./tools/JWTDecoderEncoder";
 import StringUtilities from "./tools/StringUtilities";
 import Base64FileConverter from "./tools/Base64FileConverter";
+import GuidGenerator from "./tools/GuidGenerator";
 
 export const router = createBrowserRouter([
   {
@@ -29,83 +30,85 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home />
       },
       {
         path: "gerar-documentos",
-        element: <DocsGenerator />,
+        element: <DocsGenerator />
       },
       {
         path: "gerar-qrcode",
-        element: <QRCodeGenerator />,
+        element: <QRCodeGenerator />
       },
       {
         path: "gerar-senha",
-        element: <PasswordGenerator />,
+        element: <PasswordGenerator />
       },
       {
         path: "gerar-pessoa",
-        element: <PersonGenerator />,
+        element: <PersonGenerator />
       },
       {
         path: "link-whatsapp",
-        element: <WhatsappLinkGenerator />,
+        element: <WhatsappLinkGenerator />
       },
       {
         path: "formatar-json",
-        element: <JSONFormatter />,
+        element: <JSONFormatter />
       },
       {
         path: "formatar-xml",
-        element: <XMLFormatter />,
+        element: <XMLFormatter />
       },
       {
         path: "formatar-sql",
-        element: <SQLFormatter />,
+        element: <SQLFormatter />
       },
       {
         path: "visualizar-html",
-        element: <HTMLVisualizer />,
+        element: <HTMLVisualizer />
       },
       {
         path: "meu-ip",
-        element: <MyIPVisualizer />,
+        element: <MyIPVisualizer />
       },
       {
         path: "json-stringify",
-        element: <JsonStringify />,
+        element: <JsonStringify />
       },
       {
         path: "url-encode-decode",
-        element: <URLEncodeDecode />,
+        element: <URLEncodeDecode />
       },
       {
         path: "calculo-hora-extra",
-        element: <OvertimeCalculator />,
+        element: <OvertimeCalculator />
       },
       {
         path: "conversor-json-class",
-        element: <JsonToClassConverter />,
+        element: <JsonToClassConverter />
       },
       {
         path: "base64-encode-decode",
-        element: <Base64EncodeDecode />,
+        element: <Base64EncodeDecode />
       },
       {
         path: "gerar-hash",
-        element: <HashGenerator />,
+        element: <HashGenerator />
       },
       {
         path: "jwt-encode-decode",
-        element: <JWTDecoderEncoder />,
+        element: <JWTDecoderEncoder />
       },
       {
         path: "string-utilities",
-        element: <StringUtilities />,
+        element: <StringUtilities />
       },
       {
         path: "conversor-base64-arquivo",
         element: <Base64FileConverter />,
+        path: "guid-generator",
+        element: <GuidGenerator />
       }
     ],
   },
