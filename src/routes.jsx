@@ -107,6 +107,8 @@ export const router = createBrowserRouter([
       {
         path: "conversor-base64-arquivo",
         element: <Base64FileConverter />,
+      },
+      {
         path: "guid-generator",
         element: <GuidGenerator />
       }

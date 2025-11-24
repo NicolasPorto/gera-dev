@@ -153,7 +153,7 @@ const resources = {
             "ColeOBase64": "Paste your Base64 code here",
             "SolteOArquivo": "Drop the file here",
             "ArrasteOArquivo": "Drag the file here or click to select",
-            "GerarGuid": "Gerenate your GUID"
+            "GerarGuid": "Gerenate GUID"
         }
     },
     pt: {
@@ -306,7 +306,7 @@ const resources = {
             "ColeOBase64": "Cole aqui seu código em Base64",
             "SolteOArquivo": "Solte o arquivo aqui",
             "ArrasteOArquivo": "Arraste o arquivo aqui ou clique para selecionar",
-            "GerarGuid": "Gerar seu GUID"
+            "GerarGuid": "Gerar GUID"
         }
     }
 };

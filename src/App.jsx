@@ -49,7 +49,8 @@ function App() {
       "/gerar-hash": `GeraDev | ${t("GerarHash")}`,
       "/jwt-encode-decode": `GeraDev | ${t("JWTEncodeDecode")}`,
       "/string-utilities": `GeraDev | ${t("Padronizador de Texto")}`,
-      "/conversor-base64-arquivo": `GeraDev | ${t("Base64Arquivo")}`
+      "/conversor-base64-arquivo": `GeraDev | ${t("Base64Arquivo")}`,
+      "/guid-generator": `GeraDev | ${t("GerarGuid")}`
     };
     document.title = pathTitles[location.pathname] || "GeraDev";
   }, [location, t, i18n.language]);
