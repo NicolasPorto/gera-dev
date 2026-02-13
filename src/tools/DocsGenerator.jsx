@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { generateCPF, generateCNPJ, generateRG, formatCPF, formatRG, formatCNPJ } from "../utils/documents";
+import { generateCPF, generateCNPJ, generateRG, generateCNPJAlfanumerico, formatCPF, formatRG, formatCNPJ, formatCNPJAlfanumerico } from "../utils/documents";
 import { useTranslation } from 'react-i18next';
 
 export default function DocsGenerator() {
@@ -33,6 +33,7 @@ export default function DocsGenerator() {
     if (type === "cpf") newNumber = generateCPF();
     if (type === "cnpj") newNumber = generateCNPJ();
     if (type === "rg") newNumber = generateRG();
+    if (type === "cnpj_alfa") newNumber = generateCNPJAlfanumerico();
 
     setNumberWithoutMask(newNumber);
     setNumber(maskOn ? applyMask(type, newNumber) : newNumber);
@@ -43,6 +44,7 @@ export default function DocsGenerator() {
       case "cpf": return formatCPF(number);
       case "cnpj": return formatCNPJ(number);
       case "rg": return formatRG(number);
+      case "cnpj_alfa": return formatCNPJAlfanumerico ? formatCNPJAlfanumerico(number) : formatCNPJ(number);
       default: return number;
     }
   }
@@ -150,16 +152,22 @@ export default function DocsGenerator() {
           CPF
         </button>
         <button
+          onClick={() => handleClick("rg")}
+          className={`px-4 py-1 rounded-lg font-medium ${active === "rg" ? "default-button" : "default-button-transparent border border-purple-600"}`}
+        >
+          RG
+        </button>
+        <button
           onClick={() => handleClick("cnpj")}
           className={`px-4 py-1 rounded-lg font-medium ${active === "cnpj" ? "default-button" : "default-button-transparent border border-purple-600"}`}
         >
           CNPJ
         </button>
         <button
-          onClick={() => handleClick("rg")}
-          className={`px-4 py-1 rounded-lg font-medium ${active === "rg" ? "default-button" : "default-button-transparent border border-purple-600"}`}
+          onClick={() => handleClick("cnpj_alfa")}
+          className={`px-4 py-1 rounded-lg font-medium ${active === "cnpj_alfa" ? "default-button" : "default-button-transparent border border-purple-600"}`}
         >
-          RG
+          CNPJ Alfanumérico
         </button>
       </div>
     </div>
