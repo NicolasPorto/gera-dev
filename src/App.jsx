@@ -4,7 +4,7 @@ import { ThemeToggle } from "./components/ThemeToggle";
 import { LanguageToggle } from "./components/LanguageToggle";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import InfoIcon from "./components/InfoIcon";
 
 function App() {
@@ -13,7 +13,9 @@ function App() {
 
   const isHome = location.pathname === "/";
   const [open, setOpen] = useState(false);
-  const [reduceComponents, setReduceComponents] = useState(window.innerWidth < 1320 || window.innerHeight < 720);
+  const [reduceComponents, setReduceComponents] = useState(
+    window.innerWidth < 1320 || window.innerHeight < 720,
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,7 +32,7 @@ function App() {
 
   useEffect(() => {
     const pathTitles = {
-      "/": 'GeraDev',
+      "/": "GeraDev",
       "/gerar-documentos": `GeraDev | ${t("DescGerarDocumentos")}`,
       "/gerar-qrcode": `GeraDev | ${t("DescGerarQRCode")}`,
       "/gerar-senha": `GeraDev | ${t("DescGerarSenha")}`,
@@ -50,7 +52,7 @@ function App() {
       "/jwt-encode-decode": `GeraDev | ${t("JWTEncodeDecode")}`,
       "/string-utilities": `GeraDev | ${t("Padronizador de Texto")}`,
       "/conversor-base64-arquivo": `GeraDev | ${t("Base64Arquivo")}`,
-      "/guid-generator": `GeraDev | ${t("GerarGuid")}`
+      "/guid-generator": `GeraDev | ${t("GerarGuid")}`,
     };
     document.title = pathTitles[location.pathname] || "GeraDev";
   }, [location, t, i18n.language]);
@@ -83,7 +85,11 @@ function App() {
       </header>
 
       <div className="flex flex-1 relative">
-        <Sidebar open={open} setOpen={setOpen} reduceComponents={reduceComponents} />
+        <Sidebar
+          open={open}
+          setOpen={setOpen}
+          reduceComponents={reduceComponents}
+        />
 
         <main
           className={`
@@ -114,7 +120,7 @@ function App() {
                   rel="noopener noreferrer"
                   className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
                 >
-                Nicolas Porto
+                  Nicolas Porto
                 </a>
                 {t("e")}
                 <a
@@ -123,16 +129,28 @@ function App() {
                   rel="noopener noreferrer"
                   className="text-[10px] sm:text-xs font-medium hover:underline mx-1 transition-all"
                 >
-                Luis Venturini
+                  Luis Venturini
                 </a>
               </span>
             </div>
           </div>
         </footer>
       )}
-
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8178345912301600"
+        crossorigin="anonymous"
+      ></script>
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-8178345912301600"
+        data-ad-slot="5660676002"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-
   );
 }
 
