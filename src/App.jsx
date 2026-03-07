@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import InfoIcon from "./components/InfoIcon";
+import AdBanner from "./components/AdBanner";
 
 function App() {
   const location = useLocation();
@@ -104,6 +105,8 @@ function App() {
         </main>
       </div>
 
+      {!isHome && <AdBanner />}
+      
       {!isHome && (
         <footer
           className={`
@@ -136,20 +139,6 @@ function App() {
           </div>
         </footer>
       )}
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8178345912301600"
-        crossorigin="anonymous"
-      ></script>
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-8178345912301600"
-        data-ad-slot="5660676002"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   );
 }
