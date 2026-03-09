@@ -104,8 +104,6 @@ function App() {
           </div>
         </main>
       </div>
-
-      {!isHome && <AdBanner />}
       
       {!isHome && (
         <footer
