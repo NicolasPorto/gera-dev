@@ -21,6 +21,7 @@ import {
   CalendarClock,
   AlignLeft,
   Palette,
+  ArrowLeftRight,
 } from "lucide-react";
 
 import { lazy } from "react";
@@ -177,6 +178,17 @@ export const TOOLS = [
     descKey: "DescToolJsonClass",
     keywords: ["json", "csharp", "c#", "class", "classe", "converter"],
     Component: load("JsonToClassConverter"),
+  },
+  {
+    id: "xml-json",
+    path: TOOL_PATHS["xml-json"],
+    category: "converters",
+    icon: ArrowLeftRight,
+    labelKey: "XmlJson",
+    titleKey: "XmlJson",
+    descKey: "DescToolXmlJson",
+    keywords: ["xml", "json", "converter", "convert", "parse"],
+    Component: load("XmlJsonConverter"),
   },
   {
     id: "json-stringify",

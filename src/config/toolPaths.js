@@ -11,6 +11,7 @@ export const TOOL_PATHS = {
   "xml": "/formatar-xml",
   "sql": "/formatar-sql",
   "json-class": "/conversor-json-class",
+  "xml-json": "/conversor-xml-json",
   "json-stringify": "/json-stringify",
   "base64-file": "/conversor-base64-arquivo",
   "timestamp": "/timestamp-converter",

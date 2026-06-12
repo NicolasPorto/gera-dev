@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Search, CornerDownLeft } from "lucide-react";
 import { searchTools, toolsFromIds, TOOLS } from "../config/tools";
 import { useToolPrefs } from "../hooks/useToolPrefs";
+import { useLocale } from "../hooks/useLocale";
 
 export function CommandPalette({ open, setOpen }) {
   const { t } = useTranslation();
@@ -14,6 +15,7 @@ export function CommandPalette({ open, setOpen }) {
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const { recents } = useToolPrefs();
+  const { to } = useLocale();
 
   const results = useMemo(() => {
     if (query.trim()) return searchTools(query, t);
@@ -44,7 +46,7 @@ export function CommandPalette({ open, setOpen }) {
 
   const select = (tool) => {
     if (!tool) return;
-    navigate(tool.path);
+    navigate(to(tool.path));
     setOpen(false);
   };
 

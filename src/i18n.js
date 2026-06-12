@@ -1,6 +1,15 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+
+// O idioma é determinado pela URL (/en => en); sem LanguageDetector para não
+// conflitar com a rota (cache de localStorage deixava conteúdo e botão de
+// idioma fora de sincronia). No SSR (sem window) cai em 'pt' e o entry-server
+// troca por rota.
+function detectLocale() {
+  if (typeof window === 'undefined') return 'pt';
+  const p = window.location.pathname;
+  return p === '/en' || p.startsWith('/en/') ? 'en' : 'pt';
+}
 
 export const resources = {
     en: {
@@ -216,6 +225,15 @@ export const resources = {
             "Quantidade": "Amount",
             "InfoCor": "Pick or paste a color (HEX) to convert between HEX, RGB and HSL.",
             "CorInvalida": "Invalid color (use #RGB or #RRGGBB)",
+            "XmlJson": "XML ↔ JSON",
+            "XmlParaJson": "XML → JSON",
+            "JsonParaXml": "JSON → XML",
+            "DescToolXmlJson": "Convert between XML and JSON",
+            "InfoXmlToJson": "Paste XML to convert it into JSON. Attributes become @attr and text content becomes #text.",
+            "InfoJsonToXml": "Paste JSON to convert it into XML. Keys starting with @ become attributes and #text becomes the element's text.",
+            "Converter": "Convert",
+            "XmlInvalido": "Invalid XML — check the markup.",
+            "JsonInvalido": "Invalid JSON — check the syntax.",
             "SobreFerramenta": "About this tool",
             "About_documents": "Generate valid CPF, CNPJ and RG numbers (including the new alphanumeric CNPJ) for software testing and form validation. All documents are fictitious — for development and QA use only.",
             "About_qrcode": "Turn any link or text into a QR Code instantly and download it as an image. Useful for menus, payments, Wi-Fi sharing and quick mobile access.",
@@ -239,7 +257,8 @@ export const resources = {
             "About_ip": "Discover your public IP address as seen by the internet, and copy it in one click.",
             "About_html": "Paste HTML and preview the rendered result instantly in a sandboxed frame — great for quick checks and snippets.",
             "About_overtime": "Calculate overtime pay from your monthly salary, hours worked and the additional percentage.",
-            "About_string-utils": "Transform text quickly: uppercase, lowercase, capitalize the first letter or shuffle the characters of each word."
+            "About_string-utils": "Transform text quickly: uppercase, lowercase, capitalize the first letter or shuffle the characters of each word.",
+            "About_xml-json": "Convert between XML and JSON in both directions. Attributes map to @attr, text nodes to #text and repeated elements to arrays — useful for migrating data and inspecting feeds or APIs."
         }
     },
     pt: {
@@ -455,6 +474,15 @@ export const resources = {
             "Quantidade": "Quantidade",
             "InfoCor": "Escolha ou cole uma cor (HEX) para converter entre HEX, RGB e HSL.",
             "CorInvalida": "Cor inválida (use #RGB ou #RRGGBB)",
+            "XmlJson": "XML ↔ JSON",
+            "XmlParaJson": "XML → JSON",
+            "JsonParaXml": "JSON → XML",
+            "DescToolXmlJson": "Converta entre XML e JSON",
+            "InfoXmlToJson": "Cole um XML para convertê-lo em JSON. Atributos viram @attr e o texto vira #text.",
+            "InfoJsonToXml": "Cole um JSON para convertê-lo em XML. Chaves começando com @ viram atributos e #text vira o texto do elemento.",
+            "Converter": "Converter",
+            "XmlInvalido": "XML inválido — verifique a marcação.",
+            "JsonInvalido": "JSON inválido — verifique a sintaxe.",
             "SobreFerramenta": "Sobre esta ferramenta",
             "About_documents": "Gere números de CPF, CNPJ e RG válidos (incluindo o novo CNPJ alfanumérico) para testes de software e validação de formulários. Todos os documentos são fictícios — uso apenas em desenvolvimento e QA.",
             "About_qrcode": "Transforme qualquer link ou texto em QR Code na hora e baixe como imagem. Útil para cardápios, pagamentos, Wi-Fi e acesso rápido pelo celular.",
@@ -478,16 +506,17 @@ export const resources = {
             "About_ip": "Descubra seu endereço de IP público como a internet o vê, e copie com um clique.",
             "About_html": "Cole HTML e veja o resultado renderizado na hora num frame isolado — ótimo para conferências rápidas e snippets.",
             "About_overtime": "Calcule o valor das horas extras a partir do salário mensal, horas trabalhadas e o percentual adicional.",
-            "About_string-utils": "Transforme texto rapidamente: maiúsculas, minúsculas, primeira letra maiúscula ou embaralhar os caracteres de cada palavra."
+            "About_string-utils": "Transforme texto rapidamente: maiúsculas, minúsculas, primeira letra maiúscula ou embaralhar os caracteres de cada palavra.",
+            "About_xml-json": "Converta entre XML e JSON nas duas direções. Atributos mapeiam para @attr, nós de texto para #text e elementos repetidos para arrays — útil para migrar dados e inspecionar feeds ou APIs."
         }
     }
 };
 
 i18n
-    .use(LanguageDetector)
     .use(initReactI18next)
     .init({
         resources,
+        lng: detectLocale(),
         fallbackLng: 'pt',
         debug: false,
         interpolation: {

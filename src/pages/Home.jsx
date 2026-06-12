@@ -9,14 +9,16 @@ import {
   TOOLS,
 } from "../config/tools";
 import { useToolPrefs } from "../hooks/useToolPrefs";
+import { useLocale } from "../hooks/useLocale";
 import { FavoriteButton } from "../components/FavoriteButton";
 import { SiteFooter } from "../App";
 
 function ToolCard({ tool }) {
   const { t } = useTranslation();
+  const { to } = useLocale();
   const Icon = tool.icon;
   return (
-    <Link to={tool.path} className="tool-card relative">
+    <Link to={to(tool.path)} className="tool-card relative">
       <span className="tool-card-icon">
         <Icon size={20} />
       </span>

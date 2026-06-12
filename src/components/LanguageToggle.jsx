@@ -1,10 +1,13 @@
-import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useLocale, localizePath } from '../hooks/useLocale';
 
 export function LanguageToggle() {
-  const { i18n } = useTranslation();
-  const isEnglish = i18n.language?.startsWith('en');
+  const navigate = useNavigate();
+  const { locale, logical } = useLocale();
+  const isEnglish = locale === 'en';
 
-  const toggle = () => i18n.changeLanguage(isEnglish ? 'pt' : 'en');
+  // Navega para a versão no outro idioma da mesma página (o App troca o i18n).
+  const toggle = () => navigate(localizePath(logical, isEnglish ? 'pt' : 'en'));
 
   return (
     <button

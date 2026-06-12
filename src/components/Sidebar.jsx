@@ -1,19 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useMemo } from "react";
 import { ChevronRight, Search, X } from "lucide-react";
 import { CATEGORIES, getToolsByCategory, searchTools } from "../config/tools";
+import { useLocale } from "../hooks/useLocale";
 
 export function Sidebar({ open, setOpen }) {
-  const location = useLocation();
   const { t } = useTranslation();
+  const { logical, to } = useLocale();
   const [query, setQuery] = useState("");
 
   const categories = useMemo(() => getToolsByCategory(), []);
-  const activeTool = useMemo(
-    () => location.pathname,
-    [location.pathname],
-  );
+  const activeTool = logical;
 
   // Mantém aberta a categoria da ferramenta ativa
   const activeCategory = useMemo(() => {
@@ -43,10 +41,10 @@ export function Sidebar({ open, setOpen }) {
 
   const ToolLink = ({ tool }) => {
     const Icon = tool.icon;
-    const isActive = location.pathname === tool.path;
+    const isActive = logical === tool.path;
     return (
       <Link
-        to={tool.path}
+        to={to(tool.path)}
         onClick={() => setOpen(false)}
         className={`
           flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
