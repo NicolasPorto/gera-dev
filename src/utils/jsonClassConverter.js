@@ -40,7 +40,7 @@ export function classToJson(input) {
             .replace(/\/\*[\s\S]*?\*\//g, '');
 
         const props = {};
-        const propRegex = /(?:public|private|protected|internal)\s+(?:static\s+)?([\w<>\[\]\.?,\s]+?)\s+(\w+)\s*\{[\s\S]*?\}/g;
+        const propRegex = /(?:public|private|protected|internal)\s+(?:static\s+)?([\w<>[\].?,\s]+?)\s+(\w+)\s*\{[\s\S]*?\}/g;
         let propMatch;
         while ((propMatch = propRegex.exec(cleaned)) !== null) {
             let type = propMatch[1].trim();

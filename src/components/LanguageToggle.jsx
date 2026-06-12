@@ -1,35 +1,27 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export function LanguageToggle({ reduceComponents }) {
+export function LanguageToggle() {
   const { i18n } = useTranslation();
-  const [isEnglish, setIsEnglish] = useState(i18n.language === 'en');
-  const currentLanguage = i18n.language;
+  const isEnglish = i18n.language?.startsWith('en');
 
-  const changeLanguage = () => {
-    const newLanguage = currentLanguage === 'pt' ? 'en' : 'pt';
-    i18n.changeLanguage(newLanguage);
-    setIsEnglish(newLanguage === 'en');
-  };
+  const toggle = () => i18n.changeLanguage(isEnglish ? 'pt' : 'en');
 
-  const flagSize = reduceComponents ? '1.6rem' : '2.4rem';
   return (
     <button
-      onClick={changeLanguage}
-      className="rounded flex items-center justify-center"
-      title={isEnglish ? 'Change to English' : 'Mudar para português'}
+      type="button"
+      onClick={toggle}
+      className="header-control"
+      aria-label={isEnglish ? 'Mudar para português' : 'Switch to English'}
+      title={isEnglish ? 'Mudar para português' : 'Switch to English'}
     >
-      {isEnglish ? (
-        <span
-          className="fi fi-us hover:opacity-60 transition-opacity duration-300 rounded cursor-pointer default-button"
-          style={{ fontSize: flagSize }}
-        ></span>
-      ) : (
-        <span
-          className="fi fi-br hover:opacity-60 transition-opacity duration-300 rounded cursor-pointer default-button"
-          style={{ fontSize: flagSize }}
-        ></span>
-      )}
+      <span
+        className={`fi ${isEnglish ? 'fi-us' : 'fi-br'} rounded-sm`}
+        style={{ fontSize: '1.1rem', lineHeight: 1 }}
+        aria-hidden="true"
+      />
+      <span className="font-semibold tracking-wide">
+        {isEnglish ? 'EN' : 'PT'}
+      </span>
     </button>
   );
 }

@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Calculator, Clock, Eraser } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
+import { IconButton } from "../components/IconButton";
 
 export default function OvertimeCalculator() {
     const { t } = useTranslation();
@@ -137,20 +139,20 @@ export default function OvertimeCalculator() {
                             onClick={() => { setUseTime(true), clearHours() }}
                             className={`px-3 py-1 rounded-lg font-medium ${useTime ? "default-button" : "default-button-transparent border border-purple-600"}`}
                         >
-                            {t("Hora início/fim")}
+                            {t("HoraInicioFim")}
                         </button>
                         <button
                             onClick={() => { setUseTime(false), clearHours() }}
                             className={`px-3 py-1 rounded-lg font-medium ${!useTime ? "default-button" : "default-button-transparent border border-purple-600"}`}
                         >
-                            {t("Quantidade de horas")}
+                            {t("QuantidadeHoras")}
                         </button>
                     </div>
                 </div>
 
                 {!useTime ? (
                     <div>
-                        <label className="block text-default font-medium mb-1">{t("Horas Trabalhadas")}</label>
+                        <label className="block text-default font-medium mb-1">{t("HorasTrabalhadas")}</label>
                         <input
                             type="text"
                             value={hours}
@@ -168,7 +170,7 @@ export default function OvertimeCalculator() {
                 ) : (
                     <div className="flex gap-2">
                         <div className="relative flex-1">
-                            <label className="block text-default font-medium mb-1">{t("Hora Início")}</label>
+                            <label className="block text-default font-medium mb-1">{t("HoraInicio")}</label>
                             <div className="relative">
                                 <input
                                     type="text"
@@ -183,11 +185,11 @@ export default function OvertimeCalculator() {
                                     ${startTimeError ? "border-red-500" : "border-gray-300/20"} 
                                     bg-purple-200/10 focus:border-purple-400`}
                                 />
-                                <i className="fa-regular fa-clock absolute left-3 top-1/2 -translate-y-1/2 text-purple-600"></i>
+                                <Clock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-600" />
                             </div>
                         </div>
                         <div className="relative flex-1">
-                            <label className="block text-default font-medium mb-1">{t("Hora Fim")}</label>
+                            <label className="block text-default font-medium mb-1">{t("HoraFim")}</label>
                             <div className="relative">
                                 <input
                                     type="text"
@@ -202,14 +204,14 @@ export default function OvertimeCalculator() {
                                         ${endTimeError ? "border-red-500" : "border-gray-300/20"} 
                                         bg-purple-200/10 focus:border-purple-400`}
                                 />
-                                <i className="fa-regular fa-clock absolute left-3 top-1/2 -translate-y-1/2 text-purple-600"></i>
+                                <Clock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-600" />
                             </div>
                         </div>
                     </div>
                 )}
 
                 <div>
-                    <label className="block text-default font-medium mb-1">{t("Salário Mensal (R$)")}</label>
+                    <label className="block text-default font-medium mb-1">{t("SalarioMensal")}</label>
                     <input
                         type="number"
                         value={salary}
@@ -221,7 +223,7 @@ export default function OvertimeCalculator() {
 
                 <div>
                     <label className="block text-default font-medium mb-2">
-                        {t("Percentual Adicional")}: <span className="font-mono"><span className="font-extrabold text-purple-500">{percent}%</span></span>
+                        {t("PercentualAdicional")}: <span className="font-mono"><span className="font-extrabold text-purple-500">{percent}%</span></span>
                     </label>
 
                     <input
@@ -241,43 +243,33 @@ export default function OvertimeCalculator() {
             </div>
 
             <div className="flex gap-4">
-                <div className="relative group">
-                    <button
-                        onClick={calculateOvertime}
-                        disabled={isButtonDisabled}
-                        className={`px-8 py-3 rounded-lg font-medium default-button 
-                            ${isButtonDisabled
-                                ? "default-button-inactive opacity-50 cursor-not-allowed"
-                                : "default-button-active hover:scale-105 transition-transform"
-                            }`}
-                    >
-                        <i className="fa-solid fa-calculator fa-lg"></i>
-                    </button>
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                        {t("Calcular")}
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-                    </div>
-                </div>
+                <IconButton
+                    label={t("Calcular")}
+                    onClick={calculateOvertime}
+                    disabled={isButtonDisabled}
+                    className={`px-8 py-3 rounded-lg font-medium
+                        ${isButtonDisabled
+                            ? "default-button-inactive opacity-50 cursor-not-allowed"
+                            : "default-button-active hover:scale-105 transition-transform"
+                        }`}
+                >
+                    <Calculator size={20} />
+                </IconButton>
 
                 {result && (
-                    <div className="relative group">
-                        <button
-                            onClick={clear}
-                            className="px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
-                        >
-                            <i className="fa-solid fa-eraser fa-lg"></i>
-                        </button>
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            {t("Limpar")}
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-purple-900"></div>
-                        </div>
-                    </div>
+                    <IconButton
+                        label={t("Limpar")}
+                        onClick={clear}
+                        className="px-8 py-3 rounded-lg font-medium default-button-active hover:scale-105 transition-transform"
+                    >
+                        <Eraser size={20} />
+                    </IconButton>
                 )}
             </div>
 
             <AnimatePresence>
                 {result && (
-                    <motion.div
+                    <Motion.div
                         key="result-box"
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
@@ -287,19 +279,19 @@ export default function OvertimeCalculator() {
                     >
                         <div className="space-y-2 text-default">
                             <div className="flex justify-between">
-                                <span>⏱ {t("Total Horas Extras")}:</span>
+                                <span>⏱ {t("TotalHorasExtras")}:</span>
                                 <span className="font-mono">{result.hours}h</span>
                             </div>
                             <div className="flex justify-between">
-                                <span>⚡ {t("Valor Horas Extras")}:</span>
+                                <span>⚡ {t("ValorHorasExtras")}:</span>
                                 <span className="font-mono">R$ {result.overtimePay}</span>
                             </div>
                             <div className="flex justify-between border-t border-purple-600 pt-2 mt-2 text-lg font-bold">
-                                <span>📊 {t("Salário com Hora Extra")}:</span>
+                                <span>📊 {t("SalarioComHoraExtra")}:</span>
                                 <span className="font-mono">R$ {result.totalPay}</span>
                             </div>
                         </div>
-                    </motion.div>
+                    </Motion.div>
                 )}
             </AnimatePresence>
         </div>

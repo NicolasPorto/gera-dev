@@ -1,31 +1,31 @@
 import { useState, useEffect } from "react";
 import { generateCPF, generateRG, formatCPF, formatRG } from "../utils/documents";
-import { generateAddress, generateName, generateAge, generateEmail, generatePhone } from "../utils/person";
+import { generateLocation, generateName, generateAge, generateEmail, generatePhone } from "../utils/person";
 import { useTranslation } from 'react-i18next';
+import { IconButton } from "../components/IconButton";
 
 export default function PersonGenerator() {
     const [person, setPerson] = useState(null);
     const [gender, setGender] = useState('random');
-    const [copied, setCopied] = useState(false);
     const [copiedField, setCopiedField] = useState(null);
     const [hoverRefresh, setHoverRefresh] = useState(false);
     const { t } = useTranslation();
 
     const generatePerson = () => {
-        const fullName = generateName(gender === 'random' ? null : gender);
+        const nameInfo = generateName(gender === 'random' ? null : gender);
         const age = generateAge();
-        const email = generateEmail(fullName);
-        const phone = generatePhone();
-        const address = generateAddress();
+        const location = generateLocation();
+        const email = generateEmail(nameInfo);
+        const phone = generatePhone(location.ddd);
         const cpf = formatCPF(generateCPF());
         const rg = formatRG(generateRG());
 
         setPerson({
-            name: fullName,
+            name: nameInfo.fullName,
             age: age,
             email,
             phone: phone,
-            address: `${address.street}, ${address.city} - ${address.state}, ${t("CEP")}: ${address.zipCode}`,
+            address: `${location.street}, ${location.city} - ${location.state}, ${t("CEP")}: ${location.zipCode}`,
             cpf,
             rg
         });
@@ -35,11 +35,9 @@ export default function PersonGenerator() {
         if (!person) return;
 
         navigator.clipboard.writeText(value);
-        setCopied(true);
         setCopiedField(field);
 
         setTimeout(() => {
-            setCopied(false);
             setCopiedField(null);
         }, 2000);
     };
@@ -58,17 +56,16 @@ export default function PersonGenerator() {
         `.trim();
 
         navigator.clipboard.writeText(texto);
-        setCopied(true);
         setCopiedField('tudo');
 
         setTimeout(() => {
-            setCopied(false);
             setCopiedField(null);
         }, 2000);
     };
 
     useEffect(() => {
         generatePerson();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -273,13 +270,13 @@ export default function PersonGenerator() {
 
             <div className="p-4 flex flex-col items-center gap-6">
                 <div className="flex gap-4">
-                    <div className="relative group">
-                        <button
-                            onClick={generatePerson}
-                            onMouseEnter={() => setHoverRefresh(true)}
-                            onMouseLeave={() => setHoverRefresh(false)}
-                            className="default-button px-4 py-2 rounded font-medium flex items-center justify-center gap-2"
-                        >
+                    <IconButton
+                        label={t("Recarregar")}
+                        onClick={generatePerson}
+                        onMouseEnter={() => setHoverRefresh(true)}
+                        onMouseLeave={() => setHoverRefresh(false)}
+                        className="px-4 py-2 rounded font-medium"
+                    >
                             <svg
                                 className={`w-6 h-6 ${hoverRefresh ? 'animate-spin' : ''}`}
                                 aria-hidden="true"
@@ -291,18 +288,13 @@ export default function PersonGenerator() {
                             >
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4" />
                             </svg>
-                        </button>
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            {t("Recarregar")}
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-                        </div>
-                    </div>
-                    <div className="relative group">
-                        <button
-                            onClick={copyAll}
-                            disabled={!person}
-                            className={`default-button px-4 py-2 rounded flex items-center justify-center ${!person ? 'default-button-inactive opacity-50' : ''}`}
-                        >
+                        </IconButton>
+                    <IconButton
+                        label={t("Copiar")}
+                        onClick={copyAll}
+                        disabled={!person}
+                        className={`px-4 py-2 rounded ${!person ? 'default-button-inactive opacity-50' : ''}`}
+                    >
                             {copiedField === 'tudo' ? (
                                 <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
@@ -313,12 +305,7 @@ export default function PersonGenerator() {
                                     <path fillRule="evenodd" d="M13 3.054V7H9.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 13 3.054ZM15 3v4a2 2 0 0 1-2 2H9v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3Z" clipRule="evenodd" />
                                 </svg>
                             )}
-                        </button>
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            {t("Copiar")}
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-                        </div>
-                    </div>
+                        </IconButton>
                 </div>
             </div>
         </div>

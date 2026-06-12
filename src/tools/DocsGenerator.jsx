@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { generateCPF, generateCNPJ, generateRG, generateCNPJAlfanumerico, formatCPF, formatRG, formatCNPJ, formatCNPJAlfanumerico } from "../utils/documents";
 import { useTranslation } from 'react-i18next';
+import { IconButton } from "../components/IconButton";
 
 export default function DocsGenerator() {
   const [number, setNumber] = useState("");
@@ -58,6 +59,7 @@ export default function DocsGenerator() {
   useEffect(() => {
     setMaskOn(true);
     handleClick("cnpj");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -65,11 +67,7 @@ export default function DocsGenerator() {
 
       <div className="flex gap-2">
 
-        <div className="relative group">
-          <button
-            onClick={() => handleClick("copy")}
-            className={`default-button px-4 py-2 rounded flex items-center justify-center`}
-          >
+        <IconButton label={t("Copiar")} onClick={() => handleClick("copy")}>
             {copied ? (
               <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
@@ -80,20 +78,14 @@ export default function DocsGenerator() {
                 <path fillRule="evenodd" d="M13 3.054V7H9.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 13 3.054ZM15 3v4a2 2 0 0 1-2 2H9v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3Z" clipRule="evenodd" />
               </svg>
             )}
-          </button>
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            {t("Copiar")}
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-          </div>
-        </div>
+        </IconButton>
 
-        <div className="relative group">
-          <button
-            onClick={() => handleClick(active)}
-            onMouseEnter={() => setHoverRefresh(true)}
-            onMouseLeave={() => setHoverRefresh(false)}
-            className={`default-button px-4 py-2 rounded`}
-          >
+        <IconButton
+          label={t("Recarregar")}
+          onClick={() => handleClick(active)}
+          onMouseEnter={() => setHoverRefresh(true)}
+          onMouseLeave={() => setHoverRefresh(false)}
+        >
             <svg
               className={`w-6 h-6 ${hoverRefresh ? 'animate-spin' : ''}`}
               aria-hidden="true"
@@ -105,18 +97,9 @@ export default function DocsGenerator() {
             >
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4" />
             </svg>
-          </button>
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            {t("Recarregar")}
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-          </div>
-        </div>
+        </IconButton>
 
-        <div className="relative group">
-          <button
-            onClick={() => handleClick("mask")}
-            className={`default-button px-4 py-2 rounded`}
-          >
+        <IconButton label={t("Mascara")} onClick={() => handleClick("mask")}>
             {maskOn ? (
               <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" d="M7.50001 6.49476c-.00222.00067-.00443.00134-.00665.00202-1.36964.41615-2.57189 1.22541-3.40555 1.89335-.42318.33907-.76614.65372-1.00483.88517-.11959.11596-.21369.21169-.2793.27999-.03283.03417-.05857.06153-.07687.08118l-.02184.02361-.00665.00728-.00225.00247-.00152.00167c-.23565.26049-.31736.6255-.21524.9616l1.88966 6.2193c.28122.9255.90731 1.6328 1.59535 2.159.68925.5272 1.4966.9166 2.25327 1.198.76111.2832 1.50814.4708 2.10341.5791.2973.054.5684.0904.7934.1077.1117.0085.2238.0133.3286.0113.0814-.0016.2434-.0076.4111-.0586.1678-.051.3057-.1361.3743-.18.0882-.0566.1786-.123.2667-.1923.1774-.1395.3824-.3205.5994-.5309-.076-.0369-.1525-.0755-.2297-.1152-.6068-.312-1.3433-.7546-2.0675-1.3064-.4898-.3733-1.01068-.8242-1.48988-1.3492-.28662.4467-.87678.5935-1.34124.3253-.47829-.2761-.64217-.8877-.36603-1.366.01906-.033.03873-.0675.05915-.1034.10835-.1902.23774-.4173.40797-.6498C7.73454 14.6941 7.5 13.8935 7.5 13V6.5l.00001-.00524ZM5.72195 11.0461c-.52844.1606-.82665.7191-.6661 1.2476.16056.5284.7191.8266 1.24753.6661l.00957-.003c.52843-.1605.82665-.7191.66609-1.2475-.16056-.5284-.7191-.8266-1.24753-.6661l-.00956.0029Z" clipRule="evenodd" />
@@ -127,12 +110,7 @@ export default function DocsGenerator() {
                 <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m7.53316 11.8623.00957-.0029m5.58157 7.1424c-.5.515-.9195.8473-1.0611.8903-.4784.1454-5.42881-1.2797-6.23759-3.3305-.80878-2.0507-1.83058-5.8152-1.88967-6.2192-.0591-.40404 1.5599-1.72424 3.59722-2.61073m1.98839 8.05513c-.22637.262-.38955.5599-.55552.8474M13.4999 12c.5.5 1 1.049 2 1.049s1.5-.549 2-1.049m-4-4h.01m3.99 0h.01m-7.01-2.5c0-.28929 2.5-1.5 5-1.5s5 1.13645 5 1.5V12c0 1.9655-4.291 5-5 5-.7432 0-5-3.0345-5-5V5.5Z" />
               </svg>
             )}
-          </button>
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            {t("Mascara")}
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-          </div>
-        </div>
+        </IconButton>
       </div>
 
       {number && (

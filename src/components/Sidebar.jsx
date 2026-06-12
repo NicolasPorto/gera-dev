@@ -1,205 +1,158 @@
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
-import { ChevronRight } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import { ChevronRight, Search, X } from "lucide-react";
+import { CATEGORIES, getToolsByCategory, searchTools } from "../config/tools";
 
-export function Sidebar({ open, setOpen, reduceComponents }) {
+export function Sidebar({ open, setOpen }) {
   const location = useLocation();
   const { t } = useTranslation();
+  const [query, setQuery] = useState("");
 
-  const sections = [
-    {
-      title: t("Geradores"),
-      key: "generators",
-      links: [
-        { to: "/gerar-documentos", label: t("GerarDocumentos") },
-        { to: "/gerar-qrcode", label: t("GerarQRCode") },
-        { to: "/gerar-senha", label: t("GerarSenha") },
-        { to: "/link-whatsapp", label: t("GerarLinkWhatsApp") },
-        { to: "/gerar-pessoa", label: t("GerarPessoa") },
-        { to: "/gerar-hash", label: t("GerarHash") },
-        { to: "/guid-generator", label: t("GerarGuid") },
-      ],
-    },
-    {
-      title: t("Formatadores"),
-      key: "formatters",
-      links: [
-        { to: "/formatar-json", label: t("FormatarJSON") },
-        { to: "/formatar-xml", label: t("FormatarXML") },
-        { to: "/formatar-sql", label: t("FormatarSQL") }
-      ],
-    },
-    {
-      title: t("Conversores"),
-      key: "converters",
-      links: [
-        { to: "/conversor-json-class", label: t("JsonClass") },
-        { to: "/json-stringify", label: t("JsonString") },
-        { to: "/conversor-base64-arquivo", label: t("Base64Arquivo") },
-      ],
-    },
-    {
-      title: t("Encode/Decode"),
-      key: "stringFunctions",
-      links: [
-        { to: "/url-encode-decode", label: t("DecodificarCodificar") },
-        { to: "/base64-encode-decode", label: t("Base64EncodeDecode") },
-        { to: "/jwt-encode-decode", label: t("JWTEncodeDecode") }
-      ],
-    },
-    {
-      title: t("Rede"),
-      key: "network",
-      links: [
-        { to: "/meu-ip", label: t("MeuIP") }
-      ],
-    },
-    {
-      title: t("Utilidades"),
-      key: "utilities",
-      links: [
-        { to: "/visualizar-html", label: t("VisualizarHTML") },
-        { to: "/calculo-hora-extra", label: t("CalculoHoraExtra") },
-        { to: "/string-utilities", label: t("Padronizador de Texto") }
-      ],
-    },
-  ];
-
-  const [openSections, setOpenSections] = useState({});
-
-  const toggleSection = (key) => {
-    setOpenSections((prev) => ({
-      [key]: !prev[key]
-    }));
-  };
-
-  useEffect(() => {
-    const path = location.pathname;
-
-    if (path === "/") {
-      setOpenSections({});
-      return;
-    }
-
-    sections.forEach(({ key, links }) => {
-      if (links.some((link) => path.startsWith(link.to))) {
-        setOpenSections((prev) => ({ ...prev, [key]: true }));
-      }
-    });
-  }, [location.pathname]);
-
-  const Icon = ({ open }) => (
-    <span className={`chev ${open ? "rotated" : ""}`} aria-hidden>
-      <ChevronRight size={18} />
-    </span>
+  const categories = useMemo(() => getToolsByCategory(), []);
+  const activeTool = useMemo(
+    () => location.pathname,
+    [location.pathname],
   );
 
-  const ITEM_HEIGHT_PX = 67;
+  // Mantém aberta a categoria da ferramenta ativa
+  const activeCategory = useMemo(() => {
+    const found = categories.find((category) =>
+      category.tools.some((tool) => tool.path === activeTool),
+    );
+    return found?.id;
+  }, [categories, activeTool]);
 
-  if (reduceComponents) {
+  const [openSections, setOpenSections] = useState(() =>
+    Object.fromEntries(CATEGORIES.map((c) => [c.id, true])),
+  );
+
+  useEffect(() => {
+    if (activeCategory) {
+      setOpenSections((prev) => ({ ...prev, [activeCategory]: true }));
+    }
+  }, [activeCategory]);
+
+  const toggleSection = (id) =>
+    setOpenSections((prev) => ({ ...prev, [id]: !prev[id] }));
+
+  const filtered = useMemo(
+    () => (query.trim() ? searchTools(query, t) : null),
+    [query, t],
+  );
+
+  const ToolLink = ({ tool }) => {
+    const Icon = tool.icon;
+    const isActive = location.pathname === tool.path;
     return (
-      <nav
+      <Link
+        to={tool.path}
+        onClick={() => setOpen(false)}
         className={`
-          fixed top-20 left-4 z-50
-          w-56 default-button rounded-2xl shadow-lg backdrop-blur-sm
-          transform transition-transform duration-300
-          ${open ? "translate-x-0 opacity-100" : "-translate-x-80 opacity-0"}
-          flex flex-col p-3 gap-2 custom-scrollbar overflow-y-auto
+          flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
+          default-button transition-colors
+          ${isActive ? "default-button-clicked underline-style" : ""}
         `}
       >
-        {sections.map(({ title, key, links }, i) => {
-          const id = `sec-compact-${i}`;
-          return (
-            <div key={key}>
-              <button
-                onClick={() => toggleSection(key)}
-                aria-expanded={!!openSections[key]}
-                aria-controls={id}
-                className="flex justify-between items-center w-full text-left px-3 py-2 rounded-lg font-semibold text-white hover:bg-purple-700 transition"
-              >
-                {title}
-                <Icon open={!!openSections[key]} />
-              </button>
-
-              <div
-                id={id}
-                className={`sidebar-collapse ${openSections[key] ? "open" : ""}`}
-                style={{ ["--acc-max"]: `${links.length * ITEM_HEIGHT_PX}px` }}
-              >
-                <div className="collapse-content pl-3 flex flex-col gap-1 mt-1">
-                  {links.map(({ to, label }) => (
-                    <Link
-                      key={to}
-                      to={to}
-                      onClick={() => setOpen(false)}
-                      className={`
-                        flex items-center gap-2 px-3 py-2 rounded-lg
-                        text-sm text-white font-medium
-                        default-button transition-colors
-                        ${location.pathname.includes(to.split("/")[1]) ? "default-button-clicked" : ""}
-                      `}
-                    >
-                      {label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </nav>
+        <Icon size={16} className="shrink-0" />
+        <span className="truncate">{t(tool.labelKey)}</span>
+      </Link>
     );
-  }
+  };
+
+  const content = (
+    <>
+      <div className="relative mb-3">
+        <Search
+          size={16}
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-default opacity-60"
+        />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={t("BuscarFerramenta")}
+          className="w-full pl-9 pr-3 py-2 rounded-lg text-sm textarea-white-theme bg-purple-700/30 border border-white/10 text-default placeholder:opacity-60 focus:outline-none focus:border-white/40"
+        />
+      </div>
+
+      <div className="flex flex-col gap-2 overflow-y-auto custom-scrollbar pr-1 flex-1">
+        {filtered ? (
+          filtered.length > 0 ? (
+            <div className="flex flex-col gap-1">
+              {filtered.map((tool) => (
+                <ToolLink key={tool.id} tool={tool} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-default opacity-60 px-2 py-4 text-center">
+              {t("NenhumResultado")}
+            </p>
+          )
+        ) : (
+          categories.map((category) => {
+            const isOpen = openSections[category.id];
+            return (
+              <div key={category.id}>
+                <button
+                  onClick={() => toggleSection(category.id)}
+                  aria-expanded={isOpen}
+                  className="flex justify-between items-center w-full text-left px-3 py-2 rounded-lg font-semibold text-sm text-default opacity-80 hover:opacity-100 transition"
+                >
+                  {t(category.labelKey)}
+                  <span className={`chev ${isOpen ? "rotated" : ""}`} aria-hidden>
+                    <ChevronRight size={16} />
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="flex flex-col gap-1 mt-1 pl-1">
+                    {category.tools.map((tool) => (
+                      <ToolLink key={tool.id} tool={tool} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })
+        )}
+      </div>
+    </>
+  );
 
   return (
-    <nav
-      className={`
-        fixed left-0 top-1/2 -translate-y-1/2 z-40
-        w-[var(--sidebar-width)] bg-transparent
-        px-4 flex flex-col gap-4 justify-center custom-scrollbar overflow-y-auto
-        pt-6
-      `}
-    >
-      {sections.map(({ title, key, links }, i) => {
-        const id = `sec-normal-${i}`;
-        return (
-          <div key={key}>
-            <button
-              onClick={() => toggleSection(key)}
-              aria-expanded={!!openSections[key]}
-              aria-controls={id}
-              className="flex justify-between items-center w-full text-left px-4 py-3 rounded-lg font-semibold text-white default-button hover:bg-purple-700 transition default-button-sidebar"
-            >
-              {title}
-              <Icon open={!!openSections[key]} />
-            </button>
+    <>
+      {/* Overlay (mobile) */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setOpen(false)}
+          aria-hidden
+        />
+      )}
 
-            <div
-              id={id}
-              className={`sidebar-collapse ${openSections[key] ? "open" : ""}`}
-              style={{ ["--acc-max"]: `${links.length * ITEM_HEIGHT_PX}px` }}
-            >
-              <div className="collapse-content pl-4 flex flex-col gap-2 mt-2">
-                {links.map(({ to, label }) => (
-                  <Link
-                    key={to}
-                    to={to}
-                    className={`
-                      font-medium
-                      default-button px-4 py-3 rounded-lg
-                      transition-transform hover:scale-105
-                      ${location.pathname.includes(to.split("/")[1]) ? "default-button-active underline-style" : ""}
-                    `}
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </nav>
+      <nav
+        className={`
+          fixed lg:static inset-y-0 left-0 z-40
+          w-64 shrink-0 flex flex-col
+          p-4 pt-6 background-default lg:bg-transparent
+          border-r border-white/5 lg:border-r-0
+          transform transition-transform duration-300
+          ${open ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0
+        `}
+        aria-label={t("Ferramentas")}
+      >
+        <div className="flex items-center justify-between mb-3 lg:hidden">
+          <span className="font-semibold text-default">{t("Ferramentas")}</span>
+          <button
+            onClick={() => setOpen(false)}
+            aria-label={t("FecharMenu")}
+            className="text-default"
+          >
+            <X size={22} />
+          </button>
+        </div>
+        {content}
+      </nav>
+    </>
   );
 }

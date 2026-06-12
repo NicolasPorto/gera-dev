@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Eraser } from "lucide-react";
 import { useTheme } from "../components/UseTheme";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import * as prismStyles from "react-syntax-highlighter/dist/esm/styles/prism";
+import { SyntaxHighlighter, coldarkLight, coldarkDark } from "../components/prism";
 import { useTranslation } from "react-i18next";
+import { IconButton } from "../components/IconButton";
 
 export default function Base64FileConverter() {
     const [inputBase64, setInputBase64] = useState("");
@@ -18,7 +19,7 @@ export default function Base64FileConverter() {
     const theme = useTheme();
 
     const getSyntaxStyle = () => {
-        return theme === "white" ? prismStyles.coldarkLight : prismStyles.coldarkDark;
+        return theme === "white" ? coldarkLight : coldarkDark;
     };
 
     function handleCopy() {
@@ -54,7 +55,7 @@ export default function Base64FileConverter() {
             link.download = `download.${fileType}`;
             link.click();
             setError(false);
-        } catch (e) {
+        } catch {
             setError(true);
         }
     }
@@ -247,33 +248,27 @@ export default function Base64FileConverter() {
                     <div className="flex gap-4 flex-wrap justify-center">
 
                         {mode === "base64-to-file" && (
-                            <div className="relative group">
-                                <button
-                                    onClick={handleBase64ToFile}
-                                    disabled={!inputBase64.trim()}
-                                    className={`px-8 py-3 rounded-lg font-medium default-button ${!inputBase64.trim()
-                                        ? "default-button-inactive opacity-50 cursor-not-allowed"
-                                        : "default-button-active hover:scale-105 transition-transform"
-                                        }`}
-                                >
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4" />
-                                    </svg>
-                                </button>
-
-                                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    {t("BaixarArquivo")}
-                                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-purple-900"></div>
-                                </div>
-                            </div>
+                            <IconButton
+                                label={t("BaixarArquivo")}
+                                onClick={handleBase64ToFile}
+                                disabled={!inputBase64.trim()}
+                                className={`px-8 py-3 rounded-lg font-medium ${!inputBase64.trim()
+                                    ? "default-button-inactive opacity-50 cursor-not-allowed"
+                                    : "default-button-active hover:scale-105 transition-transform"
+                                    }`}
+                            >
+                                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4" />
+                                </svg>
+                            </IconButton>
                         )}
 
                         {outputBase64 && (
-                            <div className="relative group">
-                                <button
-                                    onClick={handleCopy}
-                                    className="px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
-                                >
+                            <IconButton
+                                label={copied ? t("Copiado", "Copiado") : t("Copiar", "Copiar")}
+                                onClick={handleCopy}
+                                className="px-8 py-3 rounded-lg font-medium default-button-active hover:scale-105 transition-transform"
+                            >
                                     {copied ? (
                                         <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clipRule="evenodd" />
@@ -284,28 +279,16 @@ export default function Base64FileConverter() {
                                             <path fillRule="evenodd" d="M13 3.054V7H9.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 13 3.054ZM15 3v4a2 2 0 0 1-2 2H9v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3Z" clipRule="evenodd" />
                                         </svg>
                                     )}
-                                </button>
-
-                                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    {copied ? (t("Copiado", "Copiado")) : (t("Copiar", "Copiar"))}
-                                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-purple-900"></div>
-                                </div>
-                            </div>
+                                </IconButton>
                         )}
 
-                        <div className="relative group">
-                            <button
-                                onClick={resetAll}
-                                className="px-8 py-3 rounded-lg font-medium default-button default-button-active hover:scale-105 transition-transform"
-                            >
-                                <i className="fa-solid fa-eraser fa-lg"></i>
-                            </button>
-
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-purple-900 text-white text-xs rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                {t("Limpar", "Limpar")}
-                                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-purple-900"></div>
-                            </div>
-                        </div>
+                        <IconButton
+                            label={t("Limpar", "Limpar")}
+                            onClick={resetAll}
+                            className="px-8 py-3 rounded-lg font-medium default-button-active hover:scale-105 transition-transform"
+                        >
+                            <Eraser size={20} />
+                        </IconButton>
                     </div>
                 </div>
 
