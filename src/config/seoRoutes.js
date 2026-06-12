@@ -2,7 +2,7 @@ import { TOOL_PATHS } from "./toolPaths.js";
 
 export const SITE_URL = "https://geradev.com.br";
 
-export const SITE_IMAGE = `${SITE_URL}/otter-blue.png`;
+export const SITE_IMAGE = `${SITE_URL}/og-image.png`;
 
 /** Caminhos lógicos (PT canônico): Home + ferramentas. */
 const LOGICAL_PATHS = ["/", ...Object.values(TOOL_PATHS)];

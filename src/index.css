@@ -24,6 +24,15 @@
   color: var(--color-textarea-text);
 }
 
+/* Logo (otter inline + wordmark) */
+.logo-dev {
+  color: #ff6b35;
+}
+
+[data-theme="white"] .logo-dev {
+  color: #e0561f;
+}
+
 .text-footer{
   color: #ad70d8;
 }

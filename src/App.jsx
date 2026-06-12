@@ -1,5 +1,6 @@
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
+import Logo from "./components/Logo";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { LanguageToggle } from "./components/LanguageToggle";
 import { CommandPalette } from "./components/CommandPalette";
@@ -69,10 +70,8 @@ function App() {
           )}
         </div>
 
-        <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-default text-center">
-          <Link to={to("/")} className="hover:opacity-80 transition-opacity">
-            GeraDev
-          </Link>
+        <div className="flex justify-center">
+          <Logo to={to("/")} />
         </div>
 
         <div className="flex items-center justify-end gap-2">

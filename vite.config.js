@@ -22,7 +22,7 @@ function pwaPlugin() {
   return VitePWA({
     registerType: 'autoUpdate',
     injectRegister: 'auto',
-    includeAssets: ['otter.svg', 'otter-white.svg', 'otter-blue.svg', 'robots.txt'],
+    includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'robots.txt'],
     manifest: {
       name: 'GeraDev — Ferramentas para Desenvolvedores',
       short_name: 'GeraDev',
@@ -35,9 +35,10 @@ function pwaPlugin() {
       theme_color: '#1E003E',
       background_color: '#1E003E',
       icons: [
-        { src: '/otter.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-        { src: '/otter.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-        { src: '/otter.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+        { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+        { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+        { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+        { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
       ],
     },
     workbox: {
