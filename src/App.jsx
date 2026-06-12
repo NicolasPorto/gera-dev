@@ -13,16 +13,23 @@ import { Menu, X, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { TOOLS_BY_PATH } from "./config/tools";
 import { useToolPrefs } from "./hooks/useToolPrefs";
+import { useLocale } from "./hooks/useLocale";
 
 function App() {
   const location = useLocation();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { addRecent } = useToolPrefs();
+  const { locale, logical, to } = useLocale();
 
-  const isHome = location.pathname === "/";
-  const tool = TOOLS_BY_PATH[location.pathname];
+  const isHome = logical === "/";
+  const tool = TOOLS_BY_PATH[logical];
   const [open, setOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
+
+  // O idioma é determinado pela URL (/en => en).
+  useEffect(() => {
+    if (i18n.language !== locale) i18n.changeLanguage(locale);
+  }, [locale, i18n]);
 
   // Fecha o menu mobile ao trocar de rota
   useEffect(() => {
@@ -63,7 +70,7 @@ function App() {
         </div>
 
         <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-default text-center">
-          <Link to="/" className="hover:opacity-80 transition-opacity">
+          <Link to={to("/")} className="hover:opacity-80 transition-opacity">
             GeraDev
           </Link>
         </div>

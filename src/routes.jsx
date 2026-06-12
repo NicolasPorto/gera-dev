@@ -1,29 +1,27 @@
-import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import "./index.css";
 import { TOOLS } from "./config/tools";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      ...TOOLS.map((tool) => ({
-        // remove a barra inicial: rotas filhas usam caminho relativo
-        path: tool.path.replace(/^\//, ""),
-        element: <tool.Component />,
-        id: tool.id,
-      })),
-      {
-        path: "*",
-        element: <NotFound />,
-      },
-    ],
-  },
-]);
+/** Rotas filhas (iguais em PT e EN). Função para gerar objetos novos por idioma. */
+function childRoutes() {
+  return [
+    { index: true, element: <Home /> },
+    ...TOOLS.map((tool) => ({
+      path: tool.path.replace(/^\//, ""),
+      element: <tool.Component />,
+    })),
+    { path: "*", element: <NotFound /> },
+  ];
+}
+
+/**
+ * Definição de rotas, compartilhada pelo router do navegador (main.jsx) e
+ * pelo SSR (entry-server.jsx). PT em "/" e EN em "/en" — o App detecta o
+ * idioma pelo path.
+ */
+export const routes = [
+  { path: "/", element: <App />, children: childRoutes() },
+  { path: "/en", element: <App />, children: childRoutes() },
+];

@@ -1,19 +1,20 @@
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
 import { SITE_URL } from "../config/seoRoutes";
 import { TOOLS_BY_PATH } from "../config/tools";
+import { useLocale, localizePath } from "../hooks/useLocale";
 
 const SITE_NAME = "GeraDev";
 
 export function Seo() {
-  const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
+  const { t } = useTranslation();
+  const { locale, logical } = useLocale();
 
-  const isHome = pathname === "/";
-  const tool = TOOLS_BY_PATH[pathname];
+  const isHome = logical === "/";
+  const tool = TOOLS_BY_PATH[logical];
 
-  const lang = i18n.language?.startsWith("en") ? "en" : "pt";
+  const lang = locale;
+  const ogLocale = locale === "en" ? "en_US" : "pt_BR";
 
   const title = isHome
     ? `${SITE_NAME} — ${t("HomeTitulo")}`
@@ -27,7 +28,11 @@ export function Seo() {
       ? t(tool.descKey)
       : t("Sobre");
 
-  const canonical = `${SITE_URL}${isHome ? "/" : pathname}`;
+  // URLs por idioma (canonical aponta para a versão do idioma atual)
+  const canonical = `${SITE_URL}${localizePath(logical, locale)}`;
+  const homeUrl = `${SITE_URL}${localizePath("/", locale)}`;
+  const ptUrl = `${SITE_URL}${logical}`;
+  const enUrl = `${SITE_URL}${localizePath(logical, "en")}`;
   const robots = isHome || tool ? "index, follow" : "noindex, follow";
 
   const blocks = [];
@@ -37,14 +42,14 @@ export function Seo() {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: SITE_NAME,
-      url: SITE_URL,
+      url: homeUrl,
       inLanguage: lang,
       description,
       potentialAction: {
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${SITE_URL}/?q={search_term_string}`,
+          urlTemplate: `${homeUrl}?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
@@ -61,14 +66,13 @@ export function Seo() {
       inLanguage: lang,
       isAccessibleForFree: true,
       offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
-      isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+      isPartOf: { "@type": "WebSite", name: SITE_NAME, url: homeUrl },
     });
-    
     blocks.push({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: SITE_NAME, item: SITE_URL },
+        { "@type": "ListItem", position: 1, name: SITE_NAME, item: homeUrl },
         {
           "@type": "ListItem",
           position: 2,
@@ -86,9 +90,15 @@ export function Seo() {
       <link rel="canonical" href={canonical} />
       <meta name="robots" content={robots} />
 
+      {/* Versões por idioma (hreflang) */}
+      <link rel="alternate" hrefLang="pt-BR" href={ptUrl} />
+      <link rel="alternate" hrefLang="en" href={enUrl} />
+      <link rel="alternate" hrefLang="x-default" href={ptUrl} />
+
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
+      <meta property="og:locale" content={ogLocale} />
 
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
