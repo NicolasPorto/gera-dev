@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
 
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -15,10 +16,7 @@
   <meta name="application-name" content="GeraDev" />
 
   <link href="/src/index.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
 
-  <!-- title/description e og:title/description/url são injetados por rota
-       (prerender no build) e gerenciados pelo Helmet no cliente. -->
   <meta property="og:image" content="https://geradev.com.br/og-image.png" />
   <meta property="og:image:alt" content="GeraDev — Ferramentas para desenvolvedores" />
   <meta property="og:image:width" content="1200" />
@@ -28,9 +26,31 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://geradev.com.br/og-image.png" />
-  
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8178345912301600"
-    crossorigin="anonymous">
+
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+
+  <script>
+    (function () {
+      var loaded = false;
+      function loadAds() {
+        if (loaded) return;
+        loaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.crossOrigin = 'anonymous';
+        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8178345912301600';
+        document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAds, { timeout: 5000 });
+      } else {
+        setTimeout(loadAds, 3000);
+      }
+      ['scroll', 'click', 'keydown', 'touchstart'].forEach(function (evt) {
+        window.addEventListener(evt, loadAds, { once: true, passive: true });
+      });
+    })();
   </script>
 </head>
 

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useLocale, localizePath } from '../hooks/useLocale';
+import { Flag } from './Flag';
 
 export function LanguageToggle() {
   const navigate = useNavigate();
@@ -17,11 +18,7 @@ export function LanguageToggle() {
       aria-label={isEnglish ? 'Mudar para português' : 'Switch to English'}
       title={isEnglish ? 'Mudar para português' : 'Switch to English'}
     >
-      <span
-        className={`fi ${isEnglish ? 'fi-us' : 'fi-br'} rounded-sm`}
-        style={{ fontSize: '1.1rem', lineHeight: 1 }}
-        aria-hidden="true"
-      />
+      <Flag country={isEnglish ? 'us' : 'br'} />
       <span className="font-semibold tracking-wide">
         {isEnglish ? 'EN' : 'PT'}
       </span>

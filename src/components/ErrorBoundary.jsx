@@ -43,6 +43,12 @@ export class ErrorBoundary extends Component {
     if (import.meta.env.DEV) console.error("Tool error:", error, info);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.state.hasError && prevProps.resetKey !== this.props.resetKey) {
+      this.setState({ hasError: false });
+    }
+  }
+
   reset = () => this.setState({ hasError: false });
 
   render() {

@@ -9,6 +9,7 @@ import { ToolAbout } from "./components/ToolAbout";
 import { Seo } from "./components/Seo";
 import { Toaster } from "./components/Toaster";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import AdBanner from "./components/AdBanner";
 import { useState, useEffect, useCallback, Suspense } from "react";
 import { Menu, X, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -101,7 +102,7 @@ function App() {
             }`}
           >
             {!isHome && <ToolHeader tool={tool} />}
-            <ErrorBoundary key={location.pathname}>
+            <ErrorBoundary resetKey={location.pathname}>
               <Suspense
                 fallback={
                   <div className="py-20 text-default opacity-60 animate-pulse">
@@ -113,6 +114,7 @@ function App() {
               </Suspense>
             </ErrorBoundary>
             {tool && <ToolAbout toolId={tool.id} />}
+            {tool && <AdBanner key={location.pathname} />}
           </div>
         </main>
 

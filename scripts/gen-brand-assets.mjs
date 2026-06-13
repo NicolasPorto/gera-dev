@@ -16,6 +16,31 @@ const render = (svg, width) =>
     .render()
     .asPng();
 
+function buildIco(images) {
+  const count = images.length;
+  const header = Buffer.alloc(6);
+  header.writeUInt16LE(0, 0); // reservado
+  header.writeUInt16LE(1, 2); // tipo: ícone
+  header.writeUInt16LE(count, 4);
+
+  const entries = Buffer.alloc(16 * count);
+  let offset = 6 + 16 * count;
+  for (let i = 0; i < count; i++) {
+    const { size, png } = images[i];
+    const e = i * 16;
+    entries.writeUInt8(size >= 256 ? 0 : size, e + 0); // largura (0 = 256)
+    entries.writeUInt8(size >= 256 ? 0 : size, e + 1); // altura
+    entries.writeUInt8(0, e + 2); // paleta
+    entries.writeUInt8(0, e + 3); // reservado
+    entries.writeUInt16LE(1, e + 4); // planos
+    entries.writeUInt16LE(32, e + 6); // bits por pixel
+    entries.writeUInt32LE(png.length, e + 8); // tamanho dos dados
+    entries.writeUInt32LE(offset, e + 12); // offset
+    offset += png.length;
+  }
+  return Buffer.concat([header, entries, ...images.map((i) => i.png)]);
+}
+
 // --- Ícones (badge roxo, mesmo do favicon.svg) ---
 const faviconSvg = fs.readFileSync(path.join(PUBLIC, "favicon.svg"), "utf8");
 const icons = [
@@ -26,6 +51,11 @@ const icons = [
 for (const [name, size] of icons) {
   fs.writeFileSync(path.join(PUBLIC, name), render(faviconSvg, size));
 }
+
+const ico = buildIco(
+  [16, 32, 48].map((size) => ({ size, png: render(faviconSvg, size) })),
+);
+fs.writeFileSync(path.join(PUBLIC, "favicon.ico"), ico);
 
 // --- og:image 1200x630 (WhatsApp / Twitter / Google) ---
 const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
@@ -49,4 +79,4 @@ const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"
 </svg>`;
 fs.writeFileSync(path.join(PUBLIC, "og-image.png"), render(ogSvg, 1200));
 
-console.log("Brand assets gerados: favicon PNGs + og-image.png");
+console.log("Brand assets gerados: favicon.ico + PNGs + og-image.png");

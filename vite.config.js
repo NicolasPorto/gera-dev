@@ -60,7 +60,6 @@ function pwaPlugin() {
   })
 }
 
-// No build SSR (prerender) não rodamos PWA/sitemap/tailwind — só o transform de JSX.
 export default defineConfig(({ isSsrBuild }) => ({
   plugins: isSsrBuild
     ? [react()]
@@ -68,5 +67,15 @@ export default defineConfig(({ isSsrBuild }) => ({
   base: '/',
   build: {
     outDir: 'dist',
+    rollupOptions: isSsrBuild
+      ? {}
+      : {
+          output: {
+            manualChunks: {
+              'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+              i18n: ['i18next', 'react-i18next'],
+            },
+          },
+        },
   },
 }))
