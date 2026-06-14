@@ -2,9 +2,18 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { SITE_URL } from "../config/seoRoutes";
 import { TOOLS_BY_PATH } from "../config/tools";
+import { PAGE_PATHS } from "../config/toolPaths";
 import { useLocale, localizePath } from "../hooks/useLocale";
 
 const SITE_NAME = "GeraDev";
+
+// Páginas estáticas (não-ferramentas) com SEO próprio e indexável.
+const STATIC_PAGES = {
+  [PAGE_PATHS.privacy]: {
+    titleKey: "PrivacidadeTitulo",
+    descKey: "PrivacidadeDesc",
+  },
+};
 
 export function Seo() {
   const { t } = useTranslation();
@@ -12,6 +21,7 @@ export function Seo() {
 
   const isHome = logical === "/";
   const tool = TOOLS_BY_PATH[logical];
+  const staticPage = STATIC_PAGES[logical];
 
   const lang = locale;
   const ogLocale = locale === "en" ? "en_US" : "pt_BR";
@@ -20,20 +30,24 @@ export function Seo() {
     ? `${SITE_NAME} — ${t("HomeTitulo")}`
     : tool
       ? `${t(tool.labelKey)} | ${SITE_NAME}`
-      : SITE_NAME;
+      : staticPage
+        ? `${t(staticPage.titleKey)} | ${SITE_NAME}`
+        : SITE_NAME;
 
   const description = isHome
     ? t("SeoHomeDescription")
     : tool
       ? t(tool.descKey)
-      : t("Sobre");
+      : staticPage
+        ? t(staticPage.descKey)
+        : t("Sobre");
 
   // URLs por idioma (canonical aponta para a versão do idioma atual)
   const canonical = `${SITE_URL}${localizePath(logical, locale)}`;
   const homeUrl = `${SITE_URL}${localizePath("/", locale)}`;
   const ptUrl = `${SITE_URL}${logical}`;
   const enUrl = `${SITE_URL}${localizePath(logical, "en")}`;
-  const robots = isHome || tool ? "index, follow" : "noindex, follow";
+  const robots = isHome || tool || staticPage ? "index, follow" : "noindex, follow";
 
   const blocks = [];
 

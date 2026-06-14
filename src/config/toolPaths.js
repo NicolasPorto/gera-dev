@@ -24,3 +24,8 @@ export const TOOL_PATHS = {
   "overtime": "/calculo-hora-extra",
   "string-utils": "/string-utilities",
 };
+
+/** Páginas estáticas (não-ferramentas) — entram no prerender e no sitemap. */
+export const PAGE_PATHS = {
+  privacy: "/politica-de-privacidade",
+};

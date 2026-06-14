@@ -1,11 +1,15 @@
-import { TOOL_PATHS } from "./toolPaths.js";
+import { TOOL_PATHS, PAGE_PATHS } from "./toolPaths.js";
 
 export const SITE_URL = "https://geradev.com.br";
 
 export const SITE_IMAGE = `${SITE_URL}/og-image.png`;
 
-/** Caminhos lógicos (PT canônico): Home + ferramentas. */
-const LOGICAL_PATHS = ["/", ...Object.values(TOOL_PATHS)];
+/** Caminhos lógicos (PT canônico): Home + ferramentas + páginas estáticas. */
+const LOGICAL_PATHS = [
+  "/",
+  ...Object.values(TOOL_PATHS),
+  ...Object.values(PAGE_PATHS),
+];
 
 /** Rotas canônicas (PT) — usado pelo teste de integridade do registro. */
 export const SEO_ROUTES = LOGICAL_PATHS.map((path) => ({

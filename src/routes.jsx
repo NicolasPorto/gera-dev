@@ -1,8 +1,10 @@
 import App from "./App";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import "./index.css";
 import { TOOLS } from "./config/tools";
+import { PAGE_PATHS } from "./config/toolPaths";
 
 /** Rotas filhas (iguais em PT e EN). Função para gerar objetos novos por idioma. */
 function childRoutes() {
@@ -12,6 +14,7 @@ function childRoutes() {
       path: tool.path.replace(/^\//, ""),
       element: <tool.Component />,
     })),
+    { path: PAGE_PATHS.privacy.replace(/^\//, ""), element: <PrivacyPolicy /> },
     { path: "*", element: <NotFound /> },
   ];
 }

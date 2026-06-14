@@ -1,6 +1,7 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
 import Logo from "./components/Logo";
+import { PAGE_PATHS } from "./config/toolPaths";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { LanguageToggle } from "./components/LanguageToggle";
 import { CommandPalette } from "./components/CommandPalette";
@@ -131,8 +132,15 @@ function App() {
 
 export function SiteFooter() {
   const { t } = useTranslation();
+  const { to } = useLocale();
   return (
-    <footer className="py-4 text-center">
+    <footer className="py-4 text-center flex flex-col items-center gap-1.5">
+      <Link
+        to={to(PAGE_PATHS.privacy)}
+        className="text-[10px] sm:text-xs text-footer opacity-70 hover:opacity-100 hover:underline transition-opacity"
+      >
+        {t("PoliticaPrivacidade")}
+      </Link>
       <div className="text-gray-400 text-footer opacity-70 hover:opacity-100 transition-opacity duration-300">
         <span className="text-[10px] sm:text-xs font-light">
           2025 © {t("DesenvolvidoPor")}

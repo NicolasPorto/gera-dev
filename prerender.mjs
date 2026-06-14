@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { JSDOM } from "jsdom";
-import { TOOL_PATHS } from "./src/config/toolPaths.js";
+import { TOOL_PATHS, PAGE_PATHS } from "./src/config/toolPaths.js";
 
 const dom = new JSDOM("<!doctype html><html><head></head><body></body></html>", {
   url: "http://localhost/",
@@ -12,7 +12,11 @@ globalThis.localStorage = dom.window.localStorage;
 const { render } = await import("./dist-ssr/entry-server.js");
 
 const template = fs.readFileSync("dist/index.html", "utf8");
-const logicalRoutes = ["/", ...Object.values(TOOL_PATHS)];
+const logicalRoutes = [
+  "/",
+  ...Object.values(TOOL_PATHS),
+  ...Object.values(PAGE_PATHS),
+];
 const enUrl = (p) => (p === "/" ? "/en" : `/en${p}`);
 
 function injectHead(html, helmet) {
