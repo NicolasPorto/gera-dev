@@ -7,7 +7,6 @@ import { useLocale, localizePath } from "../hooks/useLocale";
 
 const SITE_NAME = "GeraDev";
 
-// Páginas estáticas (não-ferramentas) com SEO próprio e indexável.
 const STATIC_PAGES = {
   [PAGE_PATHS.privacy]: {
     titleKey: "PrivacidadeTitulo",
@@ -16,7 +15,7 @@ const STATIC_PAGES = {
 };
 
 export function Seo() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { locale, logical } = useLocale();
 
   const isHome = logical === "/";
@@ -34,15 +33,21 @@ export function Seo() {
         ? `${t(staticPage.titleKey)} | ${SITE_NAME}`
         : SITE_NAME;
 
+  const toolDescription =
+    tool && i18n.exists(`SeoDesc_${tool.id}`)
+      ? t(`SeoDesc_${tool.id}`)
+      : tool
+        ? t(tool.descKey)
+        : "";
+
   const description = isHome
     ? t("SeoHomeDescription")
     : tool
-      ? t(tool.descKey)
+      ? toolDescription
       : staticPage
         ? t(staticPage.descKey)
         : t("Sobre");
 
-  // URLs por idioma (canonical aponta para a versão do idioma atual)
   const canonical = `${SITE_URL}${localizePath(logical, locale)}`;
   const homeUrl = `${SITE_URL}${localizePath("/", locale)}`;
   const ptUrl = `${SITE_URL}${logical}`;
@@ -104,7 +109,6 @@ export function Seo() {
       <link rel="canonical" href={canonical} />
       <meta name="robots" content={robots} />
 
-      {/* Versões por idioma (hreflang) */}
       <link rel="alternate" hrefLang="pt-BR" href={ptUrl} />
       <link rel="alternate" hrefLang="en" href={enUrl} />
       <link rel="alternate" hrefLang="x-default" href={ptUrl} />

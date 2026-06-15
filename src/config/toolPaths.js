@@ -23,6 +23,13 @@ export const TOOL_PATHS = {
   "html": "/visualizar-html",
   "overtime": "/calculo-hora-extra",
   "string-utils": "/string-utilities",
+  "csv-json": "/conversor-csv-json",
+  "json-yaml": "/conversor-json-yaml",
+  "regex": "/testador-regex",
+  "diff": "/comparar-textos",
+  "numbase": "/conversor-base-numerica",
+  "cron": "/explicador-cron",
+  "markdown": "/preview-markdown",
 };
 
 /** Páginas estáticas (não-ferramentas) — entram no prerender e no sitemap. */
