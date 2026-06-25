@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToolState } from "../hooks/useToolState";
 import { Eraser, Lock, LockOpen } from "lucide-react";
 import { useTheme } from "../components/UseTheme";
 import { SyntaxHighlighter, coldarkLight, coldarkDark } from "../components/prism";
@@ -6,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { IconButton } from "../components/IconButton";
 
 export default function UrlEncodeDecode() {
-    const [input, setInput] = useState("");
+    const [input, setInput] = useToolState("url-encode", "");
     const [output, setOutput] = useState("");
     const [error, setError] = useState(false);
     const [outputOn, setOutputOn] = useState(false);

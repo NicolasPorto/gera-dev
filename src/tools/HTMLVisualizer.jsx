@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useToolState } from "../hooks/useToolState";
 import { Eraser } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import { IconButton } from "../components/IconButton";
 
 export default function HTMLVisualizer() {
-    const [htmlCode, setHtmlCode] = useState("");
+    const [htmlCode, setHtmlCode] = useToolState("html", "");
     const [isPreview, setIsPreview] = useState(false);
     const { t } = useTranslation();
 

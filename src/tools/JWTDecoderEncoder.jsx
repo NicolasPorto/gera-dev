@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToolState } from "../hooks/useToolState";
 import { Calendar, CircleCheck, Clock, Eraser, LockOpen } from "lucide-react";
 import { useTheme } from "../components/UseTheme";
 import { SyntaxHighlighter, coldarkLight, coldarkDark } from "../components/prism";
@@ -6,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { IconButton } from "../components/IconButton";
 
 export default function JWTDecoderEncoder() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useToolState("jwt", "");
   const [decoded, setDecoded] = useState(null);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState({ header: false, payload: false, all: false });

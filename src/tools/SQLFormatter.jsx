@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToolState } from "../hooks/useToolState";
 import { Eraser, Wrench } from "lucide-react";
 import { SyntaxHighlighter, coldarkLight, coldarkDark } from "../components/prism";
 import { useTheme } from "../components/UseTheme"
@@ -7,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { IconButton } from "../components/IconButton";
 
 export default function SQLFormatter() {
-    const [input, setInput] = useState("");
+    const [input, setInput] = useToolState("sql-format", "");
     const [output, setOutput] = useState("");
     const [error, setError] = useState(false);
     const [outputOn, setOutputOn] = useState(false);

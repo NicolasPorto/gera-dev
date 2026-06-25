@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { SITE_URL } from "../config/seoRoutes";
 import { TOOLS_BY_PATH } from "../config/tools";
+import { TOOL_CONTENT } from "../config/toolContent";
 import { PAGE_PATHS } from "../config/toolPaths";
 import { useLocale, localizePath } from "../hooks/useLocale";
 
@@ -11,6 +12,14 @@ const STATIC_PAGES = {
   [PAGE_PATHS.privacy]: {
     titleKey: "PrivacidadeTitulo",
     descKey: "PrivacidadeDesc",
+  },
+  [PAGE_PATHS.about]: {
+    titleKey: "SobreTitulo",
+    descKey: "SobreDesc",
+  },
+  [PAGE_PATHS.contact]: {
+    titleKey: "ContatoTitulo",
+    descKey: "ContatoDesc",
   },
 };
 
@@ -100,6 +109,19 @@ export function Seo() {
         },
       ],
     });
+
+    const faq = TOOL_CONTENT[tool.id]?.[locale]?.faq;
+    if (faq?.length) {
+      blocks.push({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map(({ q, a }) => ({
+          "@type": "Question",
+          name: q,
+          acceptedAnswer: { "@type": "Answer", text: a },
+        })),
+      });
+    }
   }
 
   return (

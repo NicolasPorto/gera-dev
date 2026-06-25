@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToolState } from "../hooks/useToolState";
 import { Eraser, Copy, Check, Pencil, ArrowLeftRight } from "lucide-react";
 import { useTheme } from "../components/UseTheme";
 import { SyntaxHighlighter, coldarkLight, coldarkDark } from "../components/prism";
@@ -14,7 +15,7 @@ const PLACEHOLDERS = {
 
 export default function XmlJsonConverter() {
   const [mode, setMode] = useState("xml-to-json");
-  const [input, setInput] = useState("");
+  const [input, setInput] = useToolState("xml-json", "");
   const [output, setOutput] = useState("");
   const [error, setError] = useState(false);
   const [outputOn, setOutputOn] = useState(false);

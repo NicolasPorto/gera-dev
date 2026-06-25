@@ -142,6 +142,16 @@ function Home() {
         )}
       </div>
 
+      {/* Conteúdo descritivo (oculto durante a busca) */}
+      {!results && (
+        <section className="w-full max-w-3xl mt-16 pt-8 border-t border-white/10 text-default text-left">
+          <h2 className="text-xl font-semibold mb-3">{t("HomeSobreTitulo")}</h2>
+          <p className="text-sm opacity-70 leading-relaxed mb-3">{t("HomeSobreP1")}</p>
+          <p className="text-sm opacity-70 leading-relaxed mb-3">{t("HomeSobreP2")}</p>
+          <p className="text-sm opacity-70 leading-relaxed">{t("HomeSobreP3")}</p>
+        </section>
+      )}
+
       {/* Rodapé */}
       <div className="mt-12">
         <SiteFooter />

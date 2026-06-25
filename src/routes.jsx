@@ -2,6 +2,8 @@ import App from "./App";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 import "./index.css";
 import { TOOLS } from "./config/tools";
 import { PAGE_PATHS } from "./config/toolPaths";
@@ -15,6 +17,8 @@ function childRoutes() {
       element: <tool.Component />,
     })),
     { path: PAGE_PATHS.privacy.replace(/^\//, ""), element: <PrivacyPolicy /> },
+    { path: PAGE_PATHS.about.replace(/^\//, ""), element: <AboutPage /> },
+    { path: PAGE_PATHS.contact.replace(/^\//, ""), element: <ContactPage /> },
     { path: "*", element: <NotFound /> },
   ];
 }

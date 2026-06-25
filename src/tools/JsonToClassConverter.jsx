@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToolState } from "../hooks/useToolState";
 import { Eraser } from "lucide-react";
 import { useTheme } from "../components/UseTheme"
 import { SyntaxHighlighter, coldarkLight, coldarkDark } from "../components/prism";
@@ -7,7 +8,7 @@ import { classToJson, jsonToCSharpTop } from "../utils/jsonClassConverter";
 import { IconButton } from "../components/IconButton";
 
 export default function JsonClassConverter() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useToolState("json-class", "");
   const [output, setOutput] = useState("");
   const [error, setError] = useState(false);
   const [outputOn, setOutputOn] = useState(false);

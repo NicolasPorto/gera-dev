@@ -135,12 +135,19 @@ export function SiteFooter() {
   const { to } = useLocale();
   return (
     <footer className="py-4 text-center flex flex-col items-center gap-1.5">
-      <Link
-        to={to(PAGE_PATHS.privacy)}
-        className="text-[10px] sm:text-xs text-footer opacity-70 hover:opacity-100 hover:underline transition-opacity"
-      >
-        {t("PoliticaPrivacidade")}
-      </Link>
+      <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] sm:text-xs text-footer opacity-70">
+        <Link to={to(PAGE_PATHS.about)} className="hover:opacity-100 hover:underline transition-opacity">
+          {t("LinkSobre")}
+        </Link>
+        <span aria-hidden>·</span>
+        <Link to={to(PAGE_PATHS.contact)} className="hover:opacity-100 hover:underline transition-opacity">
+          {t("LinkContato")}
+        </Link>
+        <span aria-hidden>·</span>
+        <Link to={to(PAGE_PATHS.privacy)} className="hover:opacity-100 hover:underline transition-opacity">
+          {t("PoliticaPrivacidade")}
+        </Link>
+      </nav>
       <div className="text-gray-400 text-footer opacity-70 hover:opacity-100 transition-opacity duration-300">
         <span className="text-[10px] sm:text-xs font-light">
           2025 © {t("DesenvolvidoPor")}

@@ -35,4 +35,6 @@ export const TOOL_PATHS = {
 /** Páginas estáticas (não-ferramentas) — entram no prerender e no sitemap. */
 export const PAGE_PATHS = {
   privacy: "/politica-de-privacidade",
+  about: "/sobre",
+  contact: "/contato",
 };
