@@ -28,6 +28,15 @@ import {
   GitCompare,
   Timer,
   FileType,
+  IdCard,
+  Building2,
+  BadgeCheck,
+  Banknote,
+  CreditCard,
+  LetterText,
+  Flag,
+  WandSparkles,
+  Wrench,
 } from "lucide-react";
 
 import { lazy } from "react";
@@ -37,28 +46,97 @@ const load = (name) => lazy(() => import(`../tools/${name}.jsx`));
 import { TOOL_PATHS } from "./toolPaths.js";
 
 export const CATEGORIES = [
-  { id: "generators", labelKey: "Geradores" },
-  { id: "formatters", labelKey: "Formatadores" },
-  { id: "converters", labelKey: "Conversores" },
-  { id: "encoders", labelKey: "Encode/Decode" },
-  { id: "network", labelKey: "Rede" },
-  { id: "utilities", labelKey: "Utilidades" },
+  { id: "brazil", labelKey: "Brasil", icon: Flag },
+  { id: "generators", labelKey: "Geradores", icon: WandSparkles },
+  { id: "formatters", labelKey: "Formatadores", icon: Braces },
+  { id: "converters", labelKey: "Conversores", icon: ArrowLeftRight },
+  { id: "encoders", labelKey: "Encode/Decode", icon: Binary },
+  { id: "network", labelKey: "Rede", icon: Globe },
+  { id: "utilities", labelKey: "Utilidades", icon: Wrench },
 ];
 
 export const TOOLS = [
-  // ── Geradores ───────────────────────────────────────────────
+  // ── Brasil ──────────────────────────────────────────────────
   {
     id: "documents",
     path: TOOL_PATHS["documents"],
-    category: "generators",
+    category: "brazil",
     icon: FileText,
     labelKey: "GerarDocumentos",
     titleKey: "DescGerarDocumentos",
     descKey: "DescToolDocumentos",
     keywords: ["cpf", "cnpj", "rg", "documento", "document", "alfanumerico"],
     disclaimer: true,
+    related: ["cpf", "cnpj", "doc-validator", "person"],
     Component: load("DocsGenerator"),
   },
+  {
+    id: "cpf",
+    path: TOOL_PATHS["cpf"],
+    category: "brazil",
+    icon: IdCard,
+    labelKey: "GerarCPF",
+    titleKey: "GerarCPF",
+    descKey: "DescToolCPF",
+    keywords: ["cpf", "gerador", "gerar", "documento", "teste", "valido"],
+    disclaimer: true,
+    related: ["doc-validator", "cnpj", "person", "documents"],
+    props: { initialType: "cpf" },
+    Component: load("DocsGenerator"),
+  },
+  {
+    id: "cnpj",
+    path: TOOL_PATHS["cnpj"],
+    category: "brazil",
+    icon: Building2,
+    labelKey: "GerarCNPJ",
+    titleKey: "GerarCNPJ",
+    descKey: "DescToolCNPJ",
+    keywords: ["cnpj", "gerador", "gerar", "empresa", "alfanumerico", "teste"],
+    disclaimer: true,
+    related: ["doc-validator", "cpf", "pix", "documents"],
+    props: { initialType: "cnpj" },
+    Component: load("DocsGenerator"),
+  },
+  {
+    id: "doc-validator",
+    path: TOOL_PATHS["doc-validator"],
+    category: "brazil",
+    icon: BadgeCheck,
+    labelKey: "ValidadorDocumentos",
+    titleKey: "ValidadorDocumentos",
+    descKey: "DescToolValidador",
+    keywords: ["validar", "validador", "cpf", "cnpj", "verificar", "validate", "alfanumerico"],
+    related: ["cpf", "cnpj", "card", "regex"],
+    Component: load("DocValidator"),
+  },
+  {
+    id: "pix",
+    path: TOOL_PATHS["pix"],
+    category: "brazil",
+    icon: Banknote,
+    labelKey: "GeradorPix",
+    titleKey: "GeradorPix",
+    descKey: "DescToolPix",
+    keywords: ["pix", "qr", "qrcode", "copia e cola", "pagamento", "cobranca", "brcode"],
+    related: ["qrcode", "whatsapp", "cnpj", "card"],
+    Component: load("PixGenerator"),
+  },
+  {
+    id: "person",
+    path: TOOL_PATHS["person"],
+    category: "brazil",
+    icon: UserRound,
+    labelKey: "GerarPessoa",
+    titleKey: "DescGerarPessoa",
+    descKey: "DescToolPessoa",
+    keywords: ["pessoa", "person", "fake", "dados", "mock"],
+    disclaimer: true,
+    related: ["cpf", "documents", "card", "lorem"],
+    Component: load("PersonGenerator"),
+  },
+
+  // ── Geradores ───────────────────────────────────────────────
   {
     id: "qrcode",
     path: TOOL_PATHS["qrcode"],
@@ -93,16 +171,17 @@ export const TOOLS = [
     Component: load("WhatsappLinkGenerator"),
   },
   {
-    id: "person",
-    path: TOOL_PATHS["person"],
+    id: "card",
+    path: TOOL_PATHS["card"],
     category: "generators",
-    icon: UserRound,
-    labelKey: "GerarPessoa",
-    titleKey: "DescGerarPessoa",
-    descKey: "DescToolPessoa",
-    keywords: ["pessoa", "person", "fake", "dados", "mock"],
+    icon: CreditCard,
+    labelKey: "CartaoTeste",
+    titleKey: "CartaoTeste",
+    descKey: "DescToolCartao",
+    keywords: ["cartao", "cartão", "credito", "credit", "card", "luhn", "teste", "visa", "mastercard", "elo"],
     disclaimer: true,
-    Component: load("PersonGenerator"),
+    related: ["person", "cpf", "doc-validator", "pix"],
+    Component: load("CardGenerator"),
   },
   {
     id: "hash",
@@ -326,7 +405,7 @@ export const TOOLS = [
   {
     id: "overtime",
     path: TOOL_PATHS["overtime"],
-    category: "utilities",
+    category: "brazil",
     icon: Clock,
     labelKey: "CalculoHoraExtra",
     titleKey: "CalculoHoraExtra",
@@ -400,7 +479,22 @@ export const TOOLS = [
     keywords: ["markdown", "md", "preview", "readme", "render"],
     Component: load("MarkdownPreview"),
   },
+  {
+    id: "text-counter",
+    path: TOOL_PATHS["text-counter"],
+    category: "utilities",
+    icon: LetterText,
+    labelKey: "ContadorTexto",
+    titleKey: "ContadorTexto",
+    descKey: "DescToolContador",
+    keywords: ["contador", "caracteres", "palavras", "count", "characters", "words", "texto", "seo"],
+    related: ["string-utils", "lorem", "diff", "markdown"],
+    Component: load("TextCounter"),
+  },
 ];
+
+/** Vitrine da Home ("Populares") — curadoria manual dos mais buscados. */
+export const POPULAR_IDS = ["cpf", "json", "password", "pix", "cnpj", "qrcode", "text-counter", "jwt"];
 
 /** Mapa rápido path -> ferramenta. */
 export const TOOLS_BY_PATH = Object.fromEntries(
@@ -415,6 +509,22 @@ export const TOOLS_BY_ID = Object.fromEntries(
 /** Resolve uma lista de ids para ferramentas (ignorando ids inexistentes). */
 export function toolsFromIds(ids) {
   return ids.map((id) => TOOLS_BY_ID[id]).filter(Boolean);
+}
+
+/**
+ * Ferramentas relacionadas: primeiro as declaradas em `related`, depois as
+ * da mesma categoria, sem repetir e sem incluir a própria.
+ */
+export function getRelatedTools(tool, limit = 4) {
+  if (!tool) return [];
+  const sameCategory = TOOLS.filter(
+    (t) => t.category === tool.category && t.id !== tool.id,
+  );
+  const picked = [...toolsFromIds(tool.related || []), ...sameCategory];
+  const seen = new Set([tool.id]);
+  return picked
+    .filter((t) => !seen.has(t.id) && seen.add(t.id))
+    .slice(0, limit);
 }
 
 /** Ferramentas agrupadas na ordem de CATEGORIES. */

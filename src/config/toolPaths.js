@@ -30,6 +30,12 @@ export const TOOL_PATHS = {
   "numbase": "/conversor-base-numerica",
   "cron": "/explicador-cron",
   "markdown": "/preview-markdown",
+  "cpf": "/gerador-de-cpf",
+  "cnpj": "/gerador-de-cnpj",
+  "doc-validator": "/validar-cpf-cnpj",
+  "pix": "/gerador-pix",
+  "text-counter": "/contador-de-caracteres",
+  "card": "/gerador-cartao-de-credito",
 };
 
 /** Páginas estáticas (não-ferramentas) — entram no prerender e no sitemap. */

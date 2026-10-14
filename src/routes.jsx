@@ -14,7 +14,8 @@ function childRoutes() {
     { index: true, element: <Home /> },
     ...TOOLS.map((tool) => ({
       path: tool.path.replace(/^\//, ""),
-      element: <tool.Component />,
+      // key: rotas que compartilham o componente (ex.: CPF/CNPJ) remontam ao trocar.
+      element: <tool.Component key={tool.id} {...tool.props} />,
     })),
     { path: PAGE_PATHS.privacy.replace(/^\//, ""), element: <PrivacyPolicy /> },
     { path: PAGE_PATHS.about.replace(/^\//, ""), element: <AboutPage /> },

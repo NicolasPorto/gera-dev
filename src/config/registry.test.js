@@ -1,4 +1,6 @@
 import { describe, it, expect } from "vitest";
+import fs from "node:fs";
+import path from "node:path";
 import { TOOLS, CATEGORIES } from "./tools";
 import { TOOL_PATHS } from "./toolPaths";
 import { SEO_ROUTES } from "./seoRoutes";
@@ -32,6 +34,22 @@ describe("registry integrity", () => {
         expect(en[key], `EN faltando: ${key}`).toBeTruthy();
         expect(pt[key], `PT faltando: ${key}`).toBeTruthy();
       }
+    }
+  });
+
+  it("toda ferramenta tem imagem OG em pt e en (rode `npm run gen:og`)", () => {
+    for (const t of TOOLS) {
+      for (const locale of ["pt", "en"]) {
+        const file = path.resolve("public/og", locale, `${t.id}.png`);
+        expect(fs.existsSync(file), `faltando: ${file}`).toBe(true);
+      }
+    }
+  });
+
+  it("related aponta para ferramentas existentes", () => {
+    const ids = new Set(TOOLS.map((t) => t.id));
+    for (const t of TOOLS) {
+      for (const r of t.related || []) expect(ids.has(r), `${t.id} -> ${r}`).toBe(true);
     }
   });
 

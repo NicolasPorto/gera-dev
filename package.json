@@ -9,6 +9,7 @@
     "build:client": "vite build",
     "lint": "eslint .",
     "gen:assets": "node scripts/gen-brand-assets.mjs",
+    "gen:og": "node scripts/gen-og-images.mjs",
     "preview": "vite preview",
     "test": "vitest run"
   },

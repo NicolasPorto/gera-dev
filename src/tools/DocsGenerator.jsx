@@ -1,16 +1,41 @@
 import { useState, useEffect } from "react";
 import { generateCPF, generateCNPJ, generateRG, generateCNPJAlfanumerico, formatCPF, formatRG, formatCNPJ, formatCNPJAlfanumerico } from "../utils/documents";
 import { useTranslation } from 'react-i18next';
+import { Copy } from "lucide-react";
 import { IconButton } from "../components/IconButton";
+import { useCopy } from "../hooks/useCopy";
 
-export default function DocsGenerator() {
+const GENERATORS = {
+  cpf: generateCPF,
+  cnpj: generateCNPJ,
+  rg: generateRG,
+  cnpj_alfa: generateCNPJAlfanumerico,
+};
+
+/**
+ * @param initialType tipo selecionado ao abrir (as páginas dedicadas de CPF e
+ *   CNPJ reaproveitam este componente com um tipo diferente).
+ */
+export default function DocsGenerator({ initialType = "cnpj" }) {
   const [number, setNumber] = useState("");
   const [numberWithoutMask, setNumberWithoutMask] = useState("");
   const [active, setActive] = useState("");
   const [copied, setCopied] = useState(false);
   const [maskOn, setMaskOn] = useState(false);
   const [hoverRefresh, setHoverRefresh] = useState(false);
+  const [bulkCount, setBulkCount] = useState(10);
+  const [bulk, setBulk] = useState("");
+  const { copy } = useCopy();
   const { t } = useTranslation();
+
+  function generateBulk() {
+    const type = active || initialType;
+    const list = Array.from({ length: bulkCount }, () => {
+      const n = GENERATORS[type]();
+      return maskOn ? applyMask(type, n) : n;
+    });
+    setBulk(list.join("\n"));
+  }
 
   function handleClick(type) {
     if (type === "copy") {
@@ -30,11 +55,8 @@ export default function DocsGenerator() {
     }
 
     setActive(type);
-    let newNumber = "";
-    if (type === "cpf") newNumber = generateCPF();
-    if (type === "cnpj") newNumber = generateCNPJ();
-    if (type === "rg") newNumber = generateRG();
-    if (type === "cnpj_alfa") newNumber = generateCNPJAlfanumerico();
+    setBulk("");
+    const newNumber = GENERATORS[type] ? GENERATORS[type]() : "";
 
     setNumberWithoutMask(newNumber);
     setNumber(maskOn ? applyMask(type, newNumber) : newNumber);
@@ -58,7 +80,7 @@ export default function DocsGenerator() {
 
   useEffect(() => {
     setMaskOn(true);
-    handleClick("cnpj");
+    handleClick(initialType);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -147,6 +169,33 @@ export default function DocsGenerator() {
         >
           CNPJ Alfanumérico
         </button>
+      </div>
+
+      <div className="w-full max-w-md flex flex-col gap-2 pt-4 border-t border-white/10">
+        <div className="flex items-center justify-center gap-2">
+          <input
+            type="number"
+            min="1"
+            max="500"
+            value={bulkCount}
+            aria-label={t("Quantidade")}
+            onChange={(e) => setBulkCount(Math.min(500, Math.max(1, Number(e.target.value) || 1)))}
+            className="w-20 p-2 rounded-lg font-mono textarea-text-color textarea-white-theme bg-purple-200/10 border border-gray-300/20 text-default focus:outline-none focus:border-purple-400"
+          />
+          <IconButton label={t("GerarEmLote")} showLabel onClick={generateBulk} className="px-4 py-2 rounded-lg" />
+          {bulk && (
+            <IconButton label={t("CopiarTudo")} onClick={() => copy(bulk, t("Copiado"))} className="px-3 py-2 rounded-lg">
+              <Copy size={16} />
+            </IconButton>
+          )}
+        </div>
+        {bulk && (
+          <textarea
+            readOnly
+            value={bulk}
+            className="w-full h-48 p-3 rounded-lg font-mono text-sm resize-y textarea-text-color textarea-white-theme bg-purple-200/10 border border-gray-300/20 text-default focus:outline-none custom-scrollbar"
+          />
+        )}
       </div>
     </div>
   );

@@ -43,6 +43,8 @@ function pwaPlugin() {
     },
     workbox: {
       globPatterns: ['**/*.{js,css,html,svg,png,ico,woff,woff2}'],
+      // Imagens de compartilhamento só servem para crawlers/redes sociais.
+      globIgnores: ['og/**', 'og-image.png'],
       navigateFallback: '/index.html',
       runtimeCaching: [
         {

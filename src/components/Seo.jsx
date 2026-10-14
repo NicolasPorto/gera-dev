@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { SITE_URL } from "../config/seoRoutes";
+import { SITE_URL, SITE_IMAGE } from "../config/seoRoutes";
 import { TOOLS_BY_PATH } from "../config/tools";
 import { TOOL_CONTENT } from "../config/toolContent";
 import { PAGE_PATHS } from "../config/toolPaths";
@@ -62,6 +62,10 @@ export function Seo() {
   const ptUrl = `${SITE_URL}${logical}`;
   const enUrl = `${SITE_URL}${localizePath(logical, "en")}`;
   const robots = isHome || tool || staticPage ? "index, follow" : "noindex, follow";
+
+  // Imagem de compartilhamento própria por ferramenta (scripts/gen-og-images.mjs).
+  const image = tool ? `${SITE_URL}/og/${locale}/${tool.id}.png` : SITE_IMAGE;
+  const imageAlt = tool ? `${t(tool.labelKey)} — ${SITE_NAME}` : `${SITE_NAME} — ${t("HomeTitulo")}`;
 
   const blocks = [];
 
@@ -139,9 +143,14 @@ export function Seo() {
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:locale" content={ogLocale} />
+      <meta property="og:image" content={image} />
+      <meta property="og:image:alt" content={imageAlt} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
 
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
 
       {blocks.map((block, i) => (
         <script key={i} type="application/ld+json">
