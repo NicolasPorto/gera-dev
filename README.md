@@ -6,63 +6,77 @@ O GeraDev é uma plataforma completa que oferece ferramentas essenciais para des
 
 Acesso: 🌐 https://geradev.com.br
 
-## Ferramentas
+Grátis, sem cadastro e 100% no navegador — nenhum dado que você digita é enviado para servidores. Em português e inglês, e funciona offline (PWA).
 
-- [x] Gerador de documentos (CPF, CNPJ e RG);
-- [x] Geração de QR Code atraves de links;
-- [x] Gerador de senhas fortes;
-- [x] Gerador de link de Whatsap, para envios de mensagem prontas;
-- [x] Gerador de pessoas;
-- [x] Formatador de JSON, XML e SQL;
-- [x] Visualizador de HTML;
-- [x] Meu IP;
-- [x] Conversão de JSON para Stringfy;
-- [x] Url Decode/Encode;
-- [x] Calculador de hora extra.
-- [x] Conversor de JSON para classe c#.
+## Ferramentas (37)
 
-## Sobre as Ferramentas
+### 🇧🇷 Brasil
+- [Gerador de CPF](https://geradev.com.br/gerador-de-cpf) — CPFs válidos para testes, com máscara e em lote
+- [Gerador de CNPJ](https://geradev.com.br/gerador-de-cnpj) — numérico e o novo CNPJ alfanumérico
+- [Validar CPF e CNPJ](https://geradev.com.br/validar-cpf-cnpj) — um por linha, explicando o motivo quando é inválido
+- [Gerador de PIX](https://geradev.com.br/gerador-pix) — QR Code e PIX copia e cola (padrão BR Code do Banco Central)
+- [Gerar Documentos](https://geradev.com.br/gerar-documentos) — CPF, CNPJ e RG em um só lugar
+- [Gerar Pessoa](https://geradev.com.br/gerar-pessoa) — perfis fictícios coerentes (cidade, DDD e CEP do mesmo estado)
+- [Cálculo de Hora Extra](https://geradev.com.br/calculo-hora-extra)
 
-### 📄 Geradores de Documentos
-- **CPF:** Gera números de CPF válidos (apenas para testes)
-- **CNPJ:** Cria números de CNPJ para simulações
-- **RG:** Gera números de Registro Geral
+### ✨ Geradores
+[QR Code](https://geradev.com.br/gerar-qrcode) ·
+[Senha](https://geradev.com.br/gerar-senha) ·
+[Link de WhatsApp](https://geradev.com.br/link-whatsapp) ·
+[Cartão de crédito para testes (Luhn)](https://geradev.com.br/gerador-cartao-de-credito) ·
+[Hash MD5/SHA](https://geradev.com.br/gerar-hash) ·
+[GUID/UUID](https://geradev.com.br/guid-generator) ·
+[Lorem Ipsum](https://geradev.com.br/lorem-ipsum)
 
-### 🔗 Utilitários de Código e Links
-- **QR Code:** Gera códigos QR personalizados a partir de URLs e textos
-- **Link do WhatsApp:** Cria links pré-formatados para mensagens diretas no WhatsApp
-- **Visualizador de HTML:** Preview instantâneo de código HTML
-- **Decode/Encode de URL's:** Codifica e decodifica url's no padrão universal
+### 🧹 Formatadores
+[JSON](https://geradev.com.br/formatar-json) ·
+[XML](https://geradev.com.br/formatar-xml) ·
+[SQL](https://geradev.com.br/formatar-sql)
 
-### 🔒 Segurança e Autenticação
-- **Gerador de Senhas:** Cria senhas fortes e seguras com opções de personalização
+### 🔁 Conversores
+[JSON ↔ C#](https://geradev.com.br/conversor-json-class) ·
+[XML ↔ JSON](https://geradev.com.br/conversor-xml-json) ·
+[CSV ↔ JSON](https://geradev.com.br/conversor-csv-json) ·
+[JSON ↔ YAML](https://geradev.com.br/conversor-json-yaml) ·
+[JSON ↔ String](https://geradev.com.br/json-stringify) ·
+[Base64 ↔ Arquivo](https://geradev.com.br/conversor-base64-arquivo) ·
+[Timestamp Unix](https://geradev.com.br/timestamp-converter) ·
+[Cores HEX/RGB/HSL](https://geradev.com.br/conversor-cores) ·
+[Bases numéricas](https://geradev.com.br/conversor-base-numerica)
 
-### 👥 Dados de Teste
-- **Gerador de Pessoas:** Gera perfis completos com dados fictícios para testes
+### 🔐 Encode/Decode
+[URL](https://geradev.com.br/url-encode-decode) ·
+[Base64](https://geradev.com.br/base64-encode-decode) ·
+[JWT](https://geradev.com.br/jwt-encode-decode)
 
-### 📊 Formatadores de Código
-- **JSON Formatter:** Formata e valida código JSON
-- **XML Formatter:** Organiza e formata documentos XML
-- **SQL Formatter:** Formata queries SQL para melhor legibilidade
-- **JSON para Stringify:** Conversor de JSON para string formatada
-
-### 🌐 Rede e Conectividade
-- **Meu IP:** Identifica e exibe seu endereço IP público
-
-### 🔢 Calculadoras
-- **Calculador de hora extra:** Calcule o valor das horas extras com base no seu salário mensal, horas trabalhadas e percentual adicional.
-
-### ☄️ Conversores
-- **Conversor de JSON para classe C#:** Converta um JSON para uma classe em C# ou o inverso com apenas um clique.
-- 
-### ✈️ Suporta mudança de idioma - 🇧🇷 🇺🇸 
-É possível alterar o idioma do Geradev para inglês, através do botão no canto superior direito.
+### 🧰 Utilidades
+[Contador de caracteres](https://geradev.com.br/contador-de-caracteres) ·
+[Testador de Regex](https://geradev.com.br/testador-regex) ·
+[Comparar textos (diff)](https://geradev.com.br/comparar-textos) ·
+[Explicador de Cron](https://geradev.com.br/explicador-cron) ·
+[Preview de Markdown](https://geradev.com.br/preview-markdown) ·
+[Visualizar HTML](https://geradev.com.br/visualizar-html) ·
+[Padronizador de texto](https://geradev.com.br/string-utilities) ·
+[Meu IP](https://geradev.com.br/meu-ip)
 
 ## Tecnologias Utilizadas
 
-- **React** - Biblioteca JavaScript para construção da interface
-- **Vite** - Ferramenta de build e desenvolvimento frontend
-- **Vercel** - Plataforma de deploy e hospedagem
+- **React + Vite** — interface, com code-splitting por ferramenta
+- **Pré-renderização (SSG)** — cada ferramenta tem HTML estático próprio em PT e EN
+- **Vitest** — testes da lógica (`npm test`)
+- **Vercel** — deploy e hospedagem
+
+## Desenvolvimento
+
+```bash
+npm install
+npm run dev      # servidor local
+npm test         # testes
+npm run build    # build + pré-renderização
+npm run gen:og   # regenera as imagens de compartilhamento (rode ao criar/renomear ferramenta)
+```
+
+Para adicionar uma ferramenta: crie o componente em `src/tools/`, registre em `src/config/tools.js` e `src/config/toolPaths.js`, adicione os textos em `src/i18n.js` e `src/config/toolContent.js` e rode `npm run gen:og`. O teste `registry.test.js` aponta o que estiver faltando.
 
 ## Contribuições
 

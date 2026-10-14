@@ -132,7 +132,7 @@ export function Sidebar({ open, setOpen }) {
         className={`
           fixed lg:static inset-y-0 left-0 z-40
           w-64 shrink-0 flex flex-col
-          p-4 pt-6 background-default lg:bg-transparent
+          p-4 pt-6 lg:pt-[calc(var(--header-h)+1.5rem)] background-default lg:bg-transparent
           border-r border-white/5 lg:border-r-0
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0

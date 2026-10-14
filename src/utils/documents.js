@@ -95,6 +95,69 @@ export function formatRG(rg) {
   return rg.replace(/(\d{2})(\d{3})(\d{3})(\d{1})/, "$1.$2.$3-$4");
 }
 
+// ── Validação ────────────────────────────────────────────────
+// Retornam { valid, reason, expected? }. `reason` é uma chave estável
+// (empty | length | chars | repeated | checkDigits) traduzida na UI.
+
+const onlyDigits = (s) => String(s ?? "").replace(/\D/g, "");
+
+export function validateCPF(input) {
+  const raw = String(input ?? "").trim();
+  if (!raw) return { valid: false, reason: "empty" };
+  if (/[^\d.\-\s]/.test(raw)) return { valid: false, reason: "chars" };
+
+  const cpf = onlyDigits(raw);
+  if (cpf.length !== 11) return { valid: false, reason: "length" };
+  if (/^(\d)\1{10}$/.test(cpf)) return { valid: false, reason: "repeated" };
+
+  const calc = (base) => {
+    const sum = [...base].reduce(
+      (acc, d, i) => acc + Number(d) * (base.length + 1 - i),
+      0,
+    );
+    const rest = sum % 11;
+    return rest < 2 ? 0 : 11 - rest;
+  };
+  const d1 = calc(cpf.slice(0, 9));
+  const d2 = calc(cpf.slice(0, 9) + d1);
+  const expected = `${d1}${d2}`;
+
+  return cpf.slice(9) === expected
+    ? { valid: true, value: cpf }
+    : { valid: false, reason: "checkDigits", expected, value: cpf };
+}
+
+/** Valida CNPJ numérico e alfanumérico (regra da RFB a partir de 2026). */
+export function validateCNPJ(input) {
+  const raw = String(input ?? "").trim().toUpperCase();
+  if (!raw) return { valid: false, reason: "empty" };
+  if (/[^A-Z0-9.\-/\s]/.test(raw)) return { valid: false, reason: "chars" };
+
+  const cnpj = raw.replace(/[^A-Z0-9]/g, "");
+  if (cnpj.length !== 14) return { valid: false, reason: "length" };
+  // Os dois dígitos verificadores são sempre numéricos.
+  if (!/^[A-Z0-9]{12}\d{2}$/.test(cnpj)) return { valid: false, reason: "chars" };
+  if (/^(.)\1{13}$/.test(cnpj)) return { valid: false, reason: "repeated" };
+
+  const base = cnpj.slice(0, 12);
+  const d1 = calculateCNPJDV(base, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+  const d2 = calculateCNPJDV(base + d1, [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+  const expected = `${d1}${d2}`;
+  const alphanumeric = /[A-Z]/.test(base);
+
+  return cnpj.slice(12) === expected
+    ? { valid: true, value: cnpj, alphanumeric }
+    : { valid: false, reason: "checkDigits", expected, value: cnpj, alphanumeric };
+}
+
+/** Detecta se a entrada parece um CPF (11) ou CNPJ (14) pelo tamanho limpo. */
+export function detectDocumentType(input) {
+  const cleaned = String(input ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (cleaned.length === 14) return "cnpj";
+  if (cleaned.length === 11 && /^\d+$/.test(cleaned)) return "cpf";
+  return null;
+}
+
 export function formatCNPJAlfanumerico(cnpj) {
   if (!cnpj) return "";
   const cleaned = cnpj.toUpperCase().replace(/[^A-Z0-9]/g, "");

@@ -5,6 +5,9 @@ import {
   generateCNPJAlfanumerico,
   formatCPF,
   formatCNPJ,
+  validateCPF,
+  validateCNPJ,
+  detectDocumentType,
 } from "./documents";
 
 function isValidCPF(cpf) {
@@ -57,5 +60,41 @@ describe("documents", () => {
   it("formata CPF e CNPJ", () => {
     expect(formatCPF("12345678909")).toBe("123.456.789-09");
     expect(formatCNPJ("11222333000181")).toBe("11.222.333/0001-81");
+  });
+});
+
+describe("validação de documentos", () => {
+  it("valida CPFs gerados e formatados", () => {
+    for (let i = 0; i < 200; i++) {
+      const cpf = generateCPF();
+      expect(validateCPF(cpf).valid).toBe(true);
+      expect(validateCPF(formatCPF(cpf)).valid).toBe(true);
+    }
+  });
+
+  it("aponta o motivo do CPF inválido", () => {
+    expect(validateCPF("").reason).toBe("empty");
+    expect(validateCPF("123").reason).toBe("length");
+    expect(validateCPF("111.111.111-11").reason).toBe("repeated");
+    expect(validateCPF("123.456.789-00")).toMatchObject({ reason: "checkDigits", expected: "09" });
+    expect(validateCPF("123a4567890").reason).toBe("chars");
+  });
+
+  it("valida CNPJ numérico e alfanumérico", () => {
+    expect(validateCNPJ("11.222.333/0001-81").valid).toBe(true);
+    expect(validateCNPJ("11.222.333/0001-80")).toMatchObject({ reason: "checkDigits", expected: "81" });
+    // Exemplo oficial da Receita Federal para o CNPJ alfanumérico.
+    expect(validateCNPJ("12.ABC.345/01DE-35")).toMatchObject({ valid: true, alphanumeric: true });
+    for (let i = 0; i < 200; i++) {
+      expect(validateCNPJ(generateCNPJ()).valid).toBe(true);
+      expect(validateCNPJ(generateCNPJAlfanumerico()).valid).toBe(true);
+    }
+  });
+
+  it("detecta o tipo pelo tamanho", () => {
+    expect(detectDocumentType("123.456.789-09")).toBe("cpf");
+    expect(detectDocumentType("11.222.333/0001-81")).toBe("cnpj");
+    expect(detectDocumentType("12ABC34501DE35")).toBe("cnpj");
+    expect(detectDocumentType("123")).toBe(null);
   });
 });

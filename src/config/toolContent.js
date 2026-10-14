@@ -1093,4 +1093,238 @@ export const TOOL_CONTENT = {
       ],
     },
   },
+
+  cpf: {
+    pt: {
+      intro: [
+        "O gerador de CPF cria números válidos — com os dois dígitos verificadores calculados pelo algoritmo oficial da Receita Federal — para preencher formulários, popular bancos de dados de homologação e testar validações em sistemas.",
+        "Os números são gerados aleatoriamente no seu navegador e não pertencem a pessoas reais de forma intencional. Use apenas em ambientes de teste: utilizar CPF de terceiros para cadastros reais é crime.",
+      ],
+      howTo: [
+        "Ao abrir a página, um CPF válido já é gerado.",
+        "Use o botão de máscara para alternar entre 000.000.000-00 e somente números.",
+        "Clique em recarregar para gerar outro, ou em copiar para levar ao seu formulário.",
+        "Precisa de vários? Informe a quantidade e use Gerar em lote para obter uma lista pronta.",
+      ],
+      faq: [
+        { q: "O CPF gerado é válido?", a: "Sim, ele passa na validação dos dígitos verificadores, que é a mesma regra usada por sistemas e formulários." },
+        { q: "Posso usar o CPF gerado em cadastros reais?", a: "Não. Os números servem apenas para testes de software. Usar documento de outra pessoa é crime de falsidade ideológica." },
+        { q: "Como funciona o cálculo do dígito verificador?", a: "Os 9 primeiros dígitos são multiplicados por pesos decrescentes (10 a 2), a soma é dividida por 11 e o resto define o 10º dígito; o processo se repete com pesos 11 a 2 para o 11º." },
+        { q: "Dá para gerar vários CPFs de uma vez?", a: "Sim, a geração em lote cria até 500 CPFs, com ou sem máscara, prontos para copiar." },
+      ],
+    },
+    en: {
+      intro: [
+        "The CPF generator creates valid Brazilian taxpayer numbers — with both check digits calculated using the official Receita Federal algorithm — to fill forms, seed staging databases and test validation logic.",
+        "Numbers are generated randomly in your browser and are not intentionally tied to real people. Use them only in test environments.",
+      ],
+      howTo: [
+        "A valid CPF is generated as soon as the page opens.",
+        "Use the mask button to switch between 000.000.000-00 and digits only.",
+        "Click refresh to generate another one, or copy it to your form.",
+        "Need many? Set the quantity and use Bulk generate to get a ready-made list.",
+      ],
+      faq: [
+        { q: "Is the generated CPF valid?", a: "Yes, it passes the check-digit validation, which is the same rule used by systems and forms." },
+        { q: "Can I use it for real sign-ups?", a: "No. The numbers are meant for software testing only. Using someone else's document is a crime in Brazil." },
+        { q: "How is the check digit calculated?", a: "The first 9 digits are multiplied by decreasing weights (10 to 2), the sum is divided by 11 and the remainder defines the 10th digit; the process repeats with weights 11 to 2 for the 11th." },
+        { q: "Can I generate several CPFs at once?", a: "Yes, bulk generation creates up to 500 CPFs, masked or not, ready to copy." },
+      ],
+    },
+  },
+
+  cnpj: {
+    pt: {
+      intro: [
+        "O gerador de CNPJ cria números válidos para testes, tanto no formato numérico tradicional quanto no novo CNPJ alfanumérico, adotado pela Receita Federal para inscrições a partir de julho de 2026 (IN RFB nº 2.229/2024).",
+        "É útil para testar cadastros de empresas, emissão de notas, integrações fiscais e validações de formulário — e para garantir que seu sistema já aceita letras nas 12 primeiras posições.",
+      ],
+      howTo: [
+        "Um CNPJ numérico válido é gerado ao abrir a página.",
+        "Escolha CNPJ Alfanumérico para testar o novo formato com letras.",
+        "Ative ou desative a máscara (00.000.000/0000-00) e copie.",
+        "Use Gerar em lote para obter vários de uma vez.",
+      ],
+      faq: [
+        { q: "O que é o CNPJ alfanumérico?", a: "É o novo formato definido pela Receita Federal: as 12 primeiras posições podem conter letras e números, e os 2 dígitos verificadores continuam numéricos. CNPJs já existentes não mudam." },
+        { q: "Como o dígito verificador do CNPJ alfanumérico é calculado?", a: "Cada caractere é convertido pelo seu código ASCII menos 48 (assim '0'–'9' valem 0–9 e 'A' vale 17) e entra no mesmo cálculo de módulo 11 com pesos do CNPJ numérico." },
+        { q: "Posso usar o CNPJ gerado em notas fiscais reais?", a: "Não. Os números são apenas para testes e não correspondem a empresas cadastradas intencionalmente." },
+        { q: "Como validar um CNPJ que recebi?", a: "Use a ferramenta Validar CPF e CNPJ, que aceita os dois formatos e mostra o motivo quando o número é inválido." },
+      ],
+    },
+    en: {
+      intro: [
+        "The CNPJ generator creates valid Brazilian company registration numbers for testing, both in the traditional numeric format and in the new alphanumeric CNPJ adopted by Receita Federal for registrations from July 2026 (IN RFB 2,229/2024).",
+        "It's useful for testing company sign-ups, invoicing, tax integrations and form validation — and for making sure your system already accepts letters in the first 12 positions.",
+      ],
+      howTo: [
+        "A valid numeric CNPJ is generated when the page opens.",
+        "Choose Alphanumeric CNPJ to test the new format with letters.",
+        "Toggle the mask (00.000.000/0000-00) and copy.",
+        "Use Bulk generate to get several at once.",
+      ],
+      faq: [
+        { q: "What is the alphanumeric CNPJ?", a: "It's the new format defined by Receita Federal: the first 12 positions may contain letters and digits, while the 2 check digits remain numeric. Existing CNPJs don't change." },
+        { q: "How is the alphanumeric check digit calculated?", a: "Each character is converted to its ASCII code minus 48 (so '0'–'9' are 0–9 and 'A' is 17) and goes through the same modulo-11 calculation with the numeric CNPJ weights." },
+        { q: "Can I use it on real invoices?", a: "No. The numbers are for testing only." },
+        { q: "How do I validate a CNPJ I received?", a: "Use the CPF & CNPJ Validator, which supports both formats and explains why a number is invalid." },
+      ],
+    },
+  },
+
+  "doc-validator": {
+    pt: {
+      intro: [
+        "Valide CPF e CNPJ em segundos: cole um número por linha, com ou sem pontuação, e veja na hora quais são válidos. O tipo é detectado automaticamente e o CNPJ alfanumérico também é suportado.",
+        "Quando um número é inválido, a ferramenta explica o motivo — quantidade de dígitos, caracteres inválidos, dígitos repetidos ou dígito verificador incorreto (mostrando qual seria o esperado). Nada sai do seu navegador.",
+      ],
+      howTo: [
+        "Cole um ou vários CPFs/CNPJs, um por linha.",
+        "Confira o resultado de cada linha: verde para válido, vermelho para inválido com o motivo.",
+        "Veja o resumo de válidos e inválidos acima da lista.",
+        "Use o link da página para compartilhar a lista com alguém.",
+      ],
+      faq: [
+        { q: "A validação consulta a Receita Federal?", a: "Não. Ela verifica a estrutura e os dígitos verificadores, que é o que os sistemas fazem antes de qualquer consulta. Um número válido não significa que o documento esteja ativo." },
+        { q: "Aceita CNPJ alfanumérico?", a: "Sim. Letras nas 12 primeiras posições são aceitas e os dígitos verificadores são calculados pela nova regra da Receita." },
+        { q: "Por que CPFs como 111.111.111-11 são inválidos?", a: "Sequências de dígitos repetidos passam no cálculo, mas são consideradas inválidas pela Receita e por praticamente todos os sistemas." },
+        { q: "Quantos números posso validar de uma vez?", a: "Até 500 linhas por vez." },
+      ],
+    },
+    en: {
+      intro: [
+        "Validate Brazilian CPF and CNPJ numbers in seconds: paste one per line, with or without punctuation, and instantly see which are valid. The type is detected automatically and the alphanumeric CNPJ is supported too.",
+        "When a number is invalid, the tool tells you why — wrong length, invalid characters, repeated digits or wrong check digits (showing the expected ones). Nothing leaves your browser.",
+      ],
+      howTo: [
+        "Paste one or more CPFs/CNPJs, one per line.",
+        "Check each line: green for valid, red for invalid with the reason.",
+        "See the valid/invalid summary above the list.",
+        "Share the page link to send the list to someone.",
+      ],
+      faq: [
+        { q: "Does it query Receita Federal?", a: "No. It checks the structure and check digits, which is what systems do before any lookup. A valid number doesn't mean the document is active." },
+        { q: "Does it accept alphanumeric CNPJ?", a: "Yes. Letters in the first 12 positions are accepted and check digits follow the new Receita rule." },
+        { q: "Why are CPFs like 111.111.111-11 invalid?", a: "Repeated-digit sequences pass the math but are considered invalid by Receita and virtually every system." },
+        { q: "How many numbers can I validate at once?", a: "Up to 500 lines at a time." },
+      ],
+    },
+  },
+
+  pix: {
+    pt: {
+      intro: [
+        "Gere um QR Code PIX e o código PIX copia e cola para receber pagamentos, com valor e descrição opcionais. O código segue o padrão BR Code do Banco Central (EMV) e funciona em qualquer app de banco.",
+        "É ideal para cobranças rápidas, lojas pequenas, eventos e para desenvolvedores que precisam testar a leitura de PIX estático. A chave, o nome e a cidade ficam salvos só no seu navegador para a próxima cobrança.",
+      ],
+      howTo: [
+        "Informe a chave PIX (CPF, CNPJ, e-mail, telefone ou chave aleatória) — o tipo é detectado automaticamente.",
+        "Preencha o nome do recebedor e a cidade, como cadastrados no banco.",
+        "Se quiser, defina valor, identificador e uma descrição.",
+        "Copie o PIX copia e cola ou baixe o QR Code em PNG e teste no app do seu banco.",
+      ],
+      faq: [
+        { q: "O QR Code PIX gerado funciona em qualquer banco?", a: "Sim. Ele segue o padrão BR Code do Banco Central, com o CRC16 calculado no final, e é lido por todos os apps participantes do PIX." },
+        { q: "O dinheiro passa pelo GeraDev?", a: "Não. O código só contém a sua chave e os dados que você informou; o pagamento vai direto do banco do pagador para a sua conta. Nada é enviado para nossos servidores." },
+        { q: "Posso deixar o valor em branco?", a: "Sim. Sem valor, quem paga digita o valor no app. Com valor, ele já vem preenchido." },
+        { q: "Telefone precisa de +55?", a: "Não precisa digitar: números com DDD são convertidos automaticamente para o formato +55DDNÚMERO exigido pelo PIX." },
+      ],
+    },
+    en: {
+      intro: [
+        "Generate a PIX QR code and the PIX copy-and-paste code to receive payments in Brazil, with optional amount and description. The code follows the Central Bank's BR Code (EMV) standard and works with any bank app.",
+        "It's great for quick charges, small shops and events, and for developers testing static PIX parsing. The key, name and city are saved only in your browser for next time.",
+      ],
+      howTo: [
+        "Enter the PIX key (CPF, CNPJ, email, phone or random key) — the type is detected automatically.",
+        "Fill in the recipient name and city as registered with the bank.",
+        "Optionally set the amount, identifier and a description.",
+        "Copy the code or download the QR code as PNG and test it in your bank app.",
+      ],
+      faq: [
+        { q: "Does the PIX QR code work with any bank?", a: "Yes. It follows the Central Bank's BR Code standard, with the CRC16 checksum at the end, and is read by every PIX-enabled app." },
+        { q: "Does the money go through GeraDev?", a: "No. The code only contains your key and the data you entered; the payment goes straight from the payer's bank to your account. Nothing is sent to our servers." },
+        { q: "Can I leave the amount empty?", a: "Yes. Without an amount, the payer types it in the app. With an amount, it comes pre-filled." },
+        { q: "Do phone keys need +55?", a: "No: numbers with area code are converted automatically to the +55 format required by PIX." },
+      ],
+    },
+  },
+
+  "text-counter": {
+    pt: {
+      intro: [
+        "O contador de caracteres mostra em tempo real quantos caracteres (com e sem espaços), palavras, frases, parágrafos e linhas o seu texto tem, além do tempo estimado de leitura e de fala e do tamanho em bytes.",
+        "Barras de progresso indicam se o texto cabe nos limites mais comuns — post no X, título e meta description para SEO, SMS e legenda do Instagram — e a lista de palavras mais frequentes ajuda a revisar repetições.",
+      ],
+      howTo: [
+        "Digite ou cole o texto na área principal.",
+        "Acompanhe os contadores no topo, atualizados a cada tecla.",
+        "Confira as barras de limite: amarelo indica que está perto e vermelho que passou.",
+        "O texto fica salvo no navegador; use Limpar para recomeçar.",
+      ],
+      faq: [
+        { q: "Emojis contam como um caractere?", a: "Sim. A contagem é por grafema, então 👍🏽 ou letras acentuadas compostas contam como 1, como você vê na tela." },
+        { q: "Como é calculado o tempo de leitura?", a: "Usamos a média de 200 palavras por minuto para leitura silenciosa e 130 para fala." },
+        { q: "Qual o limite ideal de meta description?", a: "Em torno de 150 a 160 caracteres; textos maiores costumam ser cortados nos resultados do Google." },
+        { q: "Meu texto é salvo em algum servidor?", a: "Não. Ele fica apenas no armazenamento local do seu navegador." },
+      ],
+    },
+    en: {
+      intro: [
+        "The character counter shows in real time how many characters (with and without spaces), words, sentences, paragraphs and lines your text has, plus estimated reading and speaking time and size in bytes.",
+        "Progress bars show whether the text fits common limits — X posts, SEO title and meta description, SMS and Instagram captions — and the most frequent words list helps you spot repetition.",
+      ],
+      howTo: [
+        "Type or paste text in the main area.",
+        "Watch the counters at the top update on every keystroke.",
+        "Check the limit bars: yellow means close, red means over.",
+        "Your text is saved in the browser; use Clear to start over.",
+      ],
+      faq: [
+        { q: "Do emojis count as one character?", a: "Yes. Counting is per grapheme, so 👍🏽 or composed accented letters count as 1, just like you see them." },
+        { q: "How is reading time calculated?", a: "We use an average of 200 words per minute for silent reading and 130 for speaking." },
+        { q: "What's the ideal meta description length?", a: "Around 150 to 160 characters; longer text is usually truncated in Google results." },
+        { q: "Is my text saved on a server?", a: "No. It's kept only in your browser's local storage." },
+      ],
+    },
+  },
+
+  card: {
+    pt: {
+      intro: [
+        "Gere números de cartão de crédito para testes que passam no algoritmo de Luhn e têm o prefixo correto de cada bandeira — Visa, Mastercard, American Express, Elo, Hipercard, Diners e Discover — com validade e CVV fictícios.",
+        "Eles servem para testar máscaras, detecção de bandeira e validação de formulários de checkout. Não são cartões reais: não pertencem a nenhuma conta e qualquer tentativa de compra é recusada. Para testar pagamentos de verdade, use os cartões de teste do seu gateway (Stripe, Mercado Pago, PagSeguro etc.).",
+      ],
+      howTo: [
+        "Escolha a bandeira.",
+        "Defina a quantidade e se quer os números agrupados com espaços.",
+        "Copie um número individual ou a lista inteira (número | validade | CVV).",
+        "Para conferir um número, digite-o em Validar um número: a ferramenta diz se passa no Luhn e qual é a bandeira.",
+      ],
+      faq: [
+        { q: "O que é o algoritmo de Luhn?", a: "É um cálculo de dígito verificador (módulo 10) usado em cartões para detectar erros de digitação. Passar no Luhn não significa que o cartão exista." },
+        { q: "Posso comprar com esses números?", a: "Não. Eles não estão ligados a nenhuma conta e são recusados por qualquer adquirente. O objetivo é exclusivamente testar software." },
+        { q: "Como a bandeira é identificada?", a: "Pelos primeiros dígitos (BIN/IIN). A ferramenta usa o prefixo mais específico, o que diferencia, por exemplo, cartões Elo que começam com 4 de cartões Visa." },
+        { q: "Por que Amex tem 15 dígitos e CVV de 4?", a: "É o padrão da American Express: 15 dígitos agrupados em 4-6-5 e código de segurança de 4 dígitos." },
+      ],
+    },
+    en: {
+      intro: [
+        "Generate test credit card numbers that pass the Luhn algorithm and use the right prefix for each brand — Visa, Mastercard, American Express, Elo, Hipercard, Diners and Discover — with fictitious expiry and CVV.",
+        "They're meant for testing masks, brand detection and checkout form validation. They aren't real cards: they don't belong to any account and any purchase attempt is declined. To test real payments, use your gateway's test cards (Stripe, Adyen, etc.).",
+      ],
+      howTo: [
+        "Pick a brand.",
+        "Set the quantity and whether numbers should be grouped with spaces.",
+        "Copy a single number or the whole list (number | expiry | CVV).",
+        "To check a number, type it under Validate a number: the tool tells you if it passes Luhn and which brand it is.",
+      ],
+      faq: [
+        { q: "What is the Luhn algorithm?", a: "A check-digit formula (modulo 10) used on cards to catch typos. Passing Luhn doesn't mean the card exists." },
+        { q: "Can I buy things with these numbers?", a: "No. They aren't linked to any account and are declined by every acquirer. They exist only for software testing." },
+        { q: "How is the brand detected?", a: "By the first digits (BIN/IIN). The tool uses the most specific prefix, which distinguishes, for example, Elo cards starting with 4 from Visa cards." },
+        { q: "Why does Amex have 15 digits and a 4-digit CVV?", a: "That's the American Express standard: 15 digits grouped 4-6-5 and a 4-digit security code." },
+      ],
+    },
+  },
 };

@@ -7,6 +7,7 @@ import { LanguageToggle } from "./components/LanguageToggle";
 import { CommandPalette } from "./components/CommandPalette";
 import { ToolHeader } from "./components/ToolHeader";
 import { ToolAbout } from "./components/ToolAbout";
+import { RelatedTools } from "./components/RelatedTools";
 import { Seo } from "./components/Seo";
 import { Toaster } from "./components/Toaster";
 import { ErrorBoundary } from "./components/ErrorBoundary";
@@ -28,6 +29,11 @@ function App() {
   const tool = TOOLS_BY_PATH[logical];
   const [open, setOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  // Header translúcido (efeito "vidro") assim que o conteúdo rola por baixo dele.
+  const [scrolled, setScrolled] = useState(false);
+  const onMainScroll = useCallback((event) => {
+    setScrolled(event.currentTarget.scrollTop > 4);
+  }, []);
 
   // O idioma é determinado pela URL (/en => en).
   useEffect(() => {
@@ -56,10 +62,12 @@ function App() {
   }, [togglePalette]);
 
   return (
-    <div className="h-screen flex flex-col background-default">
+    <div className="relative h-screen flex flex-col background-default">
       <Seo />
 
-      <header className="py-4 px-4 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+      <header
+        className={`site-header ${scrolled ? "is-scrolled" : ""} absolute top-0 inset-x-0 z-20 h-[var(--header-h)] px-4 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center gap-2`}
+      >
         <div className="flex items-center justify-start">
           {!isHome && (
             <button
@@ -96,9 +104,12 @@ function App() {
       <div className="flex flex-1 min-h-0 relative">
         {!isHome && <Sidebar open={open} setOpen={setOpen} />}
 
-        <main className="flex-1 min-w-0 overflow-y-auto custom-scrollbar">
+        <main
+          className="flex-1 min-w-0 overflow-y-auto custom-scrollbar"
+          onScroll={onMainScroll}
+        >
           <div
-            className={`min-h-full w-full mx-auto flex flex-col items-center p-4 ${
+            className={`min-h-full w-full mx-auto flex flex-col items-center p-4 pt-[calc(var(--header-h)+1rem)] ${
               isHome ? "max-w-6xl justify-start" : "max-w-4xl justify-center"
             }`}
           >
@@ -114,6 +125,7 @@ function App() {
                 <Outlet />
               </Suspense>
             </ErrorBoundary>
+            {tool && <RelatedTools tool={tool} />}
             {tool && <ToolAbout toolId={tool.id} />}
             {tool && <AdBanner key={location.pathname} />}
           </div>

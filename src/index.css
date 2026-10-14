@@ -165,6 +165,25 @@
 
 :root {
   --sidebar-width: 16rem;
+  --header-h: 4.25rem;
+}
+
+/* Header flutuante: transparente no topo, "vidro fosco" ao rolar (estilo iOS) */
+.site-header {
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.25s ease, border-color 0.25s ease,
+    backdrop-filter 0.25s ease, -webkit-backdrop-filter 0.25s ease;
+}
+
+.site-header.is-scrolled {
+  background-color: color-mix(in srgb, var(--color-background-default) 70%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="white"] .site-header.is-scrolled {
+  border-bottom-color: rgba(106, 13, 173, 0.12);
 }
 
 .default-button {
@@ -707,3 +726,63 @@ input[type="range"]:focus {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* ── Home: hero e chips de categoria ───────────────────────── */
+.home-hero {
+  position: relative;
+  isolation: isolate;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: -4rem 10% auto;
+  height: 16rem;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(124, 58, 237, 0.35), transparent);
+  filter: blur(8px);
+}
+
+[data-theme="white"] .home-hero::before {
+  background: radial-gradient(closest-side, rgba(124, 58, 237, 0.14), transparent);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-shrink: 0;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--color-text-default);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(106, 13, 173, 0.12);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.chip:hover {
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
+.chip:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 2px;
+}
+
+.chip-active,
+[data-theme="white"] .chip-active {
+  color: #fff;
+  background: var(--color-button-default);
+  border-color: transparent;
+}
+
+[data-theme="white"] .chip:not(.chip-active) {
+  border-color: rgba(106, 13, 173, 0.25);
+  background: rgba(106, 13, 173, 0.05);
+}
+
